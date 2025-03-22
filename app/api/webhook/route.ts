@@ -46,24 +46,63 @@ export async function POST(req: NextRequest) {
 		}
 
 		try {
-			// Update purchase status to completed
-			const purchase = await prisma.purchase.update({
+			// Fetch the purchase with all necessary relations
+			const purchase = await prisma.purchase.findUnique({
 				where: { id: purchaseId },
-				data: { status: "completed" },
+				include: {
+					PurchaseItem: true,
+					user: true,
+				},
 			});
 
-			console.log("Purchase completed successfully:", purchase.id);
+			if (!purchase) {
+				throw new Error(`Purchase not found: ${purchaseId}`);
+			}
+
+			await prisma.purchase.update({
+				where: { id: purchaseId },
+				data: {
+					status: "completed",
+					paymentIntentId: session.payment_intent as string,
+					invoiceGenerated: true,
+				},
+			});
+
+			// Generate invoice number
+			const invoiceNumber = `INV-${Date.now()}-${purchase.id.substring(0, 8)}`;
+
+			// Create invoice record
+			const invoice = await prisma.invoice.create({
+				data: {
+					purchaseId: purchaseId,
+					userId: purchase.userId,
+					invoiceNumber,
+					amount: session.amount_total! / 100,
+					currency: session.currency!,
+					items: JSON.stringify(purchase.PurchaseItem),
+					issueDate: new Date(),
+					status: "paid",
+					paymentIntentId: session.payment_intent as string,
+				},
+			});
+
+			console.log("Invoice created successfully:", invoice.id);
 
 			// Clear the user's cart after successful payment
 			await prisma.cartItem.deleteMany({
 				where: { userId: purchase.userId },
 			});
 
-			console.log("Cart cleared for user:", purchase.userId);
+			console.log("Purchase completed successfully:", purchase.id);
 		} catch (error) {
-			console.error("Error updating purchase status:", error);
+			console.error("Error processing checkout completion:", error);
+			// Log the full error details
+			if (error instanceof Error) {
+				console.error("Error details:", error.message);
+				console.error("Error stack:", error.stack);
+			}
 			return NextResponse.json(
-				{ error: "Failed to update purchase" },
+				{ error: "Failed to process checkout completion" },
 				{ status: 500 },
 			);
 		}

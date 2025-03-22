@@ -52,7 +52,7 @@ const AuthPage = ({ type }: { type: "login" | "signup" }) => {
     try {
       if (isLogin) {
         const result = await signIn("credentials", {
-          email,
+          username:email,
           password,
           redirect: false,
         });
@@ -67,7 +67,7 @@ const AuthPage = ({ type }: { type: "login" | "signup" }) => {
         });
         if (!res.ok) throw new Error((await res.json()).error);
         toast.success("Account created successfully!");
-        router.push("/dashboard");
+        router.push("/login");
       }
     } catch (error: unknown) {
       if (error instanceof Error) {

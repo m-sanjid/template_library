@@ -5,7 +5,7 @@ import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import CheckoutButton from "@/components/CheckoutButton";
 import { ShoppingCart, Trash2, AlertCircle } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
 const CartPage = () => {
   const { cart, removeFromCart, clearCart } = useCart();

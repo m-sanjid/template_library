@@ -4,7 +4,15 @@ import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { usePathname } from "next/navigation";
-import { User, LogOut, ChevronDown, Sun, Moon, Menu } from "lucide-react";
+import {
+  User,
+  LogOut,
+  ChevronDown,
+  Sun,
+  Moon,
+  Menu,
+  ShoppingCart,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,27 +22,32 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useState, useRef } from "react";
-import Image from "next/image";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import Logo from "./Logo";
 import SigninButton from "./SigninButton";
+import { useCart } from "@/context/CartContext";
+import { GlobalSearch } from "./GlobalSearch";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 const navItems = [
   { title: "Templates", href: "/templates" },
-  { title: "Pro", href: "/pricing" },
+  { title: "Components", href: "/components" },
+  { title: "Pricing", href: "/pricing" },
   { title: "Settings", href: "/settings" },
+  { title: "Purchases", href: "/purchases" },
 ];
 
 const outNavItems = [
   { title: "Templates", href: "/templates" },
+  { title: "Components", href: "/components" },
   { title: "Pricing", href: "/pricing" },
   { title: "Contact", href: "/contact" },
   { title: "About Us", href: "/about" },
-  { title: "Blog", href: "/blog" },
 ];
 
 export default function Navbar() {
   const { data: session } = useSession();
+  const { cart } = useCart();
   const pathname = usePathname();
   const isAuthenticated = !!session;
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -95,11 +108,10 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`sticky z-50 w-full transition-all duration-300 ${
-        isScrolled
-          ? "top-4 mx-auto max-w-5xl border rounded-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-          : "top-0 border-b bg-background/95 backdrop-blur"
-      }`}
+      className={`sticky z-50 w-full transition-all duration-300 ${isScrolled
+        ? "top-4 mx-auto max-w-5xl border rounded-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+        : "top-0 bg-background/95 backdrop-blur"
+        }`}
       onMouseLeave={handleMouseLeave}
     >
       <div className="max-w-7xl mx-auto flex h-14 items-center px-4 md:px-8 justify-between">
@@ -126,38 +138,39 @@ export default function Navbar() {
             {/* Navigation Items */}
             {isAuthenticated
               ? navItems.map(({ title, href }) => (
-                  <Link href={href} key={href} passHref>
-                    <Button
-                      variant={"ghost"}
-                      size="sm"
-                      className={`gap-2 relative z-10 ${
-                        pathname === href
-                          ? "text-muted-foreground"
-                          : "text-primary"
+                <Link href={href} key={href} passHref>
+                  <Button
+                    size="sm"
+                    className={`gap-2 relative bg-transparent border-none shadow-none hover:bg-transparent z-10 ${pathname === href
+                      ? "text-muted-foreground"
+                      : "text-primary"
                       }`}
-                      onMouseEnter={handleHover}
-                    >
-                      {title}
-                    </Button>
-                  </Link>
-                ))
+                    onMouseEnter={handleHover}
+                  >
+                    {title}
+                  </Button>
+                </Link>
+              ))
               : outNavItems.map(({ title, href }) => (
-                  <Link href={href} key={href} passHref>
-                    <Button
-                      variant={"ghost"}
-                      size="sm"
-                      onMouseEnter={handleHover}
-                      className={`gap-2 relative z-10 ${
-                        pathname === href
-                          ? "text-muted-foreground"
-                          : "text-primary"
+                <Link href={href} key={href} passHref>
+                  <Button
+                    size="sm"
+                    onMouseEnter={handleHover}
+                    className={`gap-2 relative bg-transparent border-none shadow-none hover:bg-transparent z-10 ${pathname === href
+                      ? "text-muted-foreground"
+                      : "text-primary"
                       }`}
-                    >
-                      {title}
-                    </Button>
-                  </Link>
-                ))}
+                  >
+                    {title}
+                  </Button>
+                </Link>
+              ))}
           </nav>
+        </div>
+
+        {/* Global Search */}
+        <div className="flex-1 max-w-sm mx-4">
+          <GlobalSearch />
         </div>
 
         {/* Mobile Navigation Dropdown */}
@@ -171,39 +184,48 @@ export default function Navbar() {
             <DropdownMenuContent align="end" className="w-48">
               {isAuthenticated
                 ? navItems.map(({ title, href }) => (
-                    <DropdownMenuItem key={href} asChild>
-                      <Link
-                        href={href}
-                        className="flex items-center gap-2 w-full"
-                      >
-                        {title}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))
+                  <DropdownMenuItem key={href} asChild>
+                    <Link
+                      href={href}
+                      className="flex items-center gap-2 w-full"
+                    >
+                      {title}
+                    </Link>
+                  </DropdownMenuItem>
+                ))
                 : outNavItems.map(({ title, href }) => (
-                    <DropdownMenuItem key={href} asChild>
-                      <Link href={href} className="w-full">
-                        {title}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
+                  <DropdownMenuItem key={href} asChild>
+                    <Link href={href} className="w-full">
+                      {title}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
 
         {/* Auth Section */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6">
+          {/* Cart Icon */}
+          <Link href="/cart">
+            <Button variant="ghost" size="sm" className="relative">
+              <ShoppingCart className="h-5 w-5" />
+              {cart && cart.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  {cart[0].quantity}
+                </span>
+              )}
+            </Button>
+          </Link>
+
           {isAuthenticated ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-2">
-                  <Image
-                    width={24}
-                    height={24}
-                    src={session.user?.image || "/default-avatar.png"}
-                    alt="Avatar"
-                    className="h-6 w-6 rounded-full"
-                  />
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src={session.user?.image || undefined} alt={session.user?.name || ''} />
+                    <AvatarFallback>{session.user?.name?.[0] || 'U'}</AvatarFallback>
+                  </Avatar>
                   <span className="hidden md:inline-block">
                     {session.user?.name}
                   </span>

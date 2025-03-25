@@ -15,7 +15,7 @@ export async function GET(
 			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 		}
 
-		const purchaseId = params.id;
+		const purchaseId = params?.id;
 
 		if (!purchaseId) {
 			return NextResponse.json(

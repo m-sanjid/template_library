@@ -19,7 +19,7 @@ export async function GET() {
         createdAt: "desc",
       },
     });
-
+    console.log("subscription", subscription);
     return NextResponse.json({ subscription });
   } catch (error) {
     console.error("Error fetching subscription:", error);

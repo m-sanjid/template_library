@@ -69,8 +69,11 @@ export async function POST(req: Request) {
         userId: session.user.id,
         plan: pricingPlan.name,
       },
+      allow_promotion_codes: true,
+      billing_address_collection: "required",
     });
 
+    console.log("Created Stripe checkout session:", stripeSession.id);
     return NextResponse.json({ url: stripeSession.url });
   } catch (error) {
     console.error("Subscription error:", error);

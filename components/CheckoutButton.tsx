@@ -4,7 +4,9 @@ import React from "react";
 import { Button } from "./ui/button";
 import axios from "axios";
 import { cn } from "@/lib/utils";
-
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 interface CheckoutItem {
   name: string;
   description: string;
@@ -18,8 +20,16 @@ interface CheckoutButtonProps {
 }
 
 const CheckoutButton = ({ items, className }: CheckoutButtonProps) => {
+  const {data:session} = useSession();
+  const router = useRouter();
+
   const handleCheckout = async () => {
     try {
+      if (!session) {
+        toast.error("Please sign in to checkout");
+        router.push("/login");
+        return;
+      }
       const { data } = await axios.post("/api/checkout", { items });
 
       if (data.url) {

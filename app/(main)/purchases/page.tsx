@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
-	Package,
 	Clock,
 	AlertCircle,
 	ShoppingBag,
@@ -11,7 +10,7 @@ import {
 	Download,
 	Mail,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -24,6 +23,10 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
+import SectionHeader from "@/components/SectionHeader";
+import { useSession } from "next-auth/react";
+import { usePurchases } from "@/hooks/use-purchases";
+import { AnimatedButton } from "@/components/AnimatedButton";
 
 interface Purchase {
 	id: string;
@@ -81,7 +84,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
 				`/api/invoice/${purchase.id}/download${download ? "?download=true" : email ? "?email=true" : ""}`,
 				{
 					responseType: email ? "json" : "blob",
-					validateStatus: (status) => status < 500, // Don't reject on 404
+					validateStatus: (status) => status < 500, 
 				},
 			);
 
@@ -258,6 +261,8 @@ const PurchasesPage = () => {
 	const [purchases, setPurchases] = useState<Purchase[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
+	const { data: session } = useSession();
+	const { isPurchased } = usePurchases();
 
 	useEffect(() => {
 		const fetchPurchases = async () => {
@@ -275,16 +280,27 @@ const PurchasesPage = () => {
 		fetchPurchases();
 	}, []);
 
+	if (!session) {
+		return (
+			<div className="container max-w-4xl mx-auto p-8">
+				<div className="flex flex-col items-center justify-center min-h-[400px] text-center">
+					<AlertCircle className="w-12 h-12 text-red-500 mb-4" />
+					<h2 className="text-xl font-semibold mb-2">
+						Oops! You're not logged in
+					</h2>
+					<p className="text-muted-foreground mb-4">
+						Please log in to view your purchase history.
+					</p>
+					<AnimatedButton label="Login" to="/login" />
+				</div>
+			</div>
+		);
+	}
+
 	if (isLoading) {
 		return (
 			<div className="container max-w-4xl mx-auto p-8">
-				<div className="flex items-center justify-between mb-8">
-					<div>
-						<h1 className="text-3xl font-bold">Purchase History</h1>
-						<p className="text-gray-500 mt-1">Loading your orders...</p>
-					</div>
-					<Package className="w-8 h-8 text-gray-400 animate-pulse" />
-				</div>
+				<SectionHeader label="Purchase History" title="Your Purchase History" description="View and manage your orders" gradientText="Purchase History" textHeight={160}/>
 				<LoadingSkeleton />
 			</div>
 		);
@@ -324,14 +340,7 @@ const PurchasesPage = () => {
 
 	return (
 		<div className="container max-w-4xl mx-auto p-8">
-			<div className="flex items-center justify-between mb-8">
-				<div>
-					<h1 className="text-3xl font-bold">Purchase History</h1>
-					<p className="text-gray-500 mt-1">View and manage your orders</p>
-				</div>
-				<Package className="w-8 h-8 text-gray-400" />
-			</div>
-
+			<SectionHeader label="Purchase History" title="Your Purchase History" description="View and manage your orders" gradientText="Purchase" textHeight={160}/>
 			<div className="space-y-6">
 				{purchases.map((purchase) => (
 					<PurchaseCard key={purchase.id} purchase={purchase} />

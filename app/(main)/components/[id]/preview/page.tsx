@@ -38,7 +38,7 @@ const ComponentPreviewPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background flex justify-center items-center flex-col">
+    <div className="min-h-screen bg-background">
       {/* Back Button */}
       <div className="fixed top-4 left-4 z-50">
         <Link href={`/components/${id}`}>
@@ -50,7 +50,7 @@ const ComponentPreviewPage = () => {
       </div>
 
       {/* Component Preview */}
-      <div className="pt-16">
+      <div className="pt-16 w-full min-h-screen">
         {renderComponent()}
       </div>
     </div>

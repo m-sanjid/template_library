@@ -4,7 +4,7 @@ export default function PreviewLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen bg-background relative flex justify-center items-center">
+    <div className="min-h-screen bg-background relative">
       {children}
     </div>
   )

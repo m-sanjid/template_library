@@ -50,7 +50,7 @@ const ComponentPreviewPage = () => {
       </div>
 
       {/* Component Preview */}
-      <div className="pt-16">
+      <div className="pt-16 w-full min-h-screen">
         {renderComponent()}
       </div>
     </div>

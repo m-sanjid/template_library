@@ -8,8 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Preview } from "@/components/ui/preview";
-import { ArrowRight, Zap, Code2, Palette, Shield, Star } from "lucide-react";
-import CardBadge from '@/components/CardBadge';
+import { ArrowRight } from "lucide-react";
 import SectionHeader from '@/components/SectionHeader';
 
 const ComponentsPage = () => {

@@ -95,10 +95,10 @@ const PricingPage = () => {
           </div>
           <div>
             <h3 className="text-xl font-semibold mb-2">
-              What's your refund policy?
+              What&apos;s your refund policy?
             </h3>
             <p className="text-muted-foreground">
-              If you're not satisfied, we offer a 30-day money-back guarantee for
+              If you&apos;re not satisfied, we offer a 30-day money-back guarantee for
               all plans.
             </p>
           </div>

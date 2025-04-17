@@ -23,7 +23,6 @@ import {
   ArrowDownRight,
 } from 'lucide-react';
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 
 const DashboardPage = () => {
   const { data: session } = useSession();
@@ -38,7 +37,7 @@ const DashboardPage = () => {
               Welcome back, <span className="text-primary">{session?.user?.name}</span>
             </h1>
             <p className="text-muted-foreground">
-              Here's what's happening with your templates
+              Here&apos;s what&apos;s happening with your templates
             </p>
           </div>
           <div className="flex gap-4">

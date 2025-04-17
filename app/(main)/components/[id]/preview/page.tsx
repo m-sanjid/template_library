@@ -40,7 +40,7 @@ const ComponentPreviewPage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Back Button */}
-      <div className="fixed top-4 left-4 z-50">
+      <div className="fixed top-24 left-4 z-50">
         <Link href={`/components/${id}`}>
           <Button variant="ghost" className="gap-2">
             <ArrowLeft className="h-4 w-4" />

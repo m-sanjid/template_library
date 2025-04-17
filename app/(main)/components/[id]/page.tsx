@@ -1,17 +1,18 @@
 "use client";
 
 import { useParams, useRouter } from 'next/navigation'
-import React from 'react'
+import React, { JSX } from 'react'
 import { COMPONENTS } from '@/data/components'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Button } from '@/components/ui/button'
 import { Eye, Code, ArrowLeft, ShoppingCart, Star, Download, Heart, Share2 } from 'lucide-react'
 import Link from 'next/link'
-import PricingPage from '../../pricing/page';
+import PricingPage from '@/app/(out)/pricing/page';
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/components/ui/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { AnimatedButton } from '@/components/AnimatedButton';
 
 interface Component {
   id: string;
@@ -70,13 +71,13 @@ const ComponentDetailPage = (): JSX.Element => {
   return (
     <div className="w-full pb-20">
       {/* Header Section */}
-      <div className="mb-8">
-        <Link href="/components">
-          <Button variant="ghost" className="mb-4">
+      <Link href="/components" className='fixed top-20 bg-accent rounded-full p-2'>
+          <Button variant="ghost">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Components
           </Button>
         </Link>
+      <div className="mt-24 mb-8">
         <div className="flex items-start justify-between">
           <div>
             <h1 className="text-3xl font-bold mb-2">{component?.title}</h1>
@@ -108,8 +109,7 @@ const ComponentDetailPage = (): JSX.Element => {
       </div>
 
       {/* Main Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
+        <div className="mb-8">
           {component.type ? (
             // Handling components with multiple types
             Object.entries(component.type).map(([key, value]) => (
@@ -166,13 +166,12 @@ const ComponentDetailPage = (): JSX.Element => {
                     <div className="text-xl font-semibold">{component.title}</div>
                     <div className="text-muted-foreground">{component.description}</div>
                   </div>
-                  <Button 
-                    onClick={() => handlePreview()} 
-                    className="gap-2"
-                  >
-                    <Eye className="h-4 w-4" />
-                    Preview
-                  </Button>
+                  <AnimatedButton 
+                    className='bg-primary text-secondary rounded-full p-2'
+                    label="Preview"
+                    onClick={() => handlePreview()}
+                    logo={<Eye className="h-5 w-5" />}
+                  />
                 </div>
                 <Tabs defaultValue="preview" className="w-full">
                   <TabsList className="mb-4">
@@ -238,7 +237,6 @@ const ComponentDetailPage = (): JSX.Element => {
             </div>
           </Card>
         </div>
-      </div>
     </div>
   )
 }

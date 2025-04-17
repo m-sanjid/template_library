@@ -8,6 +8,7 @@ import { ChevronDown, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useKeyboardShortcut } from "@/hooks/use-keyboard-shortcut";
 import SectionHeader from "@/components/SectionHeader";
+import { AnimatedButton } from "@/components/AnimatedButton";
 
 const { faq } = ADDITIONAL_PAGES;
 
@@ -194,12 +195,10 @@ export default function FAQPage() {
             Still have questions?
           </h2>
           <p className="text-muted-foreground mb-6">
-            Can't find the answer you're looking for? Please chat with our friendly
+            Can&apos;t find the answer you&apos;re looking for? Please chat with our friendly
             team.
           </p>
-          <Button asChild>
-            <a href="/contact">Contact Support</a>
-          </Button>
+          <AnimatedButton label="Contact Support" className="border rounded-full bg-primary text-secondary" to="/contact" />
         </motion.div>
       </div>
     </div>

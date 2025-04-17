@@ -21,7 +21,7 @@ const CartPage = () => {
       <div className="flex flex-col items-center justify-center min-h-[60vh] p-8">
         <ShoppingCart className="w-16 h-16 text-muted-foreground mb-4" />
         <h2 className="text-2xl font-semibold mb-2">Your cart is empty</h2>
-        <p className="text-muted-foreground mb-4">Looks like you haven't added any templates yet.</p>
+        <p className="text-muted-foreground mb-4">Looks like you haven&apos;t added any templates yet.</p>
         <AnimatedButton label="Browse Templates" className="border rounded-full bg-primary text-secondary" to="/templates" />
       </div>
     );

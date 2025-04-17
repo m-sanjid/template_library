@@ -25,8 +25,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import SectionHeader from "@/components/SectionHeader";
 import { useSession } from "next-auth/react";
-import { usePurchases } from "@/hooks/use-purchases";
 import { AnimatedButton } from "@/components/AnimatedButton";
+import Link from "next/link";
 
 interface Purchase {
 	id: string;
@@ -262,7 +262,6 @@ const PurchasesPage = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 	const { data: session } = useSession();
-	const { isPurchased } = usePurchases();
 
 	useEffect(() => {
 		const fetchPurchases = async () => {
@@ -286,7 +285,7 @@ const PurchasesPage = () => {
 				<div className="flex flex-col items-center justify-center min-h-[400px] text-center">
 					<AlertCircle className="w-12 h-12 text-red-500 mb-4" />
 					<h2 className="text-xl font-semibold mb-2">
-						Oops! You're not logged in
+						Oops! You&apos;re not logged in
 					</h2>
 					<p className="text-muted-foreground mb-4">
 						Please log in to view your purchase history.
@@ -331,7 +330,7 @@ const PurchasesPage = () => {
 						Start shopping to see your purchase history here.
 					</p>
 					<Button asChild>
-						<a href="/templates">Browse Templates</a>
+						<Link href="/templates">Browse Templates</Link>
 					</Button>
 				</div>
 			</div>

@@ -61,8 +61,8 @@ export function GlobalSearch() {
         </kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
-        <CommandList>
+        <CommandInput placeholder="Type a command or search..." className="bg-white dark:bg-black text-black dark:text-white" />
+        <CommandList className="bg-white dark:bg-black text-black dark:text-black">
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Navigation">
             <CommandItem

@@ -3,12 +3,10 @@ import { useState } from "react";
 
 export default function InvoiceButton({
 	invoiceId,
-	purchaseId,
 }: {
 	invoiceId: string;
-	purchaseId: string;
 }) {
-	const [loading, setLoading] = useState(false);
+	const [loading] = useState(false);
 
 	const handleViewInvoice = () => {
 		// Open in new tab

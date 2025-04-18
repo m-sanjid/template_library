@@ -4,9 +4,16 @@ import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Download, Mail, Package, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { CheckCircle2, Download, Mail } from "lucide-react";
 import axios from "axios";
+import { AnimatedButton } from "@/components/AnimatedButton";
+
+export interface PurchaseItem {
+  id: string;
+  name: string;
+  price: string;
+  quantity: number;
+}
 
 export default function SuccessPage() {
   const searchParams = useSearchParams();
@@ -129,7 +136,7 @@ export default function SuccessPage() {
             </div>
 
             <div className="space-y-4 mb-6">
-              {purchase.PurchaseItem.map((item: any, index: number) => (
+              {purchase.PurchaseItem.map((item: PurchaseItem, index: number) => (
                 <div
                   key={index}
                   className="flex items-center justify-between py-2 border-b last:border-0"
@@ -178,24 +185,14 @@ export default function SuccessPage() {
         >
           <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 mb-8">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              What's Next?
+              What&apos;s Next?
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-4">
               Your purchased items are now available in your account. You can access them at any time.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button asChild>
-                <Link href="/dashboard">
-                  <Package className="w-4 h-4 mr-2" />
-                  View My Purchases
-                </Link>
-              </Button>
-              <Button variant="outline" asChild>
-                <Link href="/templates">
-                  <ArrowRight className="w-4 h-4 mr-2" />
-                  Browse More Templates
-                </Link>
-              </Button>
+              <AnimatedButton label="View My Purchases" className="border rounded-full bg-primary text-secondary" to="/dashboard" />
+              <AnimatedButton label="Browse More Templates" className="border rounded-full bg-primary text-secondary" to="/templates" />
             </div>
           </div>
         </motion.div>

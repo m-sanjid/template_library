@@ -54,8 +54,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [hoverPosition, setHoverPosition] = useState({ left: 0, width: 0 });
+  const [isHovered, setIsHovered] = useState<number|null>(null);
   const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -89,22 +88,6 @@ export default function Navbar() {
     localStorage.setItem("theme", newTheme);
   };
 
-  const handleHover = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (e.currentTarget) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const navRect = navRef.current
-        ? navRef.current.getBoundingClientRect()
-        : { left: 0 };
-      setHoverPosition({
-        left: rect.left - navRect.left,
-        width: rect.width,
-      });
-      setIsHovered(true);
-    }
-  };
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
 
   return (
     <nav
@@ -112,7 +95,6 @@ export default function Navbar() {
         ? "top-4 mx-auto max-w-5xl border rounded-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
         : "top-0 bg-background/95 backdrop-blur"
         }`}
-      onMouseLeave={handleMouseLeave}
     >
       <div className="max-w-7xl mx-auto flex h-14 items-center px-4 md:px-8 justify-between">
         {/* Logo */}
@@ -120,49 +102,42 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:block">
-          <nav className="relative flex space-x-2" ref={navRef}>
-            {/* Hover Effect */}
-            {isHovered && (
-              <motion.div
-                className="absolute top-0 bottom-0 z-0 bg-black/10 dark:bg-white/10 rounded-lg"
-                initial={false}
-                animate={{
-                  left: hoverPosition.left,
-                  width: hoverPosition.width,
-                  opacity: 1,
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              />
-            )}
+          <nav className="relative flex space-x-2" ref={navRef} onMouseLeave={() => setIsHovered(null)}>
 
             {/* Navigation Items */}
             {isAuthenticated
-              ? navItems.map(({ title, href }) => (
-                <Link href={href} key={href} passHref>
-                  <Button
-                    size="sm"
-                    className={`gap-2 relative bg-transparent border-none shadow-none hover:bg-transparent z-10 ${pathname === href
+              ? navItems.map((item,idx) => (
+                <Link href={item.href} key={item.href}
+                    onMouseEnter={() => setIsHovered(idx)}
+                    className={`gap-2 relative p-2 flex items-center z-10 ${pathname === item.href
                       ? "text-muted-foreground"
                       : "text-primary"
                       }`}
-                    onMouseEnter={handleHover}
-                  >
-                    {title}
-                  </Button>
+                      >
+                    <span className="text-sm">{item.title}</span>
+                    {isHovered === idx && (
+                      <motion.div
+                        layoutId="hover"
+                        className="absolute inset-0 z-20 bg-black/10 dark:bg-white/10 h-full w-full rounded-lg"
+                      />
+                    )}
                 </Link>
               ))
-              : outNavItems.map(({ title, href }) => (
-                <Link href={href} key={href} passHref>
-                  <Button
-                    size="sm"
-                    onMouseEnter={handleHover}
-                    className={`gap-2 relative bg-transparent border-none shadow-none hover:bg-transparent z-10 ${pathname === href
+              : outNavItems.map((item,idx) => (
+                <Link href={item.href} key={item.href}
+                    onMouseEnter={() => setIsHovered(idx)}
+                    className={`gap-8 p-2 relative z-10 flex items-center ${pathname === item.href
                       ? "text-muted-foreground"
                       : "text-primary"
                       }`}
                   >
-                    {title}
-                  </Button>
+                    <span className="text-sm">{item.title}</span>
+                  {isHovered === idx && (
+                      <motion.div
+                        layoutId="hover"
+                        className="absolute inset-0 z-20 bg-black/10 dark:bg-white/10 h-full w-full rounded-lg"
+                      />
+                    )}
                 </Link>
               ))}
           </nav>
@@ -200,6 +175,9 @@ export default function Navbar() {
                     </Link>
                   </DropdownMenuItem>
                 ))}
+              <DropdownMenuItem asChild>
+                <SigninButton />
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -246,7 +224,9 @@ export default function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <SigninButton />
+            <div className="hidden md:block">
+              <SigninButton />
+            </div>
           )}
 
           {/* Theme Toggle */}

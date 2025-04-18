@@ -1,7 +1,7 @@
 "use client"
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { PlusIcon, SearchIcon, ChevronDownIcon } from 'lucide-react';
 
 const faqs = [
@@ -11,15 +11,19 @@ const faqs = [
   { category: 'Account Management', question: 'How do I update my account details?', answer: 'Go to your account settings and edit your information.' },
 ];
 
+const categories = ['All', 'Pricing', 'Features', 'Support', 'Account Management'];
+
 const FAQ3 = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('All');
 
-  const filteredFaqs = faqs.filter(faq =>
-    (category === 'All' || faq.category === category) &&
-    faq.question.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredFaqs = useMemo(() => {
+    return faqs.filter(faq =>
+      (category === 'All' || faq.category === category) &&
+      faq.question.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [category, searchTerm]);
 
   const toggleFAQ = (index: number) => setOpenIndex(openIndex === index ? null : index);
 
@@ -27,8 +31,6 @@ const FAQ3 = () => {
     hidden: { 
       opacity: 0, 
       height: 0,
-      paddingTop: 0,
-      paddingBottom: 0,
       transition: {
         duration: 0.3,
         ease: "easeInOut"
@@ -36,27 +38,6 @@ const FAQ3 = () => {
     },
     visible: { 
       opacity: 1, 
-      height: 'auto',
-      paddingTop: 16,
-      paddingBottom: 16,
-      transition: {
-        duration: 0.4,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    }
-  };
-
-  const faqVariants = {
-    hidden: { 
-      opacity: 0,
-      height: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeInOut"
-      }
-    },
-    visible: { 
-      opacity: 1,
       height: 'auto',
       transition: {
         duration: 0.4,
@@ -66,11 +47,11 @@ const FAQ3 = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl w-full mx-auto p-6">
       <motion.h2 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        transition={{ duration: 0.3 }}
         className="text-4xl font-bold text-center mb-8"
       >
         Frequently Asked Questions
@@ -80,7 +61,7 @@ const FAQ3 = () => {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+        transition={{ duration: 0.3 }}
         className="flex flex-col md:flex-row justify-between gap-4 mb-8"
       >
         <div className="relative w-full md:w-2/3">
@@ -88,20 +69,19 @@ const FAQ3 = () => {
           <input
             type="text"
             placeholder="Search questions..."
-            className="pl-10 p-3 w-full border rounded-lg focus:ring-2 focus:ring-primary transition-all duration-300 ease-in-out"
+            className="pl-10 p-3 w-full border rounded-lg focus:ring-2 focus:ring-primary transition-all duration-300"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
         <select
-          className="p-3 border rounded-lg transition-all duration-300 ease-in-out hover:border-primary focus:ring-2 focus:ring-primary"
+          className="p-3 border rounded-lg transition-all duration-300 hover:border-primary focus:ring-2 focus:ring-primary"
           onChange={(e) => setCategory(e.target.value)}
+          value={category}
         >
-          <option value="All">All</option>
-          <option value="Pricing">Pricing</option>
-          <option value="Features">Features</option>
-          <option value="Support">Support</option>
-          <option value="Account Management">Account Management</option>
+          {categories.map(cat => (
+            <option key={cat} value={cat}>{cat}</option>
+          ))}
         </select>
       </motion.div>
 
@@ -111,7 +91,6 @@ const FAQ3 = () => {
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
             className="text-center text-gray-500"
           >
             No results found.
@@ -127,28 +106,25 @@ const FAQ3 = () => {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ 
                   duration: 0.3,
-                  delay: index * 0.1,
-                  ease: "easeInOut"
+                  delay: index * 0.05
                 }}
-                className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+                className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
               >
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
                   onClick={() => toggleFAQ(index)}
-                  className="w-full flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200 transition-colors duration-300"
+                  className="w-full flex justify-between items-center p-4 transition-colors"
                 >
                   <div className="flex items-center gap-4">
                     <motion.div
                       animate={{ rotate: openIndex === index ? 45 : 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      transition={{ duration: 0.3 }}
                     >
                       <PlusIcon className="w-5 h-5 text-primary" />
                     </motion.div>
                     <span className="text-left">{faq.question}</span>
                   </div>
                   <ChevronDownIcon 
-                    className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${
+                    className={`w-5 h-5 text-muted-foreground transition-transform ${
                       openIndex === index ? 'rotate-180' : ''
                     }`} 
                   />
@@ -160,17 +136,12 @@ const FAQ3 = () => {
                       initial="hidden"
                       animate="visible"
                       exit="hidden"
-                      className="bg-white text-gray-700 overflow-hidden"
+                      className="overflow-hidden px-4 py-4"
                     >
                       <motion.p
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ 
-                          duration: 0.3,
-                          ease: "easeInOut"
-                        }}
-                        className="px-4"
+                        transition={{ duration: 0.3 }}
                       >
                         {faq.answer}
                       </motion.p>
@@ -183,20 +154,17 @@ const FAQ3 = () => {
         )}
       </div>
       
-
       {/* Contact Support CTA */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+        transition={{ duration: 0.5, delay: 0.4 }}
         className="text-center mt-10"
       >
         <p>
           Still have questions? 
           <motion.a 
             href="/contact" 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             className="text-primary font-semibold hover:underline ml-2"
           >
             Contact Support

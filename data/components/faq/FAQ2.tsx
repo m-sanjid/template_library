@@ -22,7 +22,7 @@ export default function FAQ2() {
       callback: () => {
         searchInputRef.current?.focus();
       },
-    },
+    },  
   ]);
 
   const toggleQuestion = (questionId: string) => {
@@ -48,14 +48,14 @@ export default function FAQ2() {
       : filteredCategories.filter((c) => c.name === activeCategory);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-scree py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bol mb-4">
             Frequently Asked Questions
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Find answers to common questions about our template library and services
           </p>
         </div>
@@ -64,7 +64,7 @@ export default function FAQ2() {
         <div className="space-y-6 mb-12">
           {/* Search */}
           <div className="relative max-w-xl mx-auto">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
             <Input
               ref={searchInputRef}
               placeholder="Search questions... (Press '/' to focus)"
@@ -101,32 +101,32 @@ export default function FAQ2() {
               key={category.name}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-lg shadow-sm overflow-hidden"
+              className="rounded-lg shadow-sm overflow-hidden"
             >
-              <div className="border-b border-gray-200 p-6">
-                <h2 className="text-2xl font-semibold text-gray-900">
+              <div className="border-b p-6">
+                <h2 className="text-2xl font-semibold">
                   {category.name}
                 </h2>
               </div>
 
               {/* Questions */}
-              <div className="divide-y divide-gray-200">
+              <div className="divide-y">
                 {category.questions.map((item) => {
                   const questionId = `${category.name}-${item.question}`;
                   const isExpanded = expandedQuestions.includes(questionId);
 
                   return (
-                    <div key={questionId} className="border-t border-gray-200">
+                    <div key={questionId} className="border-t">
                       <button
                         className="w-full text-left px-6 py-4 focus:outline-none"
                         onClick={() => toggleQuestion(questionId)}
                       >
                         <div className="flex items-center justify-between">
-                          <h3 className="text-lg font-medium text-gray-900">
+                          <h3 className="text-lg font-medium ">
                             {item.question}
                           </h3>
                           <ChevronDown
-                            className={`w-5 h-5 text-gray-500 transition-transform ${
+                            className={`w-5 h-5 text-muted-foreground transition-transform ${
                               isExpanded ? "transform rotate-180" : ""
                             }`}
                           />
@@ -140,7 +140,7 @@ export default function FAQ2() {
                               transition={{ duration: 0.2 }}
                               className="mt-2"
                             >
-                              <p className="text-gray-600">{item.answer}</p>
+                              <p className="text-muted-foreground">{item.answer}</p>
                             </motion.div>
                           )}
                         </AnimatePresence>
@@ -153,7 +153,7 @@ export default function FAQ2() {
               {/* Empty State */}
               {category.questions.length === 0 && (
                 <div className="p-6 text-center">
-                  <p className="text-gray-500">
+                  <p className="text-muted-foreground">
                     No questions found in this category.
                   </p>
                 </div>
@@ -169,13 +169,13 @@ export default function FAQ2() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-12"
           >
-            <div className="w-16 h-16 mx-auto mb-4 text-gray-400">
+            <div className="w-16 h-16 mx-auto mb-4 text-muted-foreground">
               <Search className="w-full h-full" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold mb-2">
               No questions found
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-muted-foreground mb-4">
               Try adjusting your search query or category filter.
             </p>
             <Button
@@ -194,12 +194,12 @@ export default function FAQ2() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-12 text-center bg-white rounded-lg shadow-sm p-8"
+          className="mt-12 text-center rounded-lg shadow-sm p-8"
         >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+          <h2 className="text-2xl font-semibold mb-4">
             Still have questions?
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-muted-foreground mb-6">
             Can't find the answer you're looking for? Please chat with our friendly
             team.
           </p>

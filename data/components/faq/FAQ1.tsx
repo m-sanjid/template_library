@@ -50,6 +50,7 @@ function FAQ1() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
+              layoutId={`faq-${index}`}
               className="overflow-hidden rounded-xl shadow-md bg-white dark:bg-zinc-900"
             >
               <button
@@ -68,6 +69,7 @@ function FAQ1() {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
+                    layoutId={`faq-${index}`}
                     className="px-6 pb-5 text-gray-600 dark:text-gray-300"
                   >
                     {faq.answer}

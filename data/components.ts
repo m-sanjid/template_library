@@ -12,6 +12,7 @@ import Navbar1 from "./components/Navbar1";
 import Navbar3 from "./components/navbar/Navbar3";
 import AuthPage1 from "./components/auth/AuthPage1";
 import FAQ3 from "./components/faq/FAQ3";
+import FAQ4 from "./components/faq/FAQ4";
 
 type ComponentType = {
   title: string;
@@ -94,6 +95,11 @@ export const COMPONENTS: Component[] = [
         description: "A custom FAQ component with variants and states",
         component: FAQ3,
         code: `<FAQ2 />`
+      },"faq4": {
+        title: "FAQ 4",
+        description: "A custom FAQ component with variants and states",
+        component: FAQ4,
+        code: `<FAQ4 />`
       }
     }
   },{

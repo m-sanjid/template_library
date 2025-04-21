@@ -2,21 +2,13 @@
 
 import { motion } from "motion/react";
 import React from "react";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { PRICING } from "@/lib/config";
 import { Check } from "lucide-react";
 import { Button } from "./ui/button";
 
-const Pricing = ({isAnnual, setIsAnnual, isLoading, handleSubscribe}: {isAnnual: boolean, setIsAnnual: (value: boolean) => void, isLoading: string | null, handleSubscribe: (plan: string) => void}) => {
+const Pricing = ({isAnnual, setIsAnnual, isLoading, handleSubscribe}: {isAnnual?: boolean, setIsAnnual: (value: boolean) => void, isLoading: string | null, handleSubscribe: (plan: string) => void}) => {
   return (
-    <div>
-    <div className="text-center mb-12">
-    <h1 className="text-4xl font-bold mb-4">Simple, Transparent Pricing</h1>
-    <p className="text-xl text-muted-foreground">
-      Choose the plan that's right for you
-    </p>
-  </div>
-
+  <div>
   {/* Billing Toggle */}
   <div className="flex justify-center items-center gap-4 mb-12">
     <span
@@ -55,8 +47,8 @@ const Pricing = ({isAnnual, setIsAnnual, isLoading, handleSubscribe}: {isAnnual:
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: index * 0.1 }}
       >
-        <Card
-          className={`relative overflow-hidden ${
+        <div
+          className={`relative border rounded-xl p-3 ${
             key === "PRO"
               ? "border-primary shadow-lg scale-105 bg-primary/5"
               : ""
@@ -67,17 +59,18 @@ const Pricing = ({isAnnual, setIsAnnual, isLoading, handleSubscribe}: {isAnnual:
               Popular
             </div>
           )}
-          <CardHeader>
-            <CardTitle className="text-2xl">{plan.name}</CardTitle>
-            <CardDescription>
+          <div className="p-4 rounded-lg border">
+          <div>
+            <h2 className="text-2xl">{plan.name}</h2>
+            <p className="text-muted-foreground">
               {key === "FREE"
                 ? "Perfect for getting started"
                 : key === "PRO"
                 ? "Best for professionals"
                 : "For large organizations"}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
+            </p>
+          </div>
+          <div className="p-4 mb-6">
             <div className="mb-6">
               <span className="text-4xl font-bold">
                 ${isAnnual ? (plan.price * 0.8 * 12).toFixed(2) : plan.price}
@@ -94,8 +87,8 @@ const Pricing = ({isAnnual, setIsAnnual, isLoading, handleSubscribe}: {isAnnual:
                 </li>
               ))}
             </ul>
-          </CardContent>
-          <CardFooter>
+          </div>
+          <div className="p-4 my-6">
             <Button
               className="w-full"
               variant={key === "PRO" ? "default" : "outline"}
@@ -111,8 +104,9 @@ const Pricing = ({isAnnual, setIsAnnual, isLoading, handleSubscribe}: {isAnnual:
                 `Get ${plan.name}`
               )}
             </Button>
-          </CardFooter>
-        </Card>
+          </div>
+          </div>
+        </div>
       </motion.div>
     ))}
   </div>

@@ -1,13 +1,21 @@
 import { TESTIMONIALS } from "@/lib/config";
-import { motion } from "motion/react";
+import { motion, Variants } from "motion/react";
 import React from "react";
 import SectionHeader from "./SectionHeader";
-const columnVariants = (direction: string) => ({
+import { IconQuoteFilled } from "@tabler/icons-react";
+
+interface Testimonial {
+	name: string;
+	role: string;
+	content: string;
+}
+
+const columnVariants = (direction: string): Variants => ({
 	animate: {
 		y: direction === "up" ? [0, "-50%"] : ["-50%", 0],
 		transition: {
 			repeat: Infinity,
-			repeatType: "loop",
+			repeatType: "loop" as const,
 			duration: 25,
 			ease: "linear",
 		},
@@ -52,12 +60,12 @@ const Testimonials = () => {
 
 export default Testimonials;
 
-const TestimonialCard = ({ testimonial }: { testimonial: any }) => {
+const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 	return (
 		<div className="bg-black/5 dark:bg-white/5 rounded-xl p-8 flex flex-col justify-between h-64 border">
 			<div className="space-y-4">
 				<div className="dark:text-muted-foreground">
-					<span className="text-2xl">&quote;</span>
+					<IconQuoteFilled/>
 				</div>
 				<p className="text-muted-foreground text-base">{testimonial.content}</p>
 			</div>

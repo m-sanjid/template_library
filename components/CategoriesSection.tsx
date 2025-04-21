@@ -3,22 +3,13 @@ import { Check } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import React from "react";
-import { Fade } from "@/types/types";
+import SectionHeader from "./SectionHeader";
 
-const CategoriesSection = ({ fadeInUp }: { fadeInUp: Fade }) => {
+const CategoriesSection = () => {
 	return (
 		<section className="py-20 px-4 sm:px-6">
 			<div className="max-w-7xl mx-auto">
-				<motion.div {...fadeInUp} className="text-center mb-16">
-					<h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-						Templates for Every Need
-					</h2>
-					<p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-						Browse our extensive collection of templates across various
-						categories.
-					</p>
-				</motion.div>
-
+				<SectionHeader label="Templates" title="Templates for Every Need" description="Browse our extensive collection of templates across various categories." gradientText="TEMPLATES" textHeight={200} />
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 					{TEMPLATE_CATEGORIES.map((category, index) => (
 						<motion.div

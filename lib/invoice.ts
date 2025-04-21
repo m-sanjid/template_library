@@ -58,8 +58,10 @@ export async function generateInvoicePdf(purchase: Purchase): Promise<Buffer> {
 
 		// Add subtle gradient overlay
 		doc.setFillColor(...secondaryColor);
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		doc.setGState(new (doc.GState as any)({ opacity: 0.3 }));
 		doc.rect(pageWidth / 2, 0, pageWidth / 2, 40, "F");
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		doc.setGState(new (doc.GState as any)({ opacity: 1.0 }));
 
 		// Company logo/name

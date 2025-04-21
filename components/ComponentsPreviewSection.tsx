@@ -1,9 +1,10 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Preview } from "@/components/ui/preview";
 import { COMPONENTS } from "@/data/components";
-import { ArrowRight, Zap } from "lucide-react";
+import SectionHeader from "./SectionHeader";
+import { AnimatedButton } from "./AnimatedButton";
 
 interface ComponentCardProps {
 	title: string;
@@ -62,10 +63,7 @@ const ComponentCard = ({
 							${price}
 						</span>
 					</div>
-					<Button variant="outline" className="group">
-						View Details
-						<ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-					</Button>
+					<AnimatedButton label="View Details" to={`/components`}  />
 				</div>
 			</div>
 		</motion.div>
@@ -139,54 +137,20 @@ const ComponentsPreviewSection = () => {
 	return (
 		<section className="py-20 px-4 sm:px-6 lg:px-8">
 			<div className="relative max-w-7xl mx-auto">
-				<motion.div
-					initial={{ opacity: 0, y: 100 }}
-					animate={{ opacity: 1, y: 0 }}
-					whileHover={{ scale: 1.05 }}
-					whileTap={{ scale: 0.95 }}
-					transition={{ duration: 0.5, ease: "easeOut" }}
-					className="px-1 z-10 py-1 mb-6 bg-white/10 border rounded-full w-fit backdrop-blur-3xl flex justify-between items-center gap-3"
-				>
-					<div className="p-2 bg-white/5 border rounded-full backdrop-blur-2xl">
-						<Zap className="w-4 h-4" />
-					</div>
-					<div className="pr-2 text-sm font-semibold">Component Packs</div>
-				</motion.div>
-
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.5 }}
-					className="mb-16 flex justify-between text-start"
-				>
-					<h2 className="text-xl sm:text-2xl max-w-md font-bold mb-4">
-						Premium Component Packs
-					</h2>
-					<p className="text-muted-foreground max-w-md">
-						A growing collection of building blocks for your website, crafted
-						with attention to detail.
-					</p>
-				</motion.div>
-
-				<div className="absolute -top-20 flex justify-center items-center -z-10 opacity-50 overflow-hidden bg-clip-text text-transparent bg-gradient-to-b from-neutral-400 via-neutral-200 to-neutral-100 dark:from-neutral-700 dark:via-neutral-800 dark:to-black tracking-tight">
-					<span className="text-[50px] md:text-[160px] font-extrabold">
-						COMPONENTS
-					</span>
-				</div>
-
+				<SectionHeader label="Components Pack" title="Premium Component Packs" description="A growing collection of building blocks for your website, crafted
+						with attention to detail." gradientText="COMPONENTS"/>
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 					{packs.map((pack, index) => (
 						<ComponentCard key={index} {...pack} />
 					))}
 				</div>
 
-				<div className="flex justify-center mt-12">
+				<div className='w-full flex justify-center items-end absolute -bottom-12 bg-gradient-to-t from-white/80 dark:from-black/80 via-white/60 dark:via-black/60 to-white/5 dark:to-black/10 h-[16rem] '>
 					<Button
 						size="lg"
 						className="group bg-black text-white hover:bg-black/90"
 					>
-						Show More Components
-						<ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+						Show More
 					</Button>
 				</div>
 			</div>

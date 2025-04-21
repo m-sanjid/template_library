@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { GoogleIcon } from "./Icon";
 import Logo from "./Logo";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
@@ -84,7 +83,7 @@ const AuthPage = ({ type }: { type: "login" | "signup" }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 h-screen max-w-7xl mx-auto">
       {/* Left Panel */}
-      <div className="flex col-span-1 max-w-md mx-auto justify-center items-center -mt-8">
+      <div className="flex col-span-1 max-w-md mx-4 md:mx-auto justify-center items-center -mt-8">
         <div className="w-full max-w-md">
           <div className="p-2 mr-4">
             <Logo />
@@ -132,7 +131,7 @@ const AuthPage = ({ type }: { type: "login" | "signup" }) => {
                   <p className="text-red-500 text-xs">{errors.password}</p>
                 )}
               </div>
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button type="submit" className="w-full rounded-full" disabled={isLoading}>
                 {isLoading
                   ? isLogin
                     ? "Signing In..."

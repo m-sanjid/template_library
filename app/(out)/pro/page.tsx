@@ -22,7 +22,7 @@ const ProPage = () => {
   }
 
   if (!hasRequiredSubscription) {
-    return null; // The hook will handle the redirect
+    return null; 
   }
 
   return (
@@ -73,4 +73,4 @@ const ProPage = () => {
   );
 };
 
-export default ProPage; 
+export default ProPage;

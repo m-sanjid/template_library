@@ -1,9 +1,9 @@
-"use client"
-import React from 'react';
-import { motion } from 'motion/react';
+"use client";
+import React from "react";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
-import { Star, Plus, Bookmark, Download, Eye, Grid, Bell } from 'lucide-react';
-import { AnimatedButton } from '@/components/AnimatedButton';
+import { Star, Plus, Bookmark, Download, Eye, Grid, Bell } from "lucide-react";
+import { AnimatedButton } from "@/components/AnimatedButton";
 
 const Home = () => {
   return (
@@ -27,8 +27,16 @@ const Home = () => {
               </p>
             </div>
             <div className="flex gap-4">
-              <AnimatedButton label="Create Template" className="border rounded-full bg-primary text-secondary" to="/templates" />
-              <AnimatedButton label="Browse Templates" className="border rounded-full bg-primary text-secondary" to="/templates" />
+              <AnimatedButton
+                label="Create Template"
+                className="border rounded-full bg-primary text-secondary"
+                to="/templates"
+              />
+              <AnimatedButton
+                label="Browse Templates"
+                className="border rounded-full bg-primary text-secondary"
+                to="/templates"
+              />
             </div>
           </motion.div>
         </div>
@@ -39,10 +47,26 @@ const Home = () => {
         <div className="container max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
-              { label: "Saved Templates", value: "12", icon: <Bookmark className="w-6 h-6" /> },
-              { label: "Downloads", value: "48", icon: <Download className="w-6 h-6" /> },
-              { label: "Recent Views", value: "156", icon: <Eye className="w-6 h-6" /> },
-              { label: "Favorites", value: "8", icon: <Star className="w-6 h-6" /> }
+              {
+                label: "Saved Templates",
+                value: "12",
+                icon: <Bookmark className="w-6 h-6" />,
+              },
+              {
+                label: "Downloads",
+                value: "48",
+                icon: <Download className="w-6 h-6" />,
+              },
+              {
+                label: "Recent Views",
+                value: "156",
+                icon: <Eye className="w-6 h-6" />,
+              },
+              {
+                label: "Favorites",
+                value: "8",
+                icon: <Star className="w-6 h-6" />,
+              },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -74,10 +98,26 @@ const Home = () => {
               </div>
               <div className="space-y-4">
                 {[
-                  { action: "Downloaded", template: "Professional Resume", time: "2 hours ago" },
-                  { action: "Saved", template: "Business Proposal", time: "5 hours ago" },
-                  { action: "Viewed", template: "Marketing Campaign", time: "1 day ago" },
-                  { action: "Created", template: "Custom Portfolio", time: "2 days ago" }
+                  {
+                    action: "Downloaded",
+                    template: "Professional Resume",
+                    time: "2 hours ago",
+                  },
+                  {
+                    action: "Saved",
+                    template: "Business Proposal",
+                    time: "5 hours ago",
+                  },
+                  {
+                    action: "Viewed",
+                    template: "Marketing Campaign",
+                    time: "1 day ago",
+                  },
+                  {
+                    action: "Created",
+                    template: "Custom Portfolio",
+                    time: "2 days ago",
+                  },
                 ].map((activity, index) => (
                   <motion.div
                     key={index}
@@ -87,14 +127,26 @@ const Home = () => {
                     className="flex items-center gap-4 p-4 bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow"
                   >
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      {activity.action === "Downloaded" && <Download className="w-5 h-5 text-primary" />}
-                      {activity.action === "Saved" && <Bookmark className="w-5 h-5 text-primary" />}
-                      {activity.action === "Viewed" && <Eye className="w-5 h-5 text-primary" />}
-                      {activity.action === "Created" && <Plus className="w-5 h-5 text-primary" />}
+                      {activity.action === "Downloaded" && (
+                        <Download className="w-5 h-5 text-primary" />
+                      )}
+                      {activity.action === "Saved" && (
+                        <Bookmark className="w-5 h-5 text-primary" />
+                      )}
+                      {activity.action === "Viewed" && (
+                        <Eye className="w-5 h-5 text-primary" />
+                      )}
+                      {activity.action === "Created" && (
+                        <Plus className="w-5 h-5 text-primary" />
+                      )}
                     </div>
                     <div className="flex-1">
-                      <div className="font-medium">{activity.action} {activity.template}</div>
-                      <div className="text-sm text-muted-foreground">{activity.time}</div>
+                      <div className="font-medium">
+                        {activity.action} {activity.template}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {activity.time}
+                      </div>
                     </div>
                   </motion.div>
                 ))}
@@ -106,10 +158,22 @@ const Home = () => {
               <h2 className="text-2xl font-bold mb-6">Quick Actions</h2>
               <div className="space-y-4">
                 {[
-                  { label: "Create New Template", icon: <Plus className="w-5 h-5" /> },
-                  { label: "Browse Categories", icon: <Grid className="w-5 h-5" /> },
-                  { label: "View Favorites", icon: <Star className="w-5 h-5" /> },
-                  { label: "Check Updates", icon: <Bell className="w-5 h-5" /> }
+                  {
+                    label: "Create New Template",
+                    icon: <Plus className="w-5 h-5" />,
+                  },
+                  {
+                    label: "Browse Categories",
+                    icon: <Grid className="w-5 h-5" />,
+                  },
+                  {
+                    label: "View Favorites",
+                    icon: <Star className="w-5 h-5" />,
+                  },
+                  {
+                    label: "Check Updates",
+                    icon: <Bell className="w-5 h-5" />,
+                  },
                 ].map((action, index) => (
                   <motion.div
                     key={action.label}

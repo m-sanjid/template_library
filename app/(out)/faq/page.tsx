@@ -53,7 +53,13 @@ export default function FAQPage() {
     <div className="min-h-screen py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <SectionHeader label="FAQ" title="Frequently Asked Questions" description="Find answers to common questions about our template library and services" gradientText="Questions" textHeight={160} />
+        <SectionHeader
+          label="FAQ"
+          title="Frequently Asked Questions"
+          description="Find answers to common questions about our template library and services"
+          gradientText="Questions"
+          textHeight={160}
+        />
 
         {/* Search and Categories */}
         <div className="space-y-6 mb-12">
@@ -80,7 +86,9 @@ export default function FAQPage() {
             {faq.categories.map((category) => (
               <Button
                 key={category.name}
-                variant={activeCategory === category.name ? "default" : "outline"}
+                variant={
+                  activeCategory === category.name ? "default" : "outline"
+                }
                 onClick={() => setActiveCategory(category.name)}
               >
                 {category.name}
@@ -135,7 +143,9 @@ export default function FAQPage() {
                               transition={{ duration: 0.2 }}
                               className="mt-2"
                             >
-                              <p className="text-muted-foreground">{item.answer}</p>
+                              <p className="text-muted-foreground">
+                                {item.answer}
+                              </p>
                             </motion.div>
                           )}
                         </AnimatePresence>
@@ -195,12 +205,16 @@ export default function FAQPage() {
             Still have questions?
           </h2>
           <p className="text-muted-foreground mb-6">
-            Can&apos;t find the answer you&apos;re looking for? Please chat with our friendly
-            team.
+            Can&apos;t find the answer you&apos;re looking for? Please chat with
+            our friendly team.
           </p>
-          <AnimatedButton label="Contact Support" className="border rounded-full bg-primary text-secondary" to="/contact" />
+          <AnimatedButton
+            label="Contact Support"
+            className="border rounded-full bg-primary text-secondary"
+            to="/contact"
+          />
         </motion.div>
       </div>
     </div>
   );
-} 
+}

@@ -53,7 +53,7 @@ export default function ContactPage() {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     console.log("Submitting form with data:", data);
-  
+
     try {
       console.log("Starting fetch request to /api/contact");
       const response = await fetch("/api/contact", {
@@ -63,9 +63,9 @@ export default function ContactPage() {
         },
         body: JSON.stringify(data),
       });
-      
+
       console.log("Response status:", response.status);
-      
+
       // Handle non-JSON responses gracefully
       let responseData;
       const contentType = response.headers.get("content-type");
@@ -77,22 +77,25 @@ export default function ContactPage() {
         console.log("Non-JSON response:", textResponse);
         responseData = { message: "Received non-JSON response" };
       }
-  
+
       if (!response.ok) {
         throw new Error(responseData?.message || `Error: ${response.status}`);
       }
-      
+
       toast({
         title: "Message sent successfully!",
         description: "We'll get back to you as soon as possible.",
       });
-      
+
       reset();
     } catch (error) {
       console.error("Error details:", error);
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to send message. Please try again later.",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Failed to send message. Please try again later.",
       });
     } finally {
       setIsSubmitting(false);
@@ -102,12 +105,12 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader 
-          label="Contact" 
-          title="Get in Touch" 
-          description="We'd love to hear from you. Send us a message and we'll respond as soon as possible." 
-          gradientText="CONTACT" 
-          textHeight={240} 
+        <SectionHeader
+          label="Contact"
+          title="Get in Touch"
+          description="We'd love to hear from you. Send us a message and we'll respond as soon as possible."
+          gradientText="CONTACT"
+          textHeight={240}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-20">
@@ -127,12 +130,17 @@ export default function ContactPage() {
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-muted-foreground mt-1" />
                     <div>
-                      <p className="text-muted-foreground">{location.address}</p>
+                      <p className="text-muted-foreground">
+                        {location.address}
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-muted-foreground" />
-                    <a href={`tel:${location.phone}`} className="text-primary hover:underline">
+                    <a
+                      href={`tel:${location.phone}`}
+                      className="text-primary hover:underline"
+                    >
                       {location.phone}
                     </a>
                   </div>
@@ -174,10 +182,7 @@ export default function ContactPage() {
                 </div>
                 <div className="flex items-center gap-3">
                   <MessageSquare className="w-5 h-5 text-muted-foreground" />
-                  <a
-                    href="#"
-                    className="text-primary hover:underline"
-                  >
+                  <a href="#" className="text-primary hover:underline">
                     Live Chat
                   </a>
                 </div>
@@ -208,7 +213,9 @@ export default function ContactPage() {
                       className={errors.name ? "border-red-500" : ""}
                     />
                     {errors.name && (
-                      <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.name.message}
+                      </p>
                     )}
                   </div>
                   <div>
@@ -225,7 +232,9 @@ export default function ContactPage() {
                       className={errors.email ? "border-red-500" : ""}
                     />
                     {errors.email && (
-                      <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.email.message}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -242,7 +251,9 @@ export default function ContactPage() {
                     className={errors.subject ? "border-red-500" : ""}
                   />
                   {errors.subject && (
-                    <p className="text-red-500 text-sm mt-1">{errors.subject.message}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.subject.message}
+                    </p>
                   )}
                 </div>
                 <div>
@@ -259,7 +270,9 @@ export default function ContactPage() {
                     className={errors.message ? "border-red-500" : ""}
                   />
                   {errors.message && (
-                    <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.message.message}
+                    </p>
                   )}
                 </div>
                 <Button

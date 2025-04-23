@@ -21,17 +21,32 @@ const CartPage = () => {
       <div className="flex flex-col items-center justify-center min-h-[60vh] p-8">
         <ShoppingCart className="w-16 h-16 text-muted-foreground mb-4" />
         <h2 className="text-2xl font-semibold mb-2">Your cart is empty</h2>
-        <p className="text-muted-foreground mb-4">Looks like you haven&apos;t added any templates yet.</p>
-        <AnimatedButton label="Browse Templates" className="border rounded-full bg-primary text-secondary" to="/templates" />
+        <p className="text-muted-foreground mb-4">
+          Looks like you haven&apos;t added any templates yet.
+        </p>
+        <AnimatedButton
+          label="Browse Templates"
+          className="border rounded-full bg-primary text-secondary"
+          to="/templates"
+        />
       </div>
     );
   }
 
-  const totalPrice = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+  const totalPrice = cart.reduce(
+    (sum, item) => sum + item.price * (item.quantity || 1),
+    0
+  );
 
   return (
     <div className="max-w-4xl mx-auto p-8 mt-20">
-      <SectionHeader label='Shopping Cart' title='Shopping Cart' description='' gradientText='CART' textHeight={160} />
+      <SectionHeader
+        label="Shopping Cart"
+        title="Shopping Cart"
+        description=""
+        gradientText="CART"
+        textHeight={160}
+      />
       <div className="flex justify-between items-center mb-8">
         <AnimatedButton
           label="Clear Cart"
@@ -55,7 +70,9 @@ const CartPage = () => {
             >
               <div className="flex-1">
                 <h2 className="text-lg font-semibold mb-1">{item.name}</h2>
-                <p className="text-muted-foreground text-sm mb-2">{item.description}</p>
+                <p className="text-muted-foreground text-sm mb-2">
+                  {item.description}
+                </p>
                 <div className="flex items-center text-sm text-muted-foreground">
                   <span>Quantity: {item.quantity || 1}</span>
                   <span className="mx-2">•</span>
@@ -89,8 +106,8 @@ const CartPage = () => {
           <div className="flex items-start gap-2 text-sm text-muted-foreground">
             <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
             <p>
-              By proceeding to checkout, you agree to our terms of service and acknowledge
-              that all purchases are final.
+              By proceeding to checkout, you agree to our terms of service and
+              acknowledge that all purchases are final.
             </p>
           </div>
           <CheckoutButton items={cart} className="w-full" />

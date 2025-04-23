@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,7 +20,6 @@ import {
   Download,
   Star,
   Clock,
-  ThumbsUp,
   ShoppingCart,
   ExternalLink,
 } from "lucide-react";
@@ -29,38 +28,11 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/components/ui/use-toast";
 import { useKeyboardShortcut } from "@/hooks/use-keyboard-shortcut";
-
+import SectionHeader from "@/components/SectionHeader";
+import { TemplateCard } from "@/components/TemplatesPreview";
+import { usePurchases } from "@/hooks/use-purchases";
 
 // Mock data - replace with actual API call
-const TEMPLATES = [
-  {
-    id: 1,
-    name: "Professional Resume",
-    category: "Personal",
-    subcategory: "Resumes",
-    description: "A clean and modern resume template perfect for professionals.",
-    price: 29,
-    rating: 4.8,
-    downloads: 1234,
-    lastUpdated: "2024-03-20",
-    thumbnail: "/templates/resume.jpg",
-    isPurchased: false,
-  },
-  {
-    id: 2,
-    name: "Business Proposal",
-    category: "Business",
-    subcategory: "Proposals",
-    description: "Comprehensive business proposal template with modern design.",
-    price: 49,
-    rating: 4.9,
-    downloads: 856,
-    lastUpdated: "2024-03-19",
-    thumbnail: "/templates/proposal.jpg",
-    isPurchased: true,
-  },
-  // Add more templates as needed
-];
 
 export default function TemplatesPage() {
   const { data: session } = useSession();
@@ -71,6 +43,24 @@ export default function TemplatesPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("popular");
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const [templates, setTemplates] = useState<any>([]);
+  const { isPurchased } = usePurchases();
+
+  useEffect(() => {
+    console.log("Fetching templates...");
+    fetch("/api/templates")
+      .then((res) => {
+        console.log("Response status:", res.status);
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Received templates data:", data);
+        setTemplates(data);
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
+      });
+  }, []);
 
   useKeyboardShortcut([
     {
@@ -81,7 +71,7 @@ export default function TemplatesPage() {
     },
   ]);
 
-  const filteredTemplates = TEMPLATES.filter((template) => {
+  const filteredTemplates = templates.filter((template: any) => {
     const matchesSearch = template.name
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
@@ -97,7 +87,9 @@ export default function TemplatesPage() {
       case "rating":
         return b.rating - a.rating;
       case "recent":
-        return new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime();
+        return (
+          new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime()
+        );
       default:
         return 0;
     }
@@ -125,39 +117,37 @@ export default function TemplatesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Templates</h1>
-            <p className="mt-2 text-gray-600">
-              Browse and download professional templates for any purpose
-            </p>
-          </div>
-          <div className="flex gap-4 mt-4 md:mt-0">
-            <Button
-              variant={viewMode === "grid" ? "default" : "outline"}
-              onClick={() => setViewMode("grid")}
-            >
-              <Grid className="w-4 h-4 mr-2" />
-              Grid
-            </Button>
-            <Button
-              variant={viewMode === "list" ? "default" : "outline"}
-              onClick={() => setViewMode("list")}
-            >
-              <List className="w-4 h-4 mr-2" />
-              List
-            </Button>
-          </div>
+    <div className="min-h-screen py-8">
+      <div className="container max-w-7xl mx-auto px-4 py-20">
+        <SectionHeader
+          label="Templates Library"
+          title="Premium UI Templates"
+          description="Discover our collection of pre-built templates, crafted with attention to detail and ready for your next project."
+          gradientText="Templates"
+          textHeight={160}
+        />
+        <div className="flex gap-4 my-4 ml-4">
+          <Button
+            variant={viewMode === "grid" ? "default" : "outline"}
+            onClick={() => setViewMode("grid")}
+          >
+            <Grid className="w-4 h-4 mr-2" />
+            Grid
+          </Button>
+          <Button
+            variant={viewMode === "list" ? "default" : "outline"}
+            onClick={() => setViewMode("list")}
+          >
+            <List className="w-4 h-4 mr-2" />
+            List
+          </Button>
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow-sm p-4 mb-8">
+        <div className="rounded-lg shadow-sm p-4 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
               <Input
                 ref={searchInputRef}
                 placeholder="Search templates... (Press '/' to focus)"
@@ -166,7 +156,10 @@ export default function TemplatesPage() {
                 className="pl-10"
               />
             </div>
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+            <Select
+              value={selectedCategory}
+              onValueChange={setSelectedCategory}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
@@ -211,10 +204,10 @@ export default function TemplatesPage() {
                   key={template.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="group bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+                  className="group rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow bg-card"
                 >
                   <Link href={`/templates/${template.id}`} className="block">
-                    <div className="aspect-video bg-gray-100 relative">
+                    <div className="aspect-video relative">
                       <img
                         src={template.thumbnail}
                         alt={template.name}
@@ -231,10 +224,10 @@ export default function TemplatesPage() {
                         {template.name}
                       </h3>
                     </Link>
-                    <p className="text-gray-600 text-sm mb-4">
+                    <p className="text-muted-foreground text-sm mb-4">
                       {template.description}
                     </p>
-                    <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
                       <div className="flex items-center">
                         <Star className="w-4 h-4 mr-1 text-yellow-400" />
                         {template.rating}
@@ -247,7 +240,7 @@ export default function TemplatesPage() {
                     <div className="flex items-center justify-between">
                       <span className="font-semibold">${template.price}</span>
                       <div className="flex gap-2">
-                        {template.isPurchased ? (
+                        {isPurchased(template.id) ? (
                           <Button
                             size="sm"
                             variant="outline"
@@ -279,17 +272,24 @@ export default function TemplatesPage() {
               exit={{ opacity: 0 }}
               className="space-y-4"
             >
+              {sortedTemplates.map((template, index) => (
+                <TemplateCard
+                  key={template.id}
+                  template={template}
+                  index={index}
+                />
+              ))}
               {sortedTemplates.map((template) => (
                 <motion.div
                   key={template.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className="bg-white rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow"
+                  className="rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow bg-card"
                 >
                   <div className="flex items-start gap-4">
                     <Link
                       href={`/templates/${template.id}`}
-                      className="w-48 h-32 bg-gray-100 rounded-lg overflow-hidden"
+                      className="w-48 h-32 bg-card  rounded-lg overflow-hidden"
                     >
                       <img
                         src={template.thumbnail}
@@ -299,12 +299,14 @@ export default function TemplatesPage() {
                     </Link>
                     <div className="flex-1">
                       <Link href={`/templates/${template.id}`}>
-                        <h3 className="font-semibold text-lg mb-1 hover:text-blue-600 transition-colors">
+                        <h3 className="font-semibold text-lg mb-1 hover:text-primary transition-colors">
                           {template.name}
                         </h3>
                       </Link>
-                      <p className="text-gray-600 mb-4">{template.description}</p>
-                      <div className="flex items-center gap-6 text-sm text-gray-500">
+                      <p className="text-muted-foreground mb-4">
+                        {template.description}
+                      </p>
+                      <div className="flex items-center gap-6 text-sm text-muted-foreground">
                         <div className="flex items-center">
                           <Star className="w-4 h-4 mr-1 text-yellow-400" />
                           {template.rating}
@@ -321,7 +323,7 @@ export default function TemplatesPage() {
                     </div>
                     <div className="flex flex-col items-end gap-2">
                       <span className="font-semibold">${template.price}</span>
-                      {template.isPurchased ? (
+                      {isPurchased(template.id) ? (
                         <Button
                           variant="outline"
                           onClick={() => handleDownload(template)}
@@ -346,14 +348,15 @@ export default function TemplatesPage() {
         {/* Empty State */}
         {sortedTemplates.length === 0 && (
           <div className="text-center py-12">
-            <div className="w-16 h-16 mx-auto mb-4 text-gray-400">
+            <div className="w-16 h-16 mx-auto mb-4 text-muted-foreground">
               <Search className="w-full h-full" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold text-primary mb-2">
               No templates found
             </h3>
-            <p className="text-gray-600 mb-4">
-              Try adjusting your search or filters to find what you're looking for.
+            <p className="text-muted-foreground mb-4">
+              Try adjusting your search or filters to find what you&apos;re
+              looking for.
             </p>
             <Button
               variant="outline"

@@ -3,15 +3,15 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
-import {
-  Calendar,
-  Clock,
-  ArrowLeft,
-  ArrowRight,
-} from "lucide-react";
+import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import BgButton from "@/components/BgButton";
-import { IconBrandX, IconBrandFacebook, IconBrandLinkedin, IconShare } from "@tabler/icons-react";
+import {
+  IconBrandX,
+  IconBrandFacebook,
+  IconBrandLinkedin,
+  IconShare,
+} from "@tabler/icons-react";
 
 // Mock data - replace with actual API call
 const post = {
@@ -49,7 +49,8 @@ const relatedPosts = [
     id: 2,
     title: "The Future of Document Templates",
     slug: "future-document-templates",
-    excerpt: "Discover the latest trends and technologies shaping the future of document templates.",
+    excerpt:
+      "Discover the latest trends and technologies shaping the future of document templates.",
     category: "Product Updates",
     author: "Jane Smith",
     date: "2024-03-19",
@@ -103,9 +104,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 {post.readTime}
               </div>
             </div>
-            <h1 className="text-3xl font-bold mb-6">
-              {post.title}
-            </h1>
+            <h1 className="text-3xl font-bold mb-6">{post.title}</h1>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <img
@@ -163,9 +162,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
           <div>
-            <h2 className="text-2xl font-bold mb-6">
-              Related Posts
-            </h2>
+            <h2 className="text-2xl font-bold mb-6">Related Posts</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {relatedPosts.map((relatedPost) => (
                 <motion.div
@@ -198,18 +195,18 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                       <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
                         {relatedPost.title}
                       </h3>
-                      <p className="text-muted-foreground text-sm">{relatedPost.excerpt}</p>
+                      <p className="text-muted-foreground text-sm">
+                        {relatedPost.excerpt}
+                      </p>
                     </div>
                   </Link>
                 </motion.div>
               ))}
             </div>
-            <BgButton className="w-fit">
-              View All Posts
-            </BgButton>
+            <BgButton className="w-fit">View All Posts</BgButton>
           </div>
         )}
       </div>
     </div>
   );
-} 
+}

@@ -15,7 +15,8 @@ const BLOG_POSTS = [
     id: 1,
     title: "10 Tips for Creating Professional Templates",
     slug: "10-tips-professional-templates",
-    excerpt: "Learn how to create professional templates that stand out and meet your clients' needs.",
+    excerpt:
+      "Learn how to create professional templates that stand out and meet your clients' needs.",
     category: "Design Tips",
     author: "John Doe",
     date: "2024-03-20",
@@ -27,7 +28,8 @@ const BLOG_POSTS = [
     id: 2,
     title: "The Future of Document Templates",
     slug: "future-document-templates",
-    excerpt: "Discover the latest trends and technologies shaping the future of document templates.",
+    excerpt:
+      "Discover the latest trends and technologies shaping the future of document templates.",
     category: "Product Updates",
     author: "Jane Smith",
     date: "2024-03-19",
@@ -67,7 +69,13 @@ export default function BlogPage() {
     <div className="min-h-screen py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <SectionHeader label="Blog" title="Template Library Blog" description="Discover tips, tutorials, and insights about creating and using professional templates" gradientText="BLOG" textHeight={240} />  
+        <SectionHeader
+          label="Blog"
+          title="Template Library Blog"
+          description="Discover tips, tutorials, and insights about creating and using professional templates"
+          gradientText="BLOG"
+          textHeight={240}
+        />
 
         {/* Featured Posts */}
         {featuredPosts.length > 0 && (
@@ -141,7 +149,9 @@ export default function BlogPage() {
             {BLOG_CATEGORIES.map((category) => (
               <Button
                 key={category.slug}
-                variant={selectedCategory === category.name ? "default" : "outline"}
+                variant={
+                  selectedCategory === category.name ? "default" : "outline"
+                }
                 onClick={() => setSelectedCategory(category.name)}
               >
                 {category.name}
@@ -180,7 +190,9 @@ export default function BlogPage() {
                   <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
                     {post.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm mb-4">{post.excerpt}</p>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    {post.excerpt}
+                  </p>
                   <div className="flex items-center text-sm text-muted-foreground">
                     <User className="w-4 h-4 mr-1" />
                     {post.author}
@@ -197,9 +209,7 @@ export default function BlogPage() {
             <div className="w-16 h-16 mx-auto mb-4 text-muted-foreground">
               <Search className="w-full h-full" />
             </div>
-            <h3 className="text-lg font-semibold mb-2">
-              No blog posts found
-            </h3>
+            <h3 className="text-lg font-semibold mb-2">No blog posts found</h3>
             <p className="text-muted-foreground mb-4">
               Try adjusting your search or category filters.
             </p>
@@ -217,4 +227,4 @@ export default function BlogPage() {
       </div>
     </div>
   );
-} 
+}

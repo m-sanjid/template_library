@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from './card';
 
 interface PreviewProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component?: React.ComponentType<any>;
 }
 

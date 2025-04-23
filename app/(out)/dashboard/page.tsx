@@ -1,7 +1,7 @@
 "use client";
 
-import React from 'react';
-import { motion } from 'motion/react';
+import React from "react";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -21,7 +21,7 @@ import {
   Bell,
   ArrowUpRight,
   ArrowDownRight,
-} from 'lucide-react';
+} from "lucide-react";
 import { useSession } from "next-auth/react";
 
 const DashboardPage = () => {
@@ -34,7 +34,8 @@ const DashboardPage = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
           <div>
             <h1 className="text-3xl font-bold mb-2">
-              Welcome back, <span className="text-primary">{session?.user?.name}</span>
+              Welcome back,{" "}
+              <span className="text-primary">{session?.user?.name}</span>
             </h1>
             <p className="text-muted-foreground">
               Here&apos;s what&apos;s happening with your templates
@@ -97,9 +98,11 @@ const DashboardPage = () => {
               </div>
               <div className="flex items-center justify-between">
                 <div className="text-3xl font-bold">{stat.value}</div>
-                <div className={`flex items-center text-sm ${
-                  stat.trend === "up" ? "text-green-500" : "text-red-500"
-                }`}>
+                <div
+                  className={`flex items-center text-sm ${
+                    stat.trend === "up" ? "text-green-500" : "text-red-500"
+                  }`}
+                >
                   {stat.trend === "up" ? (
                     <ArrowUpRight className="w-4 h-4 mr-1" />
                   ) : (
@@ -159,7 +162,9 @@ const DashboardPage = () => {
               </div>
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Next billing date</span>
+                  <span className="text-muted-foreground">
+                    Next billing date
+                  </span>
                   <span>March 1, 2024</span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
@@ -180,17 +185,33 @@ const DashboardPage = () => {
               <h3 className="font-semibold mb-4">Recent Activity</h3>
               <div className="space-y-4">
                 {[
-                  { action: "Downloaded", template: "Business Proposal", time: "2 hours ago" },
-                  { action: "Updated", template: "Resume Template", time: "5 hours ago" },
-                  { action: "Viewed", template: "Marketing Campaign", time: "1 day ago" },
+                  {
+                    action: "Downloaded",
+                    template: "Business Proposal",
+                    time: "2 hours ago",
+                  },
+                  {
+                    action: "Updated",
+                    template: "Resume Template",
+                    time: "5 hours ago",
+                  },
+                  {
+                    action: "Viewed",
+                    template: "Marketing Campaign",
+                    time: "1 day ago",
+                  },
                 ].map((activity, index) => (
                   <div key={index} className="flex items-center gap-4">
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                       <Clock className="w-4 h-4 text-primary" />
                     </div>
                     <div className="flex-1">
-                      <div className="text-sm font-medium">{activity.action} {activity.template}</div>
-                      <div className="text-xs text-muted-foreground">{activity.time}</div>
+                      <div className="text-sm font-medium">
+                        {activity.action} {activity.template}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {activity.time}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -220,7 +241,9 @@ const DashboardPage = () => {
                     </div>
                     <div>
                       <div className="text-sm font-medium">{member.name}</div>
-                      <div className="text-xs text-muted-foreground">{member.role}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {member.role}
+                      </div>
                     </div>
                   </div>
                 ))}

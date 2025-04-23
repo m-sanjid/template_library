@@ -1,9 +1,9 @@
 "use client";
 
-import { usePathname } from 'next/navigation';
-import Navbar from '@/components/Navbar';
+import { usePathname } from "next/navigation";
+import Navbar from "@/components/Navbar";
 import { Sidebar } from "@/components/Sidebar";
-import { JSX } from 'react';
+import { JSX } from "react";
 
 export default function MainLayout({
   children,
@@ -11,9 +11,9 @@ export default function MainLayout({
   children: React.ReactNode;
 }): JSX.Element {
   const pathname = usePathname();
-  const shouldShowSidebar = !pathname.includes('/preview');
+  const shouldShowSidebar = !pathname.includes("/preview");
   console.log("pathname", pathname);
-  
+
   return (
     <div className="min-h-screen max-w-7xl mx-auto">
       <Navbar />

@@ -44,12 +44,12 @@ export default function SettingsPage() {
     emailNotifications: {
       newTemplates: settings?.emailNotifications.newTemplates,
       updates: settings?.emailNotifications.updates,
-      marketing: settings?.emailNotifications.marketing
+      marketing: settings?.emailNotifications.marketing,
     },
     pushNotifications: {
       browser: settings?.pushNotifications.browser,
-      mobile: settings?.pushNotifications.mobile
-    }
+      mobile: settings?.pushNotifications.mobile,
+    },
   });
 
   const handleProfileSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -92,28 +92,30 @@ export default function SettingsPage() {
     localStorage.setItem("theme", newTheme);
   };
 
-  const handlePreferencesSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handlePreferencesSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
       await updatePreferences({
-        language: formData.language ?? '',
-        theme: formData.theme ?? '',
+        language: formData.language ?? "",
+        theme: formData.theme ?? "",
         emailNotifications: {
           newTemplates: formData.emailNotifications.newTemplates ?? false,
           updates: formData.emailNotifications.updates ?? false,
-          marketing: formData.emailNotifications.marketing ?? false
+          marketing: formData.emailNotifications.marketing ?? false,
         },
         pushNotifications: {
           browser: formData.pushNotifications.browser ?? false,
-          mobile: formData.pushNotifications.mobile ?? false
-        }
+          mobile: formData.pushNotifications.mobile ?? false,
+        },
       });
-      toast.success('Preferences updated successfully');
+      toast.success("Preferences updated successfully");
     } catch (error) {
       console.error(error);
-      toast.error('Failed to update preferences');
+      toast.error("Failed to update preferences");
     } finally {
       setIsSubmitting(false);
     }
@@ -140,7 +142,11 @@ export default function SettingsPage() {
   };
 
   const handleDeleteAccount = async () => {
-    if (!confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+    if (
+      !confirm(
+        "Are you sure you want to delete your account? This action cannot be undone."
+      )
+    ) {
       return;
     }
 
@@ -160,13 +166,19 @@ export default function SettingsPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen max-w-7xl mx-auto px-4 py-20">
-        <SectionHeader label="Settings" title="Settings" description="Manage your account settings and preferences" gradientText="Settings" textHeight={160}/>
+        <SectionHeader
+          label="Settings"
+          title="Settings"
+          description="Manage your account settings and preferences"
+          gradientText="Settings"
+          textHeight={160}
+        />
         <div className="flex flex-col gap-4 justify-center min-h-screen">
           <div className="w-full h-[5rem] bg-card rounded-lg p-4">
-          <Skeleton className="w-full h-full"/>
+            <Skeleton className="w-full h-full" />
           </div>
           <div className="w-full h-[20rem] bg-card rounded-lg p-4">
-          <Skeleton className="w-full h-full"/>
+            <Skeleton className="w-full h-full" />
           </div>
         </div>
       </div>
@@ -175,7 +187,13 @@ export default function SettingsPage() {
 
   return (
     <div className="container mx-auto py-10">
-      <SectionHeader label="Settings" title="Settings" description="Manage your account settings and preferences" gradientText="Settings" textHeight={160}/>
+      <SectionHeader
+        label="Settings"
+        title="Settings"
+        description="Manage your account settings and preferences"
+        gradientText="Settings"
+        textHeight={160}
+      />
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="grid w-full grid-cols-4 mb-20">
@@ -254,16 +272,15 @@ export default function SettingsPage() {
                 <div className="grid gap-4">
                   <div className="grid gap-2">
                     <Label htmlFor="language">Language</Label>
-                    <Select
-                      name="language"
-                      defaultValue={settings?.language}
-                    >
+                    <Select name="language" defaultValue={settings?.language}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select language" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="en">English</SelectItem>
-                        <SelectItem value="es">Other Languages coming soon</SelectItem>
+                        <SelectItem value="es">
+                          Other Languages coming soon
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -289,45 +306,73 @@ export default function SettingsPage() {
                       <Label>Email Notifications</Label>
                       <div className="space-y-2">
                         <div className="flex items-center justify-between">
-                          <Label htmlFor="newTemplates" className="text-sm font-normal">New Templates</Label>
+                          <Label
+                            htmlFor="newTemplates"
+                            className="text-sm font-normal"
+                          >
+                            New Templates
+                          </Label>
                           <Switch
                             id="newTemplates"
-                            checked={settings?.emailNotifications?.newTemplates ?? false}
-                            onCheckedChange={(checked) => setFormData(prev => ({
-                              ...prev,
-                              emailNotifications: {
-                                ...prev.emailNotifications,
-                                newTemplates: checked
-                              }
-                            }))}
+                            checked={
+                              settings?.emailNotifications?.newTemplates ??
+                              false
+                            }
+                            onCheckedChange={(checked) =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                emailNotifications: {
+                                  ...prev.emailNotifications,
+                                  newTemplates: checked,
+                                },
+                              }))
+                            }
                           />
                         </div>
                         <div className="flex items-center justify-between">
-                          <Label htmlFor="updates" className="text-sm font-normal">Updates</Label>
+                          <Label
+                            htmlFor="updates"
+                            className="text-sm font-normal"
+                          >
+                            Updates
+                          </Label>
                           <Switch
                             id="updates"
-                            checked={settings?.emailNotifications?.updates ?? false}
-                            onCheckedChange={(checked) => setFormData(prev => ({
-                              ...prev,
-                              emailNotifications: {
-                                ...prev.emailNotifications,
-                                updates: checked
-                              }
-                            }))}
+                            checked={
+                              settings?.emailNotifications?.updates ?? false
+                            }
+                            onCheckedChange={(checked) =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                emailNotifications: {
+                                  ...prev.emailNotifications,
+                                  updates: checked,
+                                },
+                              }))
+                            }
                           />
                         </div>
                         <div className="flex items-center justify-between">
-                          <Label htmlFor="marketing" className="text-sm font-normal">Marketing</Label>
+                          <Label
+                            htmlFor="marketing"
+                            className="text-sm font-normal"
+                          >
+                            Marketing
+                          </Label>
                           <Switch
                             id="marketing"
-                            checked={settings?.emailNotifications?.marketing ?? false}
-                            onCheckedChange={(checked) => setFormData(prev => ({
-                              ...prev,
-                              emailNotifications: {
-                                ...prev.emailNotifications,
-                                marketing: checked
-                              }
-                            }))}
+                            checked={
+                              settings?.emailNotifications?.marketing ?? false
+                            }
+                            onCheckedChange={(checked) =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                emailNotifications: {
+                                  ...prev.emailNotifications,
+                                  marketing: checked,
+                                },
+                              }))
+                            }
                           />
                         </div>
                       </div>
@@ -337,31 +382,49 @@ export default function SettingsPage() {
                       <Label>Push Notifications</Label>
                       <div className="space-y-2">
                         <div className="flex items-center justify-between">
-                          <Label htmlFor="browser" className="text-sm font-normal">Browser</Label>
+                          <Label
+                            htmlFor="browser"
+                            className="text-sm font-normal"
+                          >
+                            Browser
+                          </Label>
                           <Switch
                             id="browser"
-                            checked={settings?.pushNotifications?.browser ?? false}
-                            onCheckedChange={(checked) => setFormData(prev => ({
-                              ...prev,
-                              pushNotifications: {
-                                ...prev.pushNotifications,
-                                browser: checked
-                              }
-                            }))}
+                            checked={
+                              settings?.pushNotifications?.browser ?? false
+                            }
+                            onCheckedChange={(checked) =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                pushNotifications: {
+                                  ...prev.pushNotifications,
+                                  browser: checked,
+                                },
+                              }))
+                            }
                           />
                         </div>
                         <div className="flex items-center justify-between">
-                          <Label htmlFor="mobile" className="text-sm font-normal">Mobile</Label>
+                          <Label
+                            htmlFor="mobile"
+                            className="text-sm font-normal"
+                          >
+                            Mobile
+                          </Label>
                           <Switch
                             id="mobile"
-                            checked={settings?.pushNotifications?.mobile ?? false}
-                            onCheckedChange={(checked) => setFormData(prev => ({
-                              ...prev,
-                              pushNotifications: {
-                                ...prev.pushNotifications,
-                                mobile: checked
-                              }
-                            }))}
+                            checked={
+                              settings?.pushNotifications?.mobile ?? false
+                            }
+                            onCheckedChange={(checked) =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                pushNotifications: {
+                                  ...prev.pushNotifications,
+                                  mobile: checked,
+                                },
+                              }))
+                            }
                           />
                         </div>
                       </div>
@@ -464,7 +527,9 @@ export default function SettingsPage() {
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-semibold">{subscription.plan} Plan</h3>
+                      <h3 className="font-semibold">
+                        {subscription.plan} Plan
+                      </h3>
                       <div className="text-sm text-muted-foreground">
                         {subscription.status === "active" ? (
                           <Badge variant="secondary">Active</Badge>
@@ -473,18 +538,29 @@ export default function SettingsPage() {
                         )}
                       </div>
                     </div>
-                    <Button variant="outline" onClick={() => window.location.href = "/pricing"}>
+                    <Button
+                      variant="outline"
+                      onClick={() => (window.location.href = "/pricing")}
+                    >
                       Change Plan
                     </Button>
                   </div>
 
                   <div className="space-y-4">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground">Next billing date</span>
-                      <span>{new Date(subscription.currentPeriodEnd).toLocaleDateString()}</span>
+                      <span className="text-muted-foreground">
+                        Next billing date
+                      </span>
+                      <span>
+                        {new Date(
+                          subscription.currentPeriodEnd
+                        ).toLocaleDateString()}
+                      </span>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground">Payment method</span>
+                      <span className="text-muted-foreground">
+                        Payment method
+                      </span>
                       <div className="flex items-center">
                         <CreditCard className="w-4 h-4 mr-2" />
                         <span>•••• 4242</span>
@@ -496,7 +572,11 @@ export default function SettingsPage() {
                     <Button
                       variant="destructive"
                       onClick={() => {
-                        if (confirm("Are you sure you want to cancel your subscription?")) {
+                        if (
+                          confirm(
+                            "Are you sure you want to cancel your subscription?"
+                          )
+                        ) {
                           window.location.href = "/pricing";
                         }
                       }}
@@ -508,11 +588,13 @@ export default function SettingsPage() {
               ) : (
                 <div className="space-y-6">
                   <div className="text-center">
-                    <h3 className="font-semibold mb-2">No Active Subscription</h3>
+                    <h3 className="font-semibold mb-2">
+                      No Active Subscription
+                    </h3>
                     <p className="text-sm text-muted-foreground mb-4">
                       Upgrade to access premium features and templates
                     </p>
-                    <Button onClick={() => window.location.href = "/pricing"}>
+                    <Button onClick={() => (window.location.href = "/pricing")}>
                       View Plans
                     </Button>
                   </div>
@@ -524,4 +606,4 @@ export default function SettingsPage() {
       </Tabs>
     </div>
   );
-} 
+}

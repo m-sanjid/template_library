@@ -52,7 +52,13 @@ const PricingPage = () => {
 
   return (
     <div className="container max-w-6xl mx-auto px-4 py-16">
-      <SectionHeader label="Pricing" title="Simple, Transparent Pricing" description="Choose the plan that's right for you" gradientText="PRICING" textHeight={240} />
+      <SectionHeader
+        label="Pricing"
+        title="Simple, Transparent Pricing"
+        description="Choose the plan that's right for you"
+        gradientText="PRICING"
+        textHeight={240}
+      />
       <Pricing
         isAnnual={isAnnual}
         setIsAnnual={handleToggle}
@@ -71,8 +77,8 @@ const PricingPage = () => {
               Can I change plans later?
             </h3>
             <p className="text-muted-foreground">
-              Yes, you can upgrade or downgrade your plan at any time. Changes will
-              be reflected in your next billing cycle.
+              Yes, you can upgrade or downgrade your plan at any time. Changes
+              will be reflected in your next billing cycle.
             </p>
           </div>
           <div>
@@ -98,8 +104,8 @@ const PricingPage = () => {
               What&apos;s your refund policy?
             </h3>
             <p className="text-muted-foreground">
-              If you&apos;re not satisfied, we offer a 30-day money-back guarantee for
-              all plans.
+              If you&apos;re not satisfied, we offer a 30-day money-back
+              guarantee for all plans.
             </p>
           </div>
         </div>

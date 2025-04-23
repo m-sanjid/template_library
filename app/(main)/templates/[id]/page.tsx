@@ -1,25 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCart } from "@/context/CartContext";
-import { TEMPLATE_PREVIEW_FEATURES } from "@/lib/config";
 import {
   Download,
   Eye,
   ShoppingCart,
   Star,
   Clock,
-  Settings,
   Monitor,
   Tablet,
   Smartphone,
   Check,
+  Heart,
+  Share2,
+  Bookmark,
+  ArrowLeft,
+  ExternalLink,
+  Code,
+  Palette,
+  Layout,
+  FileText,
 } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 
 // Mock data - replace with actual API call
 const template = {
@@ -27,7 +34,8 @@ const template = {
   name: "Professional Resume",
   category: "Personal",
   subcategory: "Resumes",
-  description: "A clean and modern resume template perfect for professionals. This template includes multiple sections for your work experience, skills, education, and more. Easily customizable to match your personal brand.",
+  description:
+    "A clean and modern resume template perfect for professionals. This template includes multiple sections for your work experience, skills, education, and more. Easily customizable to match your personal brand.",
   price: 29,
   rating: 4.8,
   downloads: 1234,
@@ -46,10 +54,26 @@ const template = {
     mobile: "/templates/resume-mobile.jpg",
   },
   demoUrl: "https://demo.templatelibrary.com/resume",
+  tags: ["Resume", "Professional", "Modern", "ATS-Friendly"],
+  specifications: {
+    formats: ["PDF", "DOCX", "HTML"],
+    dimensions: ["A4", "US Letter"],
+    software: ["Adobe Reader", "Microsoft Word", "Web Browser"],
+  },
+  compatibility: {
+    browsers: ["Chrome", "Firefox", "Safari", "Edge"],
+    devices: ["Desktop", "Tablet", "Mobile"],
+  },
 };
 
-export default function TemplateDetailPage({ params }: { params: { id: string } }) {
-  const [activeView, setActiveView] = useState<"desktop" | "tablet" | "mobile">("desktop");
+export default function TemplateDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const [activeView, setActiveView] = useState<"desktop" | "tablet" | "mobile">(
+    "desktop"
+  );
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const { addToCart } = useCart();
 
@@ -63,15 +87,23 @@ export default function TemplateDetailPage({ params }: { params: { id: string } 
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              {template.name}
-            </h1>
-            <div className="flex items-center gap-4 text-sm text-gray-500">
+            <Link href="/templates">
+              <Button variant="ghost" className="mb-4 gap-2">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Templates
+              </Button>
+            </Link>
+            <div className="flex items-center gap-2 mb-2">
+              <Badge variant="secondary">{template.category}</Badge>
+              <Badge variant="outline">{template.subcategory}</Badge>
+            </div>
+            <h1 className="text-3xl font-bold mb-2">{template.name}</h1>
+            <div className="flex items-center gap-4 text-sm text-muted-foreground">
               <div className="flex items-center">
                 <Star className="w-4 h-4 mr-1 text-yellow-400" />
                 {template.rating} ({template.downloads} downloads)
@@ -83,6 +115,15 @@ export default function TemplateDetailPage({ params }: { params: { id: string } 
             </div>
           </div>
           <div className="flex items-center gap-4">
+            <Button variant="outline" size="icon" className="h-10 w-10">
+              <Heart className="w-4 h-4" />
+            </Button>
+            <Button variant="outline" size="icon" className="h-10 w-10">
+              <Share2 className="w-4 h-4" />
+            </Button>
+            <Button variant="outline" size="icon" className="h-10 w-10">
+              <Bookmark className="w-4 h-4" />
+            </Button>
             <Button variant="outline" onClick={() => setIsPreviewOpen(true)}>
               <Eye className="w-4 h-4 mr-2" />
               Live Preview
@@ -98,52 +139,65 @@ export default function TemplateDetailPage({ params }: { params: { id: string } 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Preview Section */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-sm p-4">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold">Preview</h2>
-                <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    variant={activeView === "desktop" ? "default" : "outline"}
-                    onClick={() => setActiveView("desktop")}
-                  >
-                    <Monitor className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant={activeView === "tablet" ? "default" : "outline"}
-                    onClick={() => setActiveView("tablet")}
-                  >
-                    <Tablet className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant={activeView === "mobile" ? "default" : "outline"}
-                    onClick={() => setActiveView("mobile")}
-                  >
-                    <Smartphone className="w-4 h-4" />
-                  </Button>
+            <Card className="overflow-hidden">
+              <div className="relative aspect-video">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10" />
+                <div className="absolute inset-0 grid grid-cols-3 gap-1 p-1">
+                  <div className="bg-gray-200 dark:bg-gray-800 rounded-lg" />
+                  <div className="bg-gray-300 dark:bg-gray-700 rounded-lg" />
+                  <div className="bg-gray-400 dark:bg-gray-600 rounded-lg" />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Button
+                      variant={activeView === "desktop" ? "default" : "ghost"}
+                      size="sm"
+                      onClick={() => setActiveView("desktop")}
+                    >
+                      <Monitor className="w-4 h-4 mr-2" />
+                      Desktop
+                    </Button>
+                    <Button
+                      variant={activeView === "tablet" ? "default" : "ghost"}
+                      size="sm"
+                      onClick={() => setActiveView("tablet")}
+                    >
+                      <Tablet className="w-4 h-4 mr-2" />
+                      Tablet
+                    </Button>
+                    <Button
+                      variant={activeView === "mobile" ? "default" : "ghost"}
+                      size="sm"
+                      onClick={() => setActiveView("mobile")}
+                    >
+                      <Smartphone className="w-4 h-4 mr-2" />
+                      Mobile
+                    </Button>
+                  </div>
                 </div>
               </div>
-              <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden">
-                <Image
-                  src={template.screenshots[activeView]}
-                  alt={`${template.name} - ${activeView} view`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
+            </Card>
 
-            {/* Features Tabs */}
             <div className="mt-8">
               <Tabs defaultValue="features">
                 <TabsList className="w-full">
-                  <TabsTrigger value="features">Features</TabsTrigger>
-                  <TabsTrigger value="specifications">Specifications</TabsTrigger>
-                  <TabsTrigger value="compatibility">Compatibility</TabsTrigger>
+                  <TabsTrigger value="features" className="gap-2">
+                    <Layout className="w-4 h-4" />
+                    Features
+                  </TabsTrigger>
+                  <TabsTrigger value="specifications" className="gap-2">
+                    <FileText className="w-4 h-4" />
+                    Specifications
+                  </TabsTrigger>
+                  <TabsTrigger value="compatibility" className="gap-2">
+                    <Code className="w-4 h-4" />
+                    Compatibility
+                  </TabsTrigger>
                 </TabsList>
-                <TabsContent value="features" className="bg-white rounded-lg shadow-sm p-6">
+                <TabsContent
+                  value="features"
+                  className="rounded-lg shadow-sm p-6"
+                >
                   <ul className="grid grid-cols-2 gap-4">
                     {template.features.map((feature) => (
                       <li key={feature} className="flex items-center">
@@ -153,35 +207,67 @@ export default function TemplateDetailPage({ params }: { params: { id: string } 
                     ))}
                   </ul>
                 </TabsContent>
-                <TabsContent value="specifications" className="bg-white rounded-lg shadow-sm p-6">
-                  <div className="space-y-4">
+                <TabsContent
+                  value="specifications"
+                  className="rounded-lg shadow-sm p-6"
+                >
+                  <div className="space-y-6">
                     <div>
                       <h3 className="font-semibold mb-2">File Formats</h3>
-                      <p>PDF, DOCX, HTML</p>
+                      <div className="flex flex-wrap gap-2">
+                        {template.specifications.formats.map((format) => (
+                          <Badge key={format} variant="secondary">
+                            {format}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                     <div>
                       <h3 className="font-semibold mb-2">Dimensions</h3>
-                      <p>A4, US Letter</p>
+                      <div className="flex flex-wrap gap-2">
+                        {template.specifications.dimensions.map((dim) => (
+                          <Badge key={dim} variant="secondary">
+                            {dim}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                     <div>
                       <h3 className="font-semibold mb-2">Required Software</h3>
-                      <p>Adobe Reader, Microsoft Word, or any modern web browser</p>
+                      <div className="flex flex-wrap gap-2">
+                        {template.specifications.software.map((software) => (
+                          <Badge key={software} variant="secondary">
+                            {software}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </TabsContent>
-                <TabsContent value="compatibility" className="bg-white rounded-lg shadow-sm p-6">
-                  <div className="space-y-4">
+                <TabsContent
+                  value="compatibility"
+                  className="rounded-lg shadow-sm p-6"
+                >
+                  <div className="space-y-6">
                     <div>
-                      <h3 className="font-semibold mb-2">Operating Systems</h3>
-                      <p>Windows, macOS, Linux</p>
+                      <h3 className="font-semibold mb-2">Supported Browsers</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {template.compatibility.browsers.map((browser) => (
+                          <Badge key={browser} variant="secondary">
+                            {browser}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-2">Browsers</h3>
-                      <p>Chrome, Firefox, Safari, Edge</p>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-2">Mobile Devices</h3>
-                      <p>Fully responsive design for all screen sizes</p>
+                      <h3 className="font-semibold mb-2">Device Support</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {template.compatibility.devices.map((device) => (
+                          <Badge key={device} variant="secondary">
+                            {device}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </TabsContent>
@@ -191,36 +277,58 @@ export default function TemplateDetailPage({ params }: { params: { id: string } 
 
           {/* Sidebar */}
           <div className="space-y-6">
-            {/* Description */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-semibold mb-4">Description</h2>
-              <p className="text-gray-600">{template.description}</p>
-            </div>
+            <Card className="p-6">
+              <h3 className="font-semibold mb-4">Template Tags</h3>
+              <div className="flex flex-wrap gap-2">
+                {template.tags.map((tag) => (
+                  <Badge key={tag} variant="outline">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </Card>
 
-            {/* Quick Actions */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
-              <div className="space-y-3">
-                <Button className="w-full" variant="outline">
-                  <Download className="w-4 h-4 mr-2" />
-                  Download Demo
+            <Card className="p-6">
+              <h3 className="font-semibold mb-4">Quick Actions</h3>
+              <div className="space-y-2">
+                <Button
+                  variant="outline"
+                  className="w-full justify-start gap-2"
+                >
+                  <Eye className="w-4 h-4" />
+                  Preview Template
                 </Button>
-                <Button className="w-full" variant="outline">
-                  <Settings className="w-4 h-4 mr-2" />
-                  Customize
+                <Button
+                  variant="outline"
+                  className="w-full justify-start gap-2"
+                >
+                  <Palette className="w-4 h-4" />
+                  Customize Design
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start gap-2"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  View Demo
+                </Button>
+                <Button className="w-full gap-2">
+                  <Download className="w-4 h-4" />
+                  Download Template
                 </Button>
               </div>
-            </div>
+            </Card>
 
-            {/* Support */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-semibold mb-4">Support</h2>
-              <ul className="space-y-3 text-sm">
-                <li>✓ 6 months technical support</li>
-                <li>✓ Documentation included</li>
-                <li>✓ Future updates</li>
-              </ul>
-            </div>
+            <Card className="p-6">
+              <h3 className="font-semibold mb-4">Need Help?</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Our support team is here to help you with any questions about
+                this template.
+              </p>
+              <Button variant="outline" className="w-full">
+                Contact Support
+              </Button>
+            </Card>
           </div>
         </div>
       </div>
@@ -228,7 +336,7 @@ export default function TemplateDetailPage({ params }: { params: { id: string } 
       {/* Live Preview Modal */}
       {isPreviewOpen && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-          <div className="bg-white rounded-lg w-full max-w-6xl mx-4">
+          <div className="rounded-lg w-full max-w-6xl mx-4">
             <div className="flex justify-between items-center p-4 border-b">
               <h2 className="text-lg font-semibold">Live Preview</h2>
               <Button

@@ -1,16 +1,16 @@
 "use client";
 
-import { useParams } from 'next/navigation'
-import React from 'react'
-import { COMPONENTS } from '@/data/components'
-import { Button } from '@/components/ui/button'
-import { ArrowLeft } from 'lucide-react'
-import Link from 'next/link'
+import { useParams } from "next/navigation";
+import React from "react";
+import { COMPONENTS } from "@/data/components";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 const ComponentPreviewPage = () => {
-  const params = useParams()
-  const { id, type } = params
-  const component = COMPONENTS.find((item) => item.id === id)
+  const params = useParams();
+  const { id, type } = params;
+  const component = COMPONENTS.find((item) => item.id === id);
 
   if (!component) {
     return (
@@ -23,19 +23,23 @@ const ComponentPreviewPage = () => {
           </Button>
         </Link>
       </div>
-    )
+    );
   }
 
   const renderComponent = () => {
     if (type && component.type) {
       // For components with multiple types
-      const typeComponent = component.type[type as string]
-      return typeComponent?.component ? React.createElement(typeComponent.component) : null
+      const typeComponent = component.type[type as string];
+      return typeComponent?.component
+        ? React.createElement(typeComponent.component)
+        : null;
     } else {
       // For simple components
-      return component.component ? React.createElement(component.component) : null
+      return component.component
+        ? React.createElement(component.component)
+        : null;
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -50,11 +54,9 @@ const ComponentPreviewPage = () => {
       </div>
 
       {/* Component Preview */}
-      <div className="pt-16 w-full min-h-screen">
-        {renderComponent()}
-      </div>
+      <div className="pt-16 w-full min-h-screen">{renderComponent()}</div>
     </div>
-  )
-}
+  );
+};
 
-export default ComponentPreviewPage 
+export default ComponentPreviewPage;

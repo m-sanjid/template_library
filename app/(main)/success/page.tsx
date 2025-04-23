@@ -45,13 +45,19 @@ export default function SuccessPage() {
   const handleDownloadInvoice = async () => {
     if (!purchase) return;
     try {
-      const response = await axios.get(`/api/invoice/${purchase.id}/download?download=true`, {
-        responseType: "blob",
-      });
+      const response = await axios.get(
+        `/api/invoice/${purchase.id}/download?download=true`,
+        {
+          responseType: "blob",
+        }
+      );
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", `invoice-${purchase.id.substring(0, 8)}.pdf`);
+      link.setAttribute(
+        "download",
+        `invoice-${purchase.id.substring(0, 8)}.pdf`
+      );
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -83,7 +89,9 @@ export default function SuccessPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Something went wrong</h2>
+          <h2 className="text-2xl font-bold text-red-600 mb-4">
+            Something went wrong
+          </h2>
           <p className="text-gray-600 mb-4">{error}</p>
           <Button onClick={() => window.location.reload()}>Try Again</Button>
         </div>
@@ -131,29 +139,33 @@ export default function SuccessPage() {
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   ${parseFloat(purchase.totalPrice).toFixed(2)}
                 </p>
-                <p className="text-sm text-gray-600 dark:text-gray-300">Total Amount</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  Total Amount
+                </p>
               </div>
             </div>
 
             <div className="space-y-4 mb-6">
-              {purchase.PurchaseItem.map((item: PurchaseItem, index: number) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between py-2 border-b last:border-0"
-                >
-                  <div>
-                    <h3 className="font-medium text-gray-900 dark:text-white">
-                      {item.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Quantity: {item.quantity}
+              {purchase.PurchaseItem.map(
+                (item: PurchaseItem, index: number) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between py-2 border-b last:border-0"
+                  >
+                    <div>
+                      <h3 className="font-medium text-gray-900 dark:text-white">
+                        {item.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Quantity: {item.quantity}
+                      </p>
+                    </div>
+                    <p className="font-medium text-gray-900 dark:text-white">
+                      ${parseFloat(item.price).toFixed(2)}
                     </p>
                   </div>
-                  <p className="font-medium text-gray-900 dark:text-white">
-                    ${parseFloat(item.price).toFixed(2)}
-                  </p>
-                </div>
-              ))}
+                )
+              )}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -188,11 +200,20 @@ export default function SuccessPage() {
               What&apos;s Next?
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-4">
-              Your purchased items are now available in your account. You can access them at any time.
+              Your purchased items are now available in your account. You can
+              access them at any time.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <AnimatedButton label="View My Purchases" className="border rounded-full bg-primary text-secondary" to="/dashboard" />
-              <AnimatedButton label="Browse More Templates" className="border rounded-full bg-primary text-secondary" to="/templates" />
+              <AnimatedButton
+                label="View My Purchases"
+                className="border rounded-full bg-primary text-secondary"
+                to="/dashboard"
+              />
+              <AnimatedButton
+                label="Browse More Templates"
+                className="border rounded-full bg-primary text-secondary"
+                to="/templates"
+              />
             </div>
           </div>
         </motion.div>

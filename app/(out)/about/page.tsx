@@ -2,17 +2,15 @@
 
 import { motion } from "motion/react";
 import { ADDITIONAL_PAGES } from "@/lib/config";
-import {
-  Users,
-  Target,
-  Award,
-  Globe,
-} from "lucide-react";
+import { Users, Target, Award, Globe } from "lucide-react";
 import Image from "next/image";
-import { IconBrandX, IconBrandLinkedin, IconBrandGithub } from "@tabler/icons-react";
+import {
+  IconBrandX,
+  IconBrandLinkedin,
+  IconBrandGithub,
+} from "@tabler/icons-react";
 import { AnimatedButton } from "@/components/AnimatedButton";
 const { about } = ADDITIONAL_PAGES;
-
 
 // Mock team data - replace with actual data
 const teamMembers = [
@@ -46,9 +44,7 @@ export default function AboutPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-4">
-            {about.title}
-          </h1>
+          <h1 className="text-4xl font-bold mb-4">{about.title}</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             {about.description}
           </p>
@@ -74,9 +70,7 @@ export default function AboutPage() {
 
         {/* Values */}
         <div className="mb-16">
-          <h2 className="text-2xl font-bold text-center mb-8">
-            Our Values
-          </h2>
+          <h2 className="text-2xl font-bold text-center mb-8">Our Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {about.values.map((value, index) => (
               <motion.div
@@ -97,9 +91,7 @@ export default function AboutPage() {
                     <Users className="w-6 h-6 text-primary" />
                   )}
                 </div>
-                <h3 className="text-lg font-semibold mb-2">
-                  {value.title}
-                </h3>
+                <h3 className="text-lg font-semibold mb-2">{value.title}</h3>
                 <p className="text-muted-foreground">{value.description}</p>
               </motion.div>
             ))}
@@ -108,9 +100,7 @@ export default function AboutPage() {
 
         {/* Team */}
         <div className="mb-16">
-          <h2 className="text-2xl font-bold text-center mb-8">
-            Meet Our Team
-          </h2>
+          <h2 className="text-2xl font-bold text-center mb-8">Meet Our Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
               <motion.div
@@ -130,10 +120,10 @@ export default function AboutPage() {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-semibold mb-1">
-                    {member.name}
-                  </h3>
-                  <div className="text-sm text-muted-foreground mb-4">{member.role}</div>
+                  <h3 className="text-lg font-semibold mb-1">{member.name}</h3>
+                  <div className="text-sm text-muted-foreground mb-4">
+                    {member.role}
+                  </div>
                   <p className="text-muted-foreground mb-4">{member.bio}</p>
                   <div className="flex gap-2">
                     {member.social.twitter && (
@@ -202,19 +192,25 @@ export default function AboutPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center rounded-lg shadow-sm p-8"
         >
-          <h2 className="text-2xl font-semibold mb-4">
-            Join Our Journey
-          </h2>
+          <h2 className="text-2xl font-semibold mb-4">Join Our Journey</h2>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
             Be part of our mission to revolutionize template creation and
             management. Start creating professional templates today.
           </p>
           <div className="flex justify-center gap-4">
-            <AnimatedButton label="Browse Templates" className="border rounded-full bg-primary text-secondary" to="/templates" />
-            <AnimatedButton label="Contact Us" className="border rounded-full bg-primary text-secondary" to="/contact" />
+            <AnimatedButton
+              label="Browse Templates"
+              className="border rounded-full bg-primary text-secondary"
+              to="/templates"
+            />
+            <AnimatedButton
+              label="Contact Us"
+              className="border rounded-full bg-primary text-secondary"
+              to="/contact"
+            />
           </div>
         </motion.div>
       </div>
     </div>
   );
-} 
+}

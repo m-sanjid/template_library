@@ -325,10 +325,10 @@ export const ADDITIONAL_PAGES = {
 		title: "Our Story",
 		description: "Building the future of template creation and management.",
 		stats: [
-			{ label: "Active Users", value: "100K+" },
-			{ label: "Templates Created", value: "1M+" },
-			{ label: "Countries", value: "150+" },
-			{ label: "Team Members", value: "50+" },
+			{ label: "Active Users", value: "1+" },
+			{ label: "Templates Created", value: "10+" },
+			{ label: "Countries", value: "20+" },
+			{ label: "Team Members", value: "1+" },
 		],
 		values: [
 			{
@@ -376,3 +376,17 @@ export const ADDITIONAL_PAGES = {
 		],
 	},
 };
+
+export const teamMembers = [
+    {
+      name: "Muhammed Sanjid",
+      role: "CEO & Founder",
+      bio: "Software Engineer",
+      avatar: "/team/sanjid.jpg",
+      social: {
+        twitter: "https://x.com/dev_sanjid",
+        linkedin: "https://linkedin.com/in/muhammedsanjid1",
+        github: "https://github.com/m-sanjid",
+      },
+    },
+  ];

@@ -11,36 +11,11 @@ import {
 } from "@tabler/icons-react";
 import { AnimatedButton } from "@/components/AnimatedButton";
 const { about } = ADDITIONAL_PAGES;
-
-// Mock team data - replace with actual data
-const teamMembers = [
-  {
-    name: "John Smith",
-    role: "CEO & Founder",
-    bio: "10+ years of experience in template design and software development.",
-    avatar: "/team/john-smith.jpg",
-    social: {
-      twitter: "https://twitter.com/johnsmith",
-      linkedin: "https://linkedin.com/in/johnsmith",
-      github: "https://github.com/johnsmith",
-    },
-  },
-  {
-    name: "Sarah Johnson",
-    role: "Head of Design",
-    bio: "Award-winning designer with expertise in UI/UX and template creation.",
-    avatar: "/team/sarah-johnson.jpg",
-    social: {
-      twitter: "https://twitter.com/sarahjohnson",
-      linkedin: "https://linkedin.com/in/sarahjohnson",
-    },
-  },
-  // Add more team members
-];
+import { teamMembers } from "@/lib/config";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-8 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">

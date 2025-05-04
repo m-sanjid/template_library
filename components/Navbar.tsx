@@ -190,7 +190,7 @@ export default function Navbar() {
               <ShoppingCart className="h-5 w-5" />
               {cart && cart.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                  {cart[0].quantity}
+                  {cart.reduce((acc, item) => acc + item.quantity, 0)}
                 </span>
               )}
             </Button>

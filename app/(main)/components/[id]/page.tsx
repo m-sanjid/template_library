@@ -18,7 +18,7 @@ import {
 import Link from "next/link";
 import PricingPage from "@/app/(out)/pricing/page";
 import { useCart } from "@/context/CartContext";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from 'sonner'
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { AnimatedButton } from "@/components/AnimatedButton";
@@ -41,7 +41,6 @@ const ComponentDetailPage = (): JSX.Element => {
     | Component
     | undefined;
   const { addToCart } = useCart();
-  const { toast } = useToast();
 
   const handlePreview = (typeKey?: string) => {
     const previewRoute = typeKey
@@ -59,8 +58,7 @@ const ComponentDetailPage = (): JSX.Element => {
       price: 29, // You can set a default price or get it from the component data
       quantity: 1,
     });
-    toast({
-      title: "Added to cart",
+    toast.success("Added to cart", {
       description: `${component.title} has been added to your cart.`,
     });
   };

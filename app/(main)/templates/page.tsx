@@ -26,18 +26,16 @@ import {
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { useToast } from "@/components/ui/use-toast";
 import { useKeyboardShortcut } from "@/hooks/use-keyboard-shortcut";
 import SectionHeader from "@/components/SectionHeader";
 import { TemplateCard } from "@/components/TemplatesPreview";
 import { usePurchases } from "@/hooks/use-purchases";
-
+import { toast } from 'sonner'
 // Mock data - replace with actual API call
 
 export default function TemplatesPage() {
   const { data: session } = useSession();
   const { addToCart } = useCart();
-  const { toast } = useToast();
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -102,16 +100,14 @@ export default function TemplatesPage() {
       price: template.price,
       quantity: 1,
     });
-    toast({
-      title: "Added to cart",
+    toast.success("Added to cart", {
       description: `${template.name} has been added to your cart.`,
     });
   };
 
   const handleDownload = (template: any) => {
     // Implement download logic here
-    toast({
-      title: "Download started",
+    toast.success("Download started", {
       description: `${template.name} is being downloaded.`,
     });
   };

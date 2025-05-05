@@ -6,7 +6,6 @@ import { useSubscription } from "@/hooks/use-subscription";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import {
   Select,
   SelectContent,
@@ -23,6 +22,7 @@ import { Badge } from "@/components/ui/badge";
 import { CreditCard } from "lucide-react";
 import SectionHeader from "@/components/SectionHeader";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useRouter } from "next/navigation";
 
 export default function SettingsPage() {
   const {
@@ -34,23 +34,11 @@ export default function SettingsPage() {
     deleteAccount,
   } = useSettings();
   const { subscription, isLoading: subscriptionLoading } = useSubscription();
-
   const [activeTab, setActiveTab] = useState("profile");
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    language: settings?.language,
-    theme: settings?.theme,
-    emailNotifications: {
-      newTemplates: settings?.emailNotifications.newTemplates,
-      updates: settings?.emailNotifications.updates,
-      marketing: settings?.emailNotifications.marketing,
-    },
-    pushNotifications: {
-      browser: settings?.pushNotifications.browser,
-      mobile: settings?.pushNotifications.mobile,
-    },
-  });
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleProfileSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -67,9 +55,11 @@ export default function SettingsPage() {
     try {
       await updateProfile(data);
       toast.success("Profile updated successfully");
+      setError(null);
     } catch (error) {
       console.error(error);
       toast.error("Failed to update profile");
+      setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
       setIsSubmitting(false);
     }
@@ -85,11 +75,9 @@ export default function SettingsPage() {
   }, []);
 
   const toggleTheme = () => {
-    const value = formData.theme;
-    const newTheme = value === "dark" ? "dark" : "light";
     setIsDarkMode(!isDarkMode);
     document.documentElement.classList.toggle("dark", !isDarkMode);
-    localStorage.setItem("theme", newTheme);
+    localStorage.setItem("theme", isDarkMode ? "light" : "dark");
   };
 
   const handlePreferencesSubmit = async (
@@ -100,17 +88,7 @@ export default function SettingsPage() {
 
     try {
       await updatePreferences({
-        language: formData.language ?? "",
-        theme: formData.theme ?? "",
-        emailNotifications: {
-          newTemplates: formData.emailNotifications.newTemplates ?? false,
-          updates: formData.emailNotifications.updates ?? false,
-          marketing: formData.emailNotifications.marketing ?? false,
-        },
-        pushNotifications: {
-          browser: formData.pushNotifications.browser ?? false,
-          mobile: formData.pushNotifications.mobile ?? false,
-        },
+        theme: isDarkMode ? "dark" : "light",
       });
       toast.success("Preferences updated successfully");
     } catch (error) {
@@ -133,9 +111,11 @@ export default function SettingsPage() {
       await updatePassword(currentPassword, newPassword);
       toast.success("Password updated successfully");
       e.currentTarget.reset();
+      setError(null);
     } catch (error) {
       console.error(error);
       toast.error("Failed to update password");
+      setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
       setIsSubmitting(false);
     }
@@ -154,10 +134,12 @@ export default function SettingsPage() {
     try {
       await deleteAccount();
       toast.success("Account deleted successfully");
-      // Redirect to home page or handle logout
+      setError(null);
+      router.push("/");
     } catch (error) {
       console.error(error);
       toast.error("Failed to delete account");
+      setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
       setIsSubmitting(false);
     }
@@ -173,7 +155,7 @@ export default function SettingsPage() {
           gradientText="Settings"
           textHeight={160}
         />
-        <div className="flex flex-col gap-4 justify-center min-h-screen">
+        <div className="flex flex-col gap-4 mt-20 min-h-screen">
           <div className="w-full h-[5rem] bg-card rounded-lg p-4">
             <Skeleton className="w-full h-full" />
           </div>
@@ -186,7 +168,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 px-4">
       <SectionHeader
         label="Settings"
         title="Settings"
@@ -219,6 +201,7 @@ export default function SettingsPage() {
                       defaultValue={settings?.name}
                       required
                     />
+                    {error && <p className="text-red-500">{error}</p>}
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
@@ -229,22 +212,7 @@ export default function SettingsPage() {
                       defaultValue={settings?.email}
                       required
                     />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="company">Company</Label>
-                    <Input
-                      id="company"
-                      name="company"
-                      defaultValue={settings?.company}
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="role">Role</Label>
-                    <Input
-                      id="role"
-                      name="role"
-                      defaultValue={settings?.role}
-                    />
+                    {error && <p className="text-red-500">{error}</p>}
                   </div>
                 </div>
                 <Button type="submit" disabled={isSubmitting}>
@@ -271,26 +239,12 @@ export default function SettingsPage() {
               <form onSubmit={handlePreferencesSubmit} className="space-y-4">
                 <div className="grid gap-4">
                   <div className="grid gap-2">
-                    <Label htmlFor="language">Language</Label>
-                    <Select name="language" defaultValue={settings?.language}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select language" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="en">English</SelectItem>
-                        <SelectItem value="es">
-                          Other Languages coming soon
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="grid gap-2">
                     <Label htmlFor="theme">Theme</Label>
                     <Select
                       name="theme"
                       defaultValue={settings?.theme}
                       onValueChange={toggleTheme}
-                      value={formData.theme}
+                      value={settings?.theme}
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Select theme" />
@@ -300,135 +254,6 @@ export default function SettingsPage() {
                         <SelectItem value="dark">Dark</SelectItem>
                       </SelectContent>
                     </Select>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label>Email Notifications</Label>
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <Label
-                            htmlFor="newTemplates"
-                            className="text-sm font-normal"
-                          >
-                            New Templates
-                          </Label>
-                          <Switch
-                            id="newTemplates"
-                            checked={
-                              settings?.emailNotifications?.newTemplates ??
-                              false
-                            }
-                            onCheckedChange={(checked) =>
-                              setFormData((prev) => ({
-                                ...prev,
-                                emailNotifications: {
-                                  ...prev.emailNotifications,
-                                  newTemplates: checked,
-                                },
-                              }))
-                            }
-                          />
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <Label
-                            htmlFor="updates"
-                            className="text-sm font-normal"
-                          >
-                            Updates
-                          </Label>
-                          <Switch
-                            id="updates"
-                            checked={
-                              settings?.emailNotifications?.updates ?? false
-                            }
-                            onCheckedChange={(checked) =>
-                              setFormData((prev) => ({
-                                ...prev,
-                                emailNotifications: {
-                                  ...prev.emailNotifications,
-                                  updates: checked,
-                                },
-                              }))
-                            }
-                          />
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <Label
-                            htmlFor="marketing"
-                            className="text-sm font-normal"
-                          >
-                            Marketing
-                          </Label>
-                          <Switch
-                            id="marketing"
-                            checked={
-                              settings?.emailNotifications?.marketing ?? false
-                            }
-                            onCheckedChange={(checked) =>
-                              setFormData((prev) => ({
-                                ...prev,
-                                emailNotifications: {
-                                  ...prev.emailNotifications,
-                                  marketing: checked,
-                                },
-                              }))
-                            }
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label>Push Notifications</Label>
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <Label
-                            htmlFor="browser"
-                            className="text-sm font-normal"
-                          >
-                            Browser
-                          </Label>
-                          <Switch
-                            id="browser"
-                            checked={
-                              settings?.pushNotifications?.browser ?? false
-                            }
-                            onCheckedChange={(checked) =>
-                              setFormData((prev) => ({
-                                ...prev,
-                                pushNotifications: {
-                                  ...prev.pushNotifications,
-                                  browser: checked,
-                                },
-                              }))
-                            }
-                          />
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <Label
-                            htmlFor="mobile"
-                            className="text-sm font-normal"
-                          >
-                            Mobile
-                          </Label>
-                          <Switch
-                            id="mobile"
-                            checked={
-                              settings?.pushNotifications?.mobile ?? false
-                            }
-                            onCheckedChange={(checked) =>
-                              setFormData((prev) => ({
-                                ...prev,
-                                pushNotifications: {
-                                  ...prev.pushNotifications,
-                                  mobile: checked,
-                                },
-                              }))
-                            }
-                          />
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
                 <Button type="submit" disabled={isSubmitting}>

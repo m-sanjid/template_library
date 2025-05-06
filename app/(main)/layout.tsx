@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Navbar from "@/components/Navbar";
 import { Sidebar } from "@/components/Sidebar";
 import { JSX } from "react";
 
@@ -12,14 +11,12 @@ export default function MainLayout({
 }): JSX.Element {
   const pathname = usePathname();
   const shouldShowSidebar = !pathname.includes("/preview");
-  console.log("pathname", pathname);
 
   return (
-    <div className="min-h-screen max-w-7xl mx-auto">
-      <Navbar />
+    <div className="flex min-h-screen max-w-7xl mx-auto">
       {shouldShowSidebar && <Sidebar />}
-      <main className={shouldShowSidebar ? "lg:pl-64" : ""}>
-        <div className="max-w-4xl mx-auto min-h-[150vh] overflow-hidden">
+      <main className={`${shouldShowSidebar ? "" : ""} p-4`}>
+        <div className="max-w-4xl mx-auto overflow-hidden">
           {children}
         </div>
       </main>

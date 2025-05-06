@@ -156,7 +156,7 @@ export default function Navbar() {
                 <Menu className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
+            <DropdownMenuContent align="end" className="w-48 px-2 py-4">
               {isAuthenticated
                 ? navItems.map(({ title, href }) => (
                   <DropdownMenuItem key={href} asChild>
@@ -183,7 +183,7 @@ export default function Navbar() {
         </div>
 
         {/* Auth Section */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2 lg:gap-6">
           {/* Cart Icon */}
           <Link href="/cart">
             <Button variant="ghost" size="sm" className="relative">
@@ -197,7 +197,7 @@ export default function Navbar() {
           </Link>
 
           {isAuthenticated ? (
-            <DropdownMenu>
+            <DropdownMenu>  
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-2">
                   <Avatar className="h-8 w-8">

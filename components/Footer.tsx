@@ -20,8 +20,8 @@ const Footer = () => {
 		resources: [
 			{ name: "Documentation", href: "#docs" },
 			{ name: "API Reference", href: "#api" },
-			{ name: "Community", href: "#community" },
-			{ name: "Support", href: "#support" },
+			{ name: "Dashboard", href: "/dashboard" },
+			{ name: "FAQ", href: "/faq" },
 		],
 		legal: [
 			{ name: "Privacy", href: "#privacy" },
@@ -32,7 +32,7 @@ const Footer = () => {
 	};
 
 	return (
-		<footer className="bg-black text-white w-full relative overflow-hidden">
+		<footer className="bg-gradient-to-b from-black border-t to-secondary/5 text-black dark:text-white w-full relative overflow-hidden">
 			{/* Background watermark */}
 			<div className="absolute inset-0 flex justify-center items-center z-0 opacity-5 overflow-hidden">
 				<span className="text-[50px] md:text-[240px] font-extrabold">S UI</span>
@@ -43,13 +43,13 @@ const Footer = () => {
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 					{/* Product Links */}
 					<div>
-						<h3 className="text-lg font-semibold mb-6">Product</h3>
-						<ul className="space-y-4">
+						<h3 className="font-medium mb-6">Product</h3>
+						<ul className="space-y-3">
 							{footerLinks.product.map((link) => (
 								<li key={link.name}>
 									<Link
 										href={link.href}
-										className="text-muted-foreground hover:text-white transition-colors"
+										className="text-sm text-muted-foreground hover:text-primary transition-colors"
 									>
 										{link.name}
 									</Link>
@@ -60,13 +60,13 @@ const Footer = () => {
 
 					{/* Company Links */}
 					<div>
-						<h3 className="text-lg font-semibold mb-6">Company</h3>
-						<ul className="space-y-4">
+						<h3 className="font-medium mb-6">Company</h3>
+						<ul className="space-y-3">
 							{footerLinks.company.map((link) => (
 								<li key={link.name}>
 									<Link
 										href={link.href}
-										className="text-muted-foreground hover:text-white transition-colors"
+										className="text-sm text-muted-foreground hover:text-primary transition-colors"
 									>
 										{link.name}
 									</Link>
@@ -77,13 +77,13 @@ const Footer = () => {
 
 					{/* Resources Links */}
 					<div>
-						<h3 className="text-lg font-semibold mb-6">Resources</h3>
-						<ul className="space-y-4">
+						<h3 className="font-medium mb-6">Resources</h3>
+						<ul className="space-y-3">
 							{footerLinks.resources.map((link) => (
 								<li key={link.name}>
 									<Link
 										href={link.href}
-										className="text-muted-foreground hover:text-white transition-colors"
+										className="text-sm text-muted-foreground hover:text-primary transition-colors"
 									>
 										{link.name}
 									</Link>
@@ -94,8 +94,8 @@ const Footer = () => {
 
 					{/* Contact Info */}
 					<div>
-						<h3 className="text-lg font-semibold mb-6">Contact</h3>
-						<ul className="space-y-4">
+						<h3 className="font-medium mb-6">Contact</h3>
+						<ul className="space-y-3 text-sm">
 							<li className="flex items-center gap-3 text-muted-foreground">
 								<IconMail className="w-4 h-4" />
 								<span>contact@example.com</span>
@@ -113,7 +113,7 @@ const Footer = () => {
 				</div>
 
 				{/* Social Links & Copyright */}
-				<div className="flex flex-col md:flex-row items-center justify-between gap-4 py-2 border rounded-xl max-w-6xl px-4 mx-auto border-white/10 bg-white/5 backdrop-blur-md">
+				<div className="flex flex-col md:flex-row items-center justify-between gap-4 py-2 border rounded-xl max-w-6xl px-4 mx-auto bg-accent backdrop-blur-md">
 				<div>
 					<Logo label="S UI"/>
 				</div>
@@ -121,19 +121,19 @@ const Footer = () => {
 					<div className="flex items-center gap-4">
 						<Link
 							href="#"
-							className="w-10 h-10 rounded-md bg-white/5 shadow-inner shadow-white/20 flex items-center justify-center hover:bg-white/10 hover:shadow-2xl hover:shadow-white transition-colors"
+							className="w-10 h-10 rounded-md dark:bg-white/5 bg-black/5 shadow-inner dark:shadow-white/20 shadow-black/20 flex items-center justify-center hover:bg-white/10 hover:shadow-2xl hover:shadow-white transition-colors"
 						>
 							<IconBrandGithub className="w-5 h-5" />
 						</Link>
 						<Link
 							href="#"
-							className="w-10 h-10 rounded-md bg-white/5 shadow-inner shadow-white/20 flex items-center justify-center hover:bg-white/10 hover:shadow-2xl hover:shadow-white transition-colors"
+							className="w-10 h-10 rounded-md dark:bg-white/5 bg-black/5 shadow-inner dark:shadow-white/20 shadow-black/20 flex items-center justify-center hover:bg-white/10 hover:shadow-2xl hover:shadow-white transition-colors"
 						>
 							<IconBrandX className="w-5 h-5" />
 						</Link>
 						<Link
 							href="#"
-							className="w-10 h-10 rounded-md bg-white/5 shadow-inner shadow-white/20 flex items-center justify-center hover:bg-white/10 hover:shadow-2xl hover:shadow-white transition-colors"
+							className="w-10 h-10 rounded-md dark:bg-white/5 bg-black/5 shadow-inner dark:shadow-white/20 shadow-black/20 flex items-center justify-center hover:bg-white/10 hover:shadow-2xl hover:shadow-white transition-colors"
 						>
 							<IconBrandLinkedin className="w-5 h-5" />
 						</Link>
@@ -146,9 +146,9 @@ const Footer = () => {
 			</div>
 
 			{/* Decorative line */}
-			<div className="absolute bottom-[10%] left-0 w-full h-px bg-white opacity-10">
-				<div className="absolute left-[10%] -top-1 w-2 h-2 rounded-full bg-white opacity-50"></div>
-				<div className="absolute right-[10%] -top-1 w-2 h-2 rounded-full bg-white opacity-50"></div>
+			<div className="absolute bottom-[10%] left-0 w-full h-px bg-black dark:bg-white opacity-10">
+				<div className="absolute left-[10%] -top-1 w-2 h-2 rounded-full bg-black dark:bg-white opacity-50"></div>
+				<div className="absolute right-[10%] -top-1 w-2 h-2 rounded-full bg-black dark:bg-white opacity-50"></div>
 			</div>
 		</footer>
 	);

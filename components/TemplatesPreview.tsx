@@ -76,7 +76,8 @@ const TemplatesPreview = () => {
                 title='Preview Templates' 
                 description='Choose from a variety of templates to get started' 
                 gradientText='TEMPLATES' 
-                textHeight={200} 
+                textHeight={70} 
+                mdTextHeight={120}
             />
             
             <div className="container max-w-7xl mx-auto px-4">

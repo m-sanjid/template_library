@@ -8,7 +8,7 @@ const CTA = ({ session }: { session: Session | null }) => {
 	return (
 		<section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r">
 			<div className="max-w-7xl mx-auto text-center">
-				<SectionHeader label="Ready to Get Started" title="Ready to Get Started" description="Join thousands of users who are already creating amazing templates with our platform." gradientText="START NOW" textHeight={180} />
+				<SectionHeader label="Ready to Get Started" title="Ready to Get Started" description="Join thousands of users who are already creating amazing templates with our platform." gradientText="START NOW" mdTextHeight={180} />
 					<div className="flex flex-col sm:flex-row justify-center gap-4">
 						<Button
 							size="lg"

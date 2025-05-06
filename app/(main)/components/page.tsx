@@ -20,7 +20,7 @@ const ComponentsPage = () => {
           title="Premium UI Components"
           description="Discover our collection of pre-built components, crafted with attention to detail and ready for your next project."
           gradientText="Components"
-          textHeight={160}
+          textHeight={40}
         />
 
         <Tabs defaultValue="all" className="w-full">

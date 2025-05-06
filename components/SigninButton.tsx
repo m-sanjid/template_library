@@ -4,12 +4,12 @@ import { Button } from "./ui/button";
 
 const SigninButton = () => {
   return (
-    <div className="flex gap-3 items-center">
+    <div className="flex gap-3 items-center mx-2">
       <Link href={"/login"}>
-        <Button className="rounded-full">Login</Button>
+        <Button size="sm" className="rounded-full">Login</Button>
       </Link>
       <Link href={"/signup"}>
-        <Button variant={"secondary"} className="rounded-full">
+        <Button size="sm" variant={"secondary"} className="rounded-full">
           SignUp
         </Button>
       </Link>

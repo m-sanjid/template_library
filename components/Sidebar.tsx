@@ -1,6 +1,5 @@
 import React, { JSX, useState } from 'react';
-import { Button } from './ui/button';
-import { Menu, X, Layout, FileText, Home, ShoppingCart, Settings } from 'lucide-react';
+import { Layout, FileText, Home, ShoppingCart, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { COMPONENTS } from '@/data/components';
@@ -12,15 +11,10 @@ interface Template {
 }
 
 export const Sidebar = (): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
   const [hover, setHover] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(0);
 
   const pathname = usePathname();
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
 
   const navItems = [
     { href: '/', label: 'Home', icon: Home },
@@ -32,21 +26,8 @@ export const Sidebar = (): JSX.Element => {
 
   return (
     <>
-      {/* Mobile Menu Button */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="fixed top-4 left-4 z-50 lg:hidden"
-        onClick={toggleSidebar}
-      >
-        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-      </Button>
-
-      {/* Sidebar */}
       <div
-        className={`fixed overflow-auto top-0 pt-20 h-full w-64 bg-background border-r transform transition-transform duration-200 ease-in-out z-40 ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        } lg:translate-x-0`}
+        className={`sticky pb-20 hidden md:block overflow-auto mr-4 top-0 pt-20 h-full w-64 bg-background border-r transform transition-transform duration-200 ease-in-out z-40 lg:translate-x-0`}
       >
         <div className="p-4">
           <h2 className="text-xl font-bold mb-6">Template Library</h2>
@@ -61,7 +42,7 @@ export const Sidebar = (): JSX.Element => {
                   href={item.href}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(0)}
-                  className={`flex items-center gap-2 p-2 rounded-lg transition-colors ${
+                  className={`flex items-center gap-2 py-2 px-4 rounded-full transition-colors ${
                     pathname === item.href
                       ? 'bg-primary text-primary-foreground'
                       : 'hover:bg-muted'
@@ -86,7 +67,7 @@ export const Sidebar = (): JSX.Element => {
                   onMouseLeave={() => setHoveredIndex(0)}
                   key={idx}
                   href={`/components/${component.id}`}
-                  className={`relative block p-2 rounded-lg text-sm transition-all duration-300 ${
+                  className={`relative block py-2 px-4 rounded-full text-sm transition-all duration-300 ${
                     pathname === `/components/${component.id}`
                       ? 'bg-primary text-primary-foreground font-bold'
                       : `${hover && hoveredIndex === idx ? 'translate-x-2 text-primary' : 'text-muted-foreground'}`
@@ -113,7 +94,7 @@ export const Sidebar = (): JSX.Element => {
                 <Link
                   key={template.id}
                   href={`/templates/${template.id}`}
-                  className={`block p-2 rounded-lg text-sm transition-colors ${
+                  className={`block py-2 px-4 rounded-full text-sm transition-colors ${
                     pathname === `/templates/${template.id}`
                       ? 'bg-primary text-primary-foreground'
                       : 'hover:bg-muted'
@@ -127,13 +108,6 @@ export const Sidebar = (): JSX.Element => {
         </div>
       </div>
 
-      {/* Overlay */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
-          onClick={toggleSidebar}
-        />
-      )}
     </>
   );
 }; 

@@ -94,7 +94,7 @@ const Home = () => {
             <div className="lg:col-span-2">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold">Recent Activity</h2>
-                <Button variant="ghost">View All</Button>
+                <Button >View All</Button>
               </div>
               <div className="space-y-4">
                 {[
@@ -194,7 +194,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> 
     </div>
   );
 };

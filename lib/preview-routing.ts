@@ -6,11 +6,12 @@ export const getPreviewRoutes = (id: string) => {
   if (!component) return [];
 
   // If component has multiple types
-  if (component.type) {
-    return Object.keys(component.type).map(typeKey => ({
+  if (component?.type) {
+    const types = component.type;
+    return Object.keys(types).map(typeKey => ({
       route: `/components/${id}/${typeKey}/preview`,
-      title: component.type[typeKey].title,
-      description: component.type[typeKey].description
+      title: types[typeKey].title,
+      description: types[typeKey].description
     }));
   }
 

@@ -6,19 +6,7 @@ import { useSubscription } from "./use-subscription";
 interface UserSettings {
   name: string;
   email: string;
-  company?: string;
-  role?: string;
-  language: string;
-  theme: string;
-  emailNotifications: {
-    newTemplates: boolean;
-    updates: boolean;
-    marketing: boolean;
-  };
-  pushNotifications: {
-    browser: boolean;
-    mobile: boolean;
-  };
+  theme?: string;
 }
 
 export function useSettings() {

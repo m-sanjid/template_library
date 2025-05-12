@@ -17,6 +17,7 @@ export interface PurchaseItem {
 
 export default function SuccessPage() {
   const searchParams = useSearchParams();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [purchase, setPurchase] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

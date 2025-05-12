@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Preview } from "@/components/ui/preview";
-import { COMPONENTS } from "@/data/components";
+import { COMPONENTS, COMPONENT_TYPE } from "@/data/components";
 import SectionHeader from "./SectionHeader";
 import { AnimatedButton } from "./AnimatedButton";
 
@@ -14,7 +14,7 @@ interface ComponentCardProps {
   count: number;
   image: string;
   faded?: boolean;
-  component?: React.ComponentType<any>;
+  component?: React.ComponentType<COMPONENT_TYPE>;
 }
 
 const ComponentCard = ({
@@ -147,6 +147,7 @@ const ComponentsPreviewSection = () => {
           gradientText="COMPONENTS"
           textHeight={56}
           mdTextHeight={140}
+          lgTextHeight={156}
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {packs.map((pack, index) => (

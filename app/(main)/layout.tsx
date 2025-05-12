@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Sidebar } from "@/components/Sidebar";
 import { JSX } from "react";
+import Navbar from "@/components/Navbar";
 
 export default function MainLayout({
   children,
@@ -11,15 +12,21 @@ export default function MainLayout({
 }): JSX.Element {
   const pathname = usePathname();
   const shouldShowSidebar = !pathname.includes("/preview");
+  const shouldScale = pathname.includes("/preview"); 
+  const shouldShowNavbar = !pathname.includes("/preview"); 
 
   return (
+    <>
+      {shouldShowNavbar && <Navbar />}
     <div className="flex min-h-screen max-w-7xl mx-auto">
-      {shouldShowSidebar && <Sidebar />}
+
+      {shouldShowSidebar && <Sidebar /> }
       <main className={`${shouldShowSidebar ? "" : ""} p-4`}>
-        <div className="max-w-4xl mx-auto overflow-hidden">
+        <div className={`${shouldScale ? "max-w-7xl" : "max-w-4xl"} mx-auto overflow-hidden`}>
           {children}
         </div>
       </main>
     </div>
+    </>
   );
 }

@@ -310,6 +310,7 @@ const PurchasesPage = () => {
           description="View and manage your orders"
           gradientText="Purchase History"
           textHeight={160}
+          mdTextHeight={120}
         />
         <LoadingSkeleton />
       </div>
@@ -349,13 +350,15 @@ const PurchasesPage = () => {
   }
 
   return (
-    <div className="container max-w-4xl mx-auto p-8">
+    <div className="container max-w-5xl mx-auto p-8">
       <SectionHeader
         label="Purchase History"
         title="Your Purchase History"
         description="View and manage your orders"
         gradientText="Purchase"
-        textHeight={160}
+        textHeight={80}
+        mdTextHeight={100}
+        lgTextHeight={100}
       />
       <div className="space-y-6">
         {purchases.map((purchase) => (

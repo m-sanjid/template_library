@@ -23,7 +23,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command"
 import { Button } from "@/components/ui/button"
-
+import { COMPONENTS } from "@/data/components"
 
 export function GlobalSearch() {
   const [open, setOpen] = React.useState(false)
@@ -56,7 +56,7 @@ export function GlobalSearch() {
         <Search className="h-4 w-4 xl:mr-2" />
         <span className="hidden xl:inline-flex">Search...</span>
         <span className="sr-only">Search...</span>
-        <kbd className="pointer-events-none absolute right-1.5 top-1.5 hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 xl:flex">
+        <kbd className="pointer-events-none absolute right-3 top-1.5 hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 xl:flex">
           <span className="text-xs">⌘</span>K
         </kbd>
       </Button>
@@ -64,6 +64,17 @@ export function GlobalSearch() {
         <CommandInput placeholder="Type a command or search..." className="bg-white dark:bg-black text-black dark:text-white" />
         <CommandList className="bg-white dark:bg-black text-black dark:text-black">
           <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Components">
+            {COMPONENTS.map((component, idx) => (
+              <CommandItem
+                key={idx}
+                onSelect={() => runCommand(() => router.push(`/components/${component.id}`))}
+                className="flex items-center gap-2"
+              >
+                <span>{component.title}</span>
+              </CommandItem>
+            ))}
+          </CommandGroup>
           <CommandGroup heading="Navigation">
             <CommandItem
               onSelect={() => runCommand(() => router.push("/templates"))}

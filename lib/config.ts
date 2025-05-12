@@ -131,6 +131,34 @@ export const PRICING = {
 	},
 };
 
+export type TemplateItemType = {
+	id: string;
+	name: string;
+	description: string;
+	price: number;
+	rating: number;
+	downloads: number;
+	lastUpdated: string;
+	features: string[];
+	thumbnail?: string;
+	category?: string;
+	screenshots: {
+		desktop: string;
+		tablet: string;
+		mobile: string;
+	};
+	demoUrl: string;
+	tags: string[];
+	specifications: {
+		formats: string[];
+		dimensions: string[];
+		software: string[];
+	};
+	compatibility: {
+		browsers: string[];
+		devices: string[];
+	};
+};
 // Template Categories
 export const TEMPLATE_CATEGORIES = [
 	{

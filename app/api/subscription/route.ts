@@ -15,6 +15,7 @@ export async function POST(req: Request) {
     }
 
     const { plan, isAnnual } = await req.json();
+    // eslint-disable-next-line
     const pricingPlan = Object.entries(PRICING).find(
       ([_, p]) => p.name === plan
     )?.[1];

@@ -48,7 +48,7 @@ const Pricing = ({isAnnual, setIsAnnual, isLoading, handleSubscribe}: {isAnnual?
         transition={{ duration: 0.3, delay: index * 0.1 }}
       >
         <div
-          className={`relative border rounded-xl p-3 ${
+          className={`relative border rounded-xl overflow-hidden p-3 ${
             key === "PRO"
               ? "border-primary shadow-lg scale-105 bg-primary/5"
               : ""

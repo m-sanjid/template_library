@@ -21,7 +21,7 @@ type ComponentType = {
   code: string;
 }
 
-type Component = {
+export type COMPONENT_TYPE = {
   id: string;
   title?: string;
   description?: string;
@@ -30,7 +30,7 @@ type Component = {
   type?: Record<string, ComponentType>;
 }
 
-export const COMPONENTS: Component[] = [
+export const COMPONENTS: COMPONENT_TYPE[] = [
   {
     id: "button1",
     title: "Button 1",
@@ -140,7 +140,7 @@ export const COMPONENTS: Component[] = [
   },
   {
     id: "navbar",
-    title: "Navbar",
+    title: "Navbar 5",
     description: "A custom navbar component with variants and states",
     component: Navbar,
     code: `<Navbar />`

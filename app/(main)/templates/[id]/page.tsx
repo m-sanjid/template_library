@@ -66,11 +66,7 @@ const template = {
   },
 };
 
-export default function TemplateDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default function TemplateDetailPage() {
   const [activeView, setActiveView] = useState<"desktop" | "tablet" | "mobile">(
     "desktop"
   );

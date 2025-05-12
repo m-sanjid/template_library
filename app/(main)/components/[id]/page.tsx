@@ -22,14 +22,15 @@ import { toast } from 'sonner'
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { AnimatedButton } from "@/components/AnimatedButton";
+import type { COMPONENT_TYPE } from "@/data/components";
 
 interface Component {
   id: string;
   title?: string;
   description?: string;
-  component?: React.ComponentType<any>;
+  component?: React.ComponentType<COMPONENT_TYPE>;
   code?: string;
-  type?: Record<string, any>;
+  type?: Record<string, COMPONENT_TYPE>;
   tags?: string[];
 }
 

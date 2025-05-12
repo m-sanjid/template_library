@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { TEMPLATE_CATEGORIES } from "@/lib/config";
+import { TEMPLATE_CATEGORIES, TemplateItemType } from "@/lib/config";
 import {
   Grid,
   List,
@@ -38,6 +38,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function TemplatesPage() {
   const { addToCart } = useCart();
@@ -46,7 +47,7 @@ export default function TemplatesPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("popular");
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const [templates, setTemplates] = useState<any>([]);
+  const [templates, setTemplates] = useState<TemplateItemType[]>([]);
   const { isPurchased } = usePurchases();
   const [hoveredTemplate, setHoveredTemplate] = useState<string | null>(null);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -82,7 +83,7 @@ export default function TemplatesPage() {
     },
   ]);
 
-  const filteredTemplates = templates.filter((template: any) => {
+  const filteredTemplates = templates.filter((template: TemplateItemType) => {
     const matchesSearch = template.name
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
@@ -106,7 +107,7 @@ export default function TemplatesPage() {
     }
   });
 
-  const handleAddToCart = (template: any) => {
+  const handleAddToCart = (template: TemplateItemType) => {
     addToCart({
       name: template.name,
       description: template.description,
@@ -125,7 +126,7 @@ export default function TemplatesPage() {
     });
   };
 
-  const handleDownload = (template: any) => {
+  const handleDownload = (template: TemplateItemType) => {
     toast.success("Download started", {
       description: `${template.name} is being downloaded.`,
     });
@@ -479,9 +480,11 @@ export default function TemplatesPage() {
                 >
                   <Link href={`/templates/${template.id}`} className="block">
                     <div className="aspect-video relative overflow-hidden">
-                      <img
-                        src={template.thumbnail}
+                      <Image
+                        src={template.thumbnail ?? ""}
                         alt={template.name}
+                        width={576}
+                        height={324}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -578,9 +581,11 @@ export default function TemplatesPage() {
                           href={`/templates/${template.id}`}
                           className="w-48 h-32 bg-muted rounded-lg overflow-hidden relative group-hover:shadow-md transition-all"
                         >
-                          <img
-                            src={template.thumbnail}
+                          <Image
+                            src={template.thumbnail ?? ""}
                             alt={template.name}
+                            width={192}
+                            height={144}
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                           />
                           {/* Category overlay */}
@@ -592,9 +597,11 @@ export default function TemplatesPage() {
                           href={`/templates/${template.id}`}
                           className="w-48 h-32 bg-muted rounded-lg overflow-hidden relative group-hover:shadow-md transition-all"
                         >
-                          <img
-                            src={template.thumbnail}
+                          <Image
+                            src={template.thumbnail ?? ""}
                             alt={template.name}
+                            width={192}
+                            height={144}
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                           />
                         </Link>
@@ -602,28 +609,29 @@ export default function TemplatesPage() {
                           href={`/templates/${template.id}`}
                           className="w-48 h-32 bg-muted rounded-lg overflow-hidden relative group-hover:shadow-md transition-all"
                         >
-                          <img
-                            src={template.thumbnail}
+                          <Image
+                            src={template.thumbnail ?? ""}
                             alt={template.name}
+                            width={192}
+                            height={144}
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                           />
                         </Link>
                       </div>
-                      </div>
+                    </div>
 
-                      <div className="flex justify-between mt-8">
-
-                        <Link href={`/templates/${template.id}`}>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-xs w-full"
-                          >
-                            View details
-                            <ExternalLink className="w-3 h-3 ml-2" />
-                          </Button>
-                        </Link>
-                        <div>
+                    <div className="flex justify-between mt-8">
+                      <Link href={`/templates/${template.id}`}>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="text-xs w-full"
+                        >
+                          View details
+                          <ExternalLink className="w-3 h-3 ml-2" />
+                        </Button>
+                      </Link>
+                      <div>
                         {isPurchased(template.id) ? (
                           <Button
                             variant="outline"
@@ -636,10 +644,13 @@ export default function TemplatesPage() {
                             </span>
                           </Button>
                         ) : (
-                          <AddToCart handleAddToCart={() => handleAddToCart(template)} price={template.price} />
+                          <AddToCart
+                            handleAddToCart={() => handleAddToCart(template)}
+                            price={template.price}
+                          />
                         )}
-                        </div>
-                              </div>
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
               ))}

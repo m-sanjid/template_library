@@ -9,6 +9,7 @@ import { Search, Calendar, User, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useKeyboardShortcut } from "@/hooks/use-keyboard-shortcut";
 import SectionHeader from "@/components/SectionHeader";
+import Image from "next/image";
 // Mock data - replace with actual API call
 const BLOG_POSTS = [
   {
@@ -91,9 +92,11 @@ export default function BlogPage() {
                 >
                   <Link href={`/blog/${post.slug}`}>
                     <div className="aspect-video relative">
-                      <img
+                      <Image
                         src={post.thumbnail}
                         alt={post.title}
+                        width={576}
+                        height={324}
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -171,9 +174,11 @@ export default function BlogPage() {
             >
               <Link href={`/blog/${post.slug}`}>
                 <div className="aspect-video relative">
-                  <img
+                  <Image
                     src={post.thumbnail}
                     alt={post.title}
+                    width={576}
+                    height={324}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

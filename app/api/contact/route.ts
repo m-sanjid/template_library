@@ -13,7 +13,7 @@ const formSchema = z.object({
 // Ensure environment variables are defined
 const emailUser = process.env.EMAIL_USER;
 const emailPass = process.env.EMAIL_APP_PASSWORD;
-const bemailFrom = process.env.EMAIL_FROM || emailUser;
+const emailFrom = process.env.EMAIL_FROM;
 const emailTo = process.env.EMAIL_TO;
 
 if (!emailUser || !emailPass || !emailTo) {
@@ -51,23 +51,22 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-    console.log("EMAIL_USER:", process.env.EMAIL_USER);
-    console.log(
-      "EMAIL_APP_PASSWORD:",
-      process.env.EMAIL_APP_PASSWORD ? "✔ Loaded" : "❌ Missing"
-    );
+    console.log("EMAIL_USER:", emailUser);
+    console.log("EMAIL_APP_PASSWORD:", emailPass ? "Loaded" : "Missing");
+    console.log("EMAIL_FROM:", emailFrom);
+    console.log("EMAIL_TO:", emailTo);
 
     const { name, email, subject, message } = result.data;
 
     console.log("Preparing to send email with:", {
-      from: process.env.EMAIL_FROM,
-      to: process.env.EMAIL_TO,
-      using: process.env.EMAIL_USER,
+      from: emailFrom,
+      to: emailTo,
+      using: emailUser,
     });
 
     await transporter.sendMail({
-      from: process.env.EMAIL_FROM || email,
-      to: process.env.EMAIL_TO || "fallback@example.com",
+      from: emailFrom || email,
+      to: emailTo,
       subject: `New Contact Form Submission: ${subject}`,
       text: `
           Name: ${name}
@@ -91,7 +90,7 @@ export async function POST(request: Request) {
       message: "Message sent successfully!",
     });
   } catch (error) {
-    console.error("❌ Contact form error:", error);
+    console.error("Contact form error:", error);
 
     return NextResponse.json(
       {

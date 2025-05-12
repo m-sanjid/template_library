@@ -12,6 +12,7 @@ import {
   IconBrandLinkedin,
   IconShare,
 } from "@tabler/icons-react";
+import Image from "next/image";
 
 // Mock data - replace with actual API call
 const post = {
@@ -63,6 +64,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    console.log("params", params);
     setMounted(true);
   }, []);
 
@@ -84,9 +86,11 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         {/* Header */}
         <div className="rounded-lg shadow-sm overflow-hidden mb-8">
           <div className="aspect-video relative">
-            <img
+            <Image
               src={post.thumbnail}
               alt={post.title}
+              width={576}
+              height={324}
               className="w-full h-full object-cover"
             />
           </div>
@@ -107,9 +111,11 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <h1 className="text-3xl font-bold mb-6">{post.title}</h1>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <img
+                <Image
                   src={post.author.avatar}
                   alt={post.author.name}
+                  width={64}
+                  height={64}
                   className="w-12 h-12 rounded-full"
                 />
                 <div>
@@ -147,9 +153,11 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <div className="rounded-lg shadow-sm p-8 mb-8">
           <h2 className="text-xl font-semibold mb-4">About the Author</h2>
           <div className="flex items-start gap-4">
-            <img
+            <Image
               src={post.author.avatar}
               alt={post.author.name}
+              width={64}
+              height={64}
               className="w-16 h-16 rounded-full"
             />
             <div>
@@ -173,9 +181,11 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 >
                   <Link href={`/blog/${relatedPost.slug}`}>
                     <div className="aspect-video bg-muted relative">
-                      <img
+                      <Image
                         src={relatedPost.thumbnail}
                         alt={relatedPost.title}
+                        width={576}
+                        height={324}
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

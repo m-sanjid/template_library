@@ -32,13 +32,13 @@ const Footer = () => {
 	};
 
 	return (
-		<footer className="bg-gradient-to-b from-black border-t to-secondary/5 text-black dark:text-white w-full relative overflow-hidden">
+		<footer className="bg-gradient-to-b from-neutral-300 dark:from-black border-t to-secondary/5 text-black dark:text-white w-full relative overflow-hidden">
 			{/* Background watermark */}
 			<div className="absolute inset-0 flex justify-center items-center z-0 opacity-5 overflow-hidden">
 				<span className="text-[50px] md:text-[240px] font-extrabold">S UI</span>
 			</div>
 
-			<div className="container mx-auto px-4 py-20 z-10 relative">
+			<div className="max-w-6xl mx-auto px-4 py-20 z-10 relative">
 				{/* Main footer content */}
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 					{/* Product Links */}
@@ -49,7 +49,7 @@ const Footer = () => {
 								<li key={link.name}>
 									<Link
 										href={link.href}
-										className="text-sm text-muted-foreground hover:text-primary transition-colors"
+										className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
 									>
 										{link.name}
 									</Link>
@@ -66,7 +66,7 @@ const Footer = () => {
 								<li key={link.name}>
 									<Link
 										href={link.href}
-										className="text-sm text-muted-foreground hover:text-primary transition-colors"
+										className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
 									>
 										{link.name}
 									</Link>
@@ -83,7 +83,7 @@ const Footer = () => {
 								<li key={link.name}>
 									<Link
 										href={link.href}
-										className="text-sm text-muted-foreground hover:text-primary transition-colors"
+										className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
 									>
 										{link.name}
 									</Link>
@@ -95,7 +95,7 @@ const Footer = () => {
 					{/* Contact Info */}
 					<div>
 						<h3 className="font-medium mb-6">Contact</h3>
-						<ul className="space-y-3 text-sm">
+						<ul className="space-y-3 text-sm font-medium">
 							<li className="flex items-center gap-3 text-muted-foreground">
 								<IconMail className="w-4 h-4" />
 								<span>contact@example.com</span>

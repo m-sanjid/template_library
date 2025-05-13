@@ -22,7 +22,7 @@ export default function MainLayout({
 
       {shouldShowSidebar && <Sidebar /> }
       <main className={`${shouldShowSidebar ? "" : ""} p-4`}>
-        <div className={`${shouldScale ? "max-w-7xl" : "max-w-4xl"} mx-auto overflow-hidden`}>
+        <div className={`${shouldScale ? "max-w-7xl" : "max-w-6xl"} mx-auto overflow-hidden`}>
           {children}
         </div>
       </main>

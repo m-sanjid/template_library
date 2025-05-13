@@ -42,13 +42,13 @@ export const Sidebar = (): JSX.Element => {
                   href={item.href}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(0)}
-                  className={`flex items-center gap-2 py-2 px-4 rounded-full transition-colors ${
+                  className={`flex group items-center gap-2 py-2 px-4 rounded-full transition-colors ${
                     pathname === item.href
                       ? 'bg-primary text-primary-foreground'
                       : 'hover:bg-muted'
                   }`}
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-4 w-4 group-hover:translate-x-1 duration-300 ease-in-out" />
                   {item.label}
                 </Link>
               );
@@ -67,10 +67,10 @@ export const Sidebar = (): JSX.Element => {
                   onMouseLeave={() => setHoveredIndex(0)}
                   key={idx}
                   href={`/components/${component.id}`}
-                  className={`relative block py-2 px-4 rounded-full text-sm transition-all duration-300 ${
+                  className={`relative block py-2 px-4 rounded-full text-sm transition-all duration-300 ease-in-out ${
                     pathname === `/components/${component.id}`
                       ? 'bg-primary text-primary-foreground font-bold'
-                      : `${hover && hoveredIndex === idx ? 'translate-x-2 text-primary' : 'text-muted-foreground'}`
+                      : `${hover && hoveredIndex === idx ? 'translate-x-1 text-primary' : 'text-muted-foreground'}`
                   }`}
                 >
                   {component.title}
@@ -94,7 +94,7 @@ export const Sidebar = (): JSX.Element => {
                 <Link
                   key={template.id}
                   href={`/templates/${template.id}`}
-                  className={`block py-2 px-4 rounded-full text-sm transition-colors ${
+                  className={`block hover:translate-x-2 py-2 px-4 rounded-full text-sm transition-all duration-300 ease-in-out ${
                     pathname === `/templates/${template.id}`
                       ? 'bg-primary text-primary-foreground'
                       : 'hover:bg-muted'

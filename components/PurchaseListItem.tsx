@@ -112,10 +112,10 @@ const PurchaseListItem = ({ purchase }: PurchaseItemProps) => {
             <button
               onClick={viewInvoice}
               disabled={isLoading || !purchase.id}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="inline-flex group items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               <svg
-                className="w-4 h-4 mr-2"
+                className="w-4 h-4 mr-2 group-hover:translate-x-2 duration-300 ease-in-out"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -140,10 +140,10 @@ const PurchaseListItem = ({ purchase }: PurchaseItemProps) => {
             <button
               onClick={downloadInvoice}
               disabled={isLoading || !purchase.id}
-              className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="inline-flex group items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <svg
-                className="w-4 h-4 mr-2"
+                className="w-4 h-4 mr-2 group-hover:translate-x-2 duration-300 ease-in-out"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

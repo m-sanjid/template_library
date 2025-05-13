@@ -168,7 +168,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="container mx-auto py-10 px-4">
+    <div className="max-w-7xl mx-auto py-10 px-4">
       <SectionHeader
         label="Settings"
         title="Settings"

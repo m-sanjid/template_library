@@ -203,31 +203,31 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
             <Button
               variant="outline"
               size="sm"
-              className="flex-1"
+              className="flex-1 group"
               onClick={() => handleGenerateInvoice(false)}
               disabled={isGeneratingInvoice || isSendingEmail}
             >
-              <FileText className="w-4 h-4 mr-2" />
+              <FileText className="w-4 h-4 mr-2 group-hover:translate-x-2 duration-300 ease-in-out" />
               {isGeneratingInvoice ? "Generating..." : "View Invoice"}
             </Button>
             <Button
               variant="outline"
               size="sm"
-              className="flex-1"
+              className="flex-1 group"
               onClick={() => handleGenerateInvoice(true)}
               disabled={isGeneratingInvoice || isSendingEmail}
             >
-              <Download className="w-4 h-4 mr-2" />
+              <Download className="w-4 h-4 mr-2 group-hover:translate-x-2 duration-300 ease-in-out" />
               Download
             </Button>
             <Button
               variant="outline"
               size="sm"
-              className="flex-1"
+              className="flex-1 group"
               onClick={() => handleGenerateInvoice(false, true)}
               disabled={isGeneratingInvoice || isSendingEmail}
             >
-              <Mail className="w-4 h-4 mr-2" />
+              <Mail className="w-4 h-4 mr-2 group-hover:translate-x-2 duration-300 ease-in-out" />
               {isSendingEmail ? "Sending..." : "Email Invoice"}
             </Button>
           </div>
@@ -286,7 +286,7 @@ const PurchasesPage = () => {
 
   if (!session) {
     return (
-      <div className="container max-w-4xl mx-auto p-8">
+      <div className="container max-w-7xl mx-auto p-8">
         <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
           <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
           <h2 className="text-xl font-semibold mb-2">
@@ -303,7 +303,7 @@ const PurchasesPage = () => {
 
   if (isLoading) {
     return (
-      <div className="container max-w-4xl mx-auto p-8">
+      <div className="container max-w-7xl mx-auto p-8">
         <SectionHeader
           label="Purchase History"
           title="Your Purchase History"
@@ -319,7 +319,7 @@ const PurchasesPage = () => {
 
   if (error) {
     return (
-      <div className="container max-w-4xl mx-auto p-8">
+      <div className="container max-w-7xl mx-auto p-8">
         <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
           <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
           <h2 className="text-xl font-semibold mb-2">
@@ -334,7 +334,7 @@ const PurchasesPage = () => {
 
   if (purchases.length === 0) {
     return (
-      <div className="container max-w-4xl mx-auto p-8">
+      <div className="container max-w-7xl mx-auto p-8">
         <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
           <ShoppingBag className="w-16 h-16 text-gray-400 mb-4" />
           <h2 className="text-2xl font-semibold mb-2">No purchases yet</h2>
@@ -350,7 +350,7 @@ const PurchasesPage = () => {
   }
 
   return (
-    <div className="container max-w-5xl mx-auto p-8">
+    <div className="container max-w-7xl mx-auto p-8">
       <SectionHeader
         label="Purchase History"
         title="Your Purchase History"

@@ -90,9 +90,9 @@ export const Sidebar = (): JSX.Element => {
               Templates
             </h3>
             <div className="space-y-1">
-              {TEMPLATES.map((template: Template) => (
+              {TEMPLATES.map((template,idx) => (
                 <Link
-                  key={template.id}
+                  key={idx}
                   href={`/templates/${template.id}`}
                   className={`block hover:translate-x-2 py-2 px-4 rounded-full text-sm transition-all duration-300 ease-in-out ${
                     pathname === `/templates/${template.id}`

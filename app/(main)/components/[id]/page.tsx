@@ -15,7 +15,7 @@ import {
   Heart,
   Share2,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import PricingPage from "@/app/(out)/pricing/page";
 import { useCart } from "@/context/CartContext";
 import { toast } from 'sonner'

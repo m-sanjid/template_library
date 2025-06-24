@@ -26,7 +26,7 @@ import { toast } from "sonner";
 import SectionHeader from "@/components/SectionHeader";
 import { useSession } from "next-auth/react";
 import { AnimatedButton } from "@/components/AnimatedButton";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 interface Purchase {
   id: string;

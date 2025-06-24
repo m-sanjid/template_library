@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BLOG_CATEGORIES } from "@/lib/config";
 import { Search, Calendar, User, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useKeyboardShortcut } from "@/hooks/use-keyboard-shortcut";
 import SectionHeader from "@/components/SectionHeader";
 import Image from "next/image";

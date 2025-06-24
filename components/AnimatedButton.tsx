@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useState, ReactNode } from "react";
 import { IconArrowRight } from "@tabler/icons-react";
 import clsx from "clsx";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 type AnimatedButtonProps = {
   label: string;

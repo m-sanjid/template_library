@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { COMPONENTS } from "@/data/components";
 import { motion } from "motion/react";
 import { Card } from "@/components/ui/card";

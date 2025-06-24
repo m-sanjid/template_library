@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import BgButton from "@/components/BgButton";
 import {
   IconBrandX,

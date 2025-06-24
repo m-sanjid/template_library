@@ -1,7 +1,7 @@
 
 import { Button } from "./ui/button";
 import React from "react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Session } from "next-auth";
 import SectionHeader from "./SectionHeader";
 const CTA = ({ session }: { session: Session | null }) => {

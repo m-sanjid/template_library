@@ -24,7 +24,7 @@ import {
   Layout,
   FileText,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 

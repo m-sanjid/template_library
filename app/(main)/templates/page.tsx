@@ -23,7 +23,7 @@ import {
   ExternalLink,
   Eye,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useCart } from "@/context/CartContext";
 import { useKeyboardShortcut } from "@/hooks/use-keyboard-shortcut";
 import SectionHeader from "@/components/SectionHeader";

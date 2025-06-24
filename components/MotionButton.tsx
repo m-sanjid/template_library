@@ -2,7 +2,7 @@
 
 import { LucideProps } from "lucide-react";
 import { motion } from "motion/react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 const MotionButton = ({
 	label,

@@ -7,7 +7,7 @@ import Logo from "@/components/Logo";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Label } from "@/components/ui/label";
 import GoogleSignInButton from "@/components/GoogleSignInButton";
 

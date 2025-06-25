@@ -95,7 +95,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             />
           </div>
           <div className="p-8">
-            <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
+            <div className="flex items-center gap-4 text-sm text-neutral-500 mb-4">
               <span className="bg-muted px-2 py-1 rounded">
                 {post.category}
               </span>

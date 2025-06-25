@@ -59,8 +59,8 @@ const PurchaseListItem = ({ purchase }: PurchaseItemProps) => {
       <div className="p-6">
         <div className="flex justify-between items-start mb-4">
           <div>
-            <p className="text-sm text-gray-500">Order #{getOrderId()}</p>
-            <p className="text-sm text-gray-500">{getFormattedDate()}</p>
+            <p className="text-sm text-neutral-500">Order #{getOrderId()}</p>
+            <p className="text-sm text-neutral-500">{getFormattedDate()}</p>
           </div>
           <div className="flex items-center">
             <span
@@ -68,7 +68,7 @@ const PurchaseListItem = ({ purchase }: PurchaseItemProps) => {
                   ? "bg-green-100 text-green-800"
                   : purchase.status === "pending"
                     ? "bg-yellow-100 text-yellow-800"
-                    : "bg-gray-100 text-gray-800"
+                    : "bg-neutral-100 text-neutral-800"
                 }`}
             >
               {purchase.status
@@ -79,27 +79,27 @@ const PurchaseListItem = ({ purchase }: PurchaseItemProps) => {
           </div>
         </div>
 
-        <div className="border-t border-gray-200 my-4 pt-4">
+        <div className="border-t border-neutral-200 my-4 pt-4">
           {purchase.PurchaseItem?.map((item, index) => (
             <div key={item.id || index} className="flex justify-between py-2">
               <div className="flex-1">
-                <p className="font-medium text-gray-800">
+                <p className="font-medium text-neutral-800">
                   {item.name || "Unnamed Item"}
                 </p>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-neutral-500">
                   Qty: {item.quantity || 0}
                 </p>
               </div>
-              <p className="text-gray-700">
+              <p className="text-neutral-700">
                 ${((item.price || 0) * (item.quantity || 0)).toFixed(2)}
               </p>
             </div>
           ))}
         </div>
 
-        <div className="border-t border-gray-200 pt-4 flex justify-between items-center">
+        <div className="border-t border-neutral-200 pt-4 flex justify-between items-center">
           <div>
-            <p className="font-bold text-lg text-gray-800">
+            <p className="font-bold text-lg text-neutral-800">
               Total: $
               {(purchase.totalPrice !== undefined
                 ? parseFloat(purchase.totalPrice.toString())
@@ -140,7 +140,7 @@ const PurchaseListItem = ({ purchase }: PurchaseItemProps) => {
             <button
               onClick={downloadInvoice}
               disabled={isLoading || !purchase.id}
-              className="inline-flex group items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="inline-flex group items-center px-4 py-2 border border-neutral-300 text-sm font-medium rounded-md shadow-sm text-neutral-700 bg-white hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <svg
                 className="w-4 h-4 mr-2 group-hover:translate-x-2 duration-300 ease-in-out"

@@ -29,14 +29,14 @@ const CategoriesSection = () => {
               <h3 className="text-xl font-semibold mb-2 dark:text-white">
                 {category.name}
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
+              <p className="text-neutral-600 dark:text-neutral-300 mb-4">
                 {category.description}
               </p>
               <ul className="space-y-2">
                 {category.subcategories.map((sub) => (
                   <li
                     key={sub}
-                    className="flex items-center text-gray-500 dark:text-gray-400"
+                    className="flex items-center text-neutral-500 dark:text-neutral-400"
                   >
                     <Check className="w-4 h-4 mr-2 text-blue-500" />
                     {sub}

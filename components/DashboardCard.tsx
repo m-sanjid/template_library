@@ -6,11 +6,11 @@ const Card = ({ title, description, children }: { title: string, description: st
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
-			className="bg-black/80 border border-gray-800 rounded-xl p-6 shadow-lg text-white"
+			className="bg-black/80 border border-neutral-800 rounded-xl p-6 shadow-lg text-white"
 		>
 			{children}
 			<h3 className="text-xl font-semibold mt-4">{title}</h3>
-			<p className="text-gray-400 mt-2">{description}</p>
+			<p className="text-neutral-400 mt-2">{description}</p>
 		</motion.div>
 	);
 };
@@ -23,14 +23,14 @@ const Dashboard = () => {
 				title="Predictive Analytics"
 				description="Harness the power of data to forecast trends."
 			>
-				<div className="relative h-40 w-full bg-gray-900 rounded-lg">
-					<div className="absolute top-4 left-4 bg-gray-800 px-3 py-1 text-sm rounded-full">
+				<div className="relative h-40 w-full bg-neutral-900 rounded-lg">
+					<div className="absolute top-4 left-4 bg-neutral-800 px-3 py-1 text-sm rounded-full">
 						Risk: 42%
 					</div>
-					<div className="absolute bottom-6 left-8 bg-gray-700 px-3 py-1 text-sm rounded-lg">
+					<div className="absolute bottom-6 left-8 bg-neutral-700 px-3 py-1 text-sm rounded-lg">
 						Possible low
 					</div>
-					<div className="absolute top-16 left-20 bg-gray-700 px-3 py-1 text-sm rounded-lg">
+					<div className="absolute top-16 left-20 bg-neutral-700 px-3 py-1 text-sm rounded-lg">
 						Possible high
 					</div>
 				</div>
@@ -43,19 +43,19 @@ const Dashboard = () => {
 			>
 				<div className="flex flex-col gap-4">
 					<motion.button
-						className="bg-gray-800 flex items-center gap-2 px-4 py-2 rounded-lg"
+						className="bg-neutral-800 flex items-center gap-2 px-4 py-2 rounded-lg"
 						whileHover={{ scale: 1.05 }}
 					>
 						<Settings size={18} /> Trigger
 					</motion.button>
 					<motion.button
-						className="bg-gray-800 flex items-center gap-2 px-4 py-2 rounded-lg"
+						className="bg-neutral-800 flex items-center gap-2 px-4 py-2 rounded-lg"
 						whileHover={{ scale: 1.05 }}
 					>
 						<MessageSquare size={18} /> Prompts
 					</motion.button>
 					<motion.button
-						className="bg-gray-800 flex items-center gap-2 px-4 py-2 rounded-lg"
+						className="bg-neutral-800 flex items-center gap-2 px-4 py-2 rounded-lg"
 						whileHover={{ scale: 1.05 }}
 					>
 						<Mail size={18} /> Send Email
@@ -68,11 +68,11 @@ const Dashboard = () => {
 				title="Natural Language Processing"
 				description="Enhance customer interactions with AI."
 			>
-				<div className="relative h-40 w-full bg-gray-900 rounded-lg">
-					<div className="absolute top-4 left-4 bg-gray-800 px-3 py-1 text-sm rounded-full">
+				<div className="relative h-40 w-full bg-neutral-900 rounded-lg">
+					<div className="absolute top-4 left-4 bg-neutral-800 px-3 py-1 text-sm rounded-full">
 						August 2024
 					</div>
-					<div className="absolute bottom-6 right-8 bg-gray-800 px-3 py-1 text-sm rounded-full">
+					<div className="absolute bottom-6 right-8 bg-neutral-800 px-3 py-1 text-sm rounded-full">
 						5.6%
 					</div>
 				</div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight, Sparkles, Code, Zap, Rocket } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import React from "react";
 import { HERO_FEATURES } from "@/lib/config";
 import { Session } from "next-auth";

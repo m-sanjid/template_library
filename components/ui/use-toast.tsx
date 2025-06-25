@@ -33,8 +33,8 @@ export function Toast({ title, description }: Toast) {
   return (
     <div className="fixed bottom-4 right-4 z-50">
       <div className="bg-white rounded-lg shadow-lg p-4 max-w-sm">
-        <h3 className="font-semibold text-gray-900">{title}</h3>
-        {description && <p className="text-gray-600 mt-1">{description}</p>}
+        <h3 className="font-semibold text-neutral-900">{title}</h3>
+        {description && <p className="text-neutral-600 mt-1">{description}</p>}
       </div>
     </div>
   );

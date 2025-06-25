@@ -57,17 +57,17 @@ const Toggle: React.FC<ToggleProps> = ({
 
   // Define color scheme styles
   const colorSchemes = {
-    blue: isToggled ? "bg-blue-600" : "bg-gray-200",
-    green: isToggled ? "bg-green-600" : "bg-gray-200",
-    purple: isToggled ? "bg-purple-600" : "bg-gray-200",
-    gray: isToggled ? "bg-gray-700" : "bg-gray-300",
-    eden: isToggled ? "bg-gray-800" : "bg-gray-900",
+    blue: isToggled ? "bg-blue-600" : "bg-neutral-200",
+    green: isToggled ? "bg-green-600" : "bg-neutral-200",
+    purple: isToggled ? "bg-purple-600" : "bg-neutral-200",
+    gray: isToggled ? "bg-neutral-700" : "bg-neutral-300",
+    eden: isToggled ? "bg-neutral-800" : "bg-neutral-900",
   };
 
   return (
     <div className="flex items-center gap-3">
       {label && (
-        <span className="text-sm font-medium text-gray-700">{label}</span>
+        <span className="text-sm font-medium text-neutral-700">{label}</span>
       )}
       <button
         type="button"

@@ -65,7 +65,7 @@ const FAQ3 = () => {
         className="flex flex-col md:flex-row justify-between gap-4 mb-8"
       >
         <div className="relative w-full md:w-2/3">
-          <SearchIcon className="absolute left-3 top-3 text-gray-400" />
+          <SearchIcon className="absolute left-3 top-3 text-neutral-400" />
           <input
             type="text"
             placeholder="Search questions..."
@@ -91,7 +91,7 @@ const FAQ3 = () => {
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center text-gray-500"
+            className="text-center text-neutral-500"
           >
             No results found.
           </motion.p>

@@ -30,7 +30,7 @@ const GridBackground = ({ children }: { children: React.ReactNode }) => {
 					<div
 						key={index}
 						className={`border-[0.1px] dark:border-white/10
-              ${index % 2 === 0 ? "rounded-[1px] bg-gray-100 dark:bg-neutral-800 shadow-[0px_0px_0px_3px_rgba(255,255,255,1)_inset] dark:shadow-[0px_0px_0px_3px_rgba(0,0,0,0.2)_inset]" : "bg-gray-100 dark:bg-neutral-800"}
+              ${index % 2 === 0 ? "rounded-[1px] bg-neutral-100 dark:bg-neutral-800 shadow-[0px_0px_0px_3px_rgba(255,255,255,1)_inset] dark:shadow-[0px_0px_0px_3px_rgba(0,0,0,0.2)_inset]" : "bg-neutral-100 dark:bg-neutral-800"}
             `}
 					/>
 				))}

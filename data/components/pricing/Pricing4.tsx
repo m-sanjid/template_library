@@ -45,7 +45,7 @@ function Pricing4() {
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             Simple, transparent pricing
           </h2>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
+          <p className="mt-6 text-lg leading-8 text-neutral-600">
             Choose the plan that's right for you
           </p>
         </motion.div>

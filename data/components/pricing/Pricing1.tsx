@@ -23,7 +23,7 @@ const Pricing = () => {
         <span className={`text-sm ${!isAnnual ? "text-primary" : "text-muted-foreground"}`}>Monthly</span>
         <button
           onClick={() => setIsAnnual(!isAnnual)}
-          className={`relative inline-flex h-7 w-14 items-center rounded-full transition-colors focus:ring-2 focus:ring-primary ${isAnnual ? "bg-primary" : "bg-gray-300"}`}
+          className={`relative inline-flex h-7 w-14 items-center rounded-full transition-colors focus:ring-2 focus:ring-primary ${isAnnual ? "bg-primary" : "bg-neutral-300"}`}
         >
           <span
             className={`inline-block h-6 w-6 rounded-full bg-white shadow-md transform transition-transform ${isAnnual ? "translate-x-7" : "translate-x-1"}`}

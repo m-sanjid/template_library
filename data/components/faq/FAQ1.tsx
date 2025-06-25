@@ -70,7 +70,7 @@ function FAQ1() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     layoutId={`faq-${index}`}
-                    className="px-6 pb-5 text-gray-600 dark:text-gray-300"
+                    className="px-6 pb-5 text-neutral-600 dark:text-neutral-300"
                   >
                     {faq.answer}
                   </motion.div>

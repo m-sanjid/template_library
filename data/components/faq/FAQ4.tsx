@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
-import { motion, Variants } from 'framer-motion'
+import { motion, Variants } from 'motion/react'
 
 const fadeIn = (delay: number = 0): Variants => ({
     hidden: { opacity: 0 },

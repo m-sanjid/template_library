@@ -24,9 +24,9 @@ export const TemplateCard = ({ template, index }: { template: TemplateType, inde
                         <p className="text-sm text-white/80 line-clamp-2">{template.description}</p>
                     </div>
                     <div className="col-span-3 grid grid-cols-3 gap-1 p-1">
-                        <div className="bg-gray-200 dark:bg-gray-800 rounded-lg" />
-                        <div className="bg-gray-300 dark:bg-gray-700 rounded-lg" />
-                        <div className="bg-gray-400 dark:bg-gray-600 rounded-lg" />
+                        <div className="bg-neutral-200 dark:bg-neutral-800 rounded-lg" />
+                        <div className="bg-neutral-300 dark:bg-neutral-700 rounded-lg" />
+                        <div className="bg-neutral-400 dark:bg-neutral-600 rounded-lg" />
                     </div>
                 </div>
             

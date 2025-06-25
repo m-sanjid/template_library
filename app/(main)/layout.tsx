@@ -12,21 +12,22 @@ export default function MainLayout({
 }): JSX.Element {
   const pathname = usePathname();
   const shouldShowSidebar = !pathname.includes("/preview");
-  const shouldScale = pathname.includes("/preview"); 
-  const shouldShowNavbar = !pathname.includes("/preview"); 
+  const shouldScale = pathname.includes("/preview");
+  const shouldShowNavbar = !pathname.includes("/preview");
 
   return (
     <>
       {shouldShowNavbar && <Navbar />}
-    <div className="flex min-h-screen max-w-7xl mx-auto">
-
-      {shouldShowSidebar && <Sidebar /> }
-      <main className={`${shouldShowSidebar ? "" : ""} p-4`}>
-        <div className={`${shouldScale ? "max-w-7xl" : "max-w-6xl"} mx-auto overflow-hidden`}>
-          {children}
-        </div>
-      </main>
-    </div>
+      <div className="flex min-h-screen max-w-7xl mx-auto">
+        {shouldShowSidebar && <Sidebar />}
+        <main className={`${shouldShowSidebar ? "" : ""} p-4`}>
+          <div
+            className={`${shouldScale ? "max-w-7xl" : "max-w-6xl"} mx-auto overflow-hidden`}
+          >
+            {children}
+          </div>
+        </main>
+      </div>
     </>
   );
 }

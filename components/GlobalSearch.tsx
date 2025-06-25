@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useRouter } from "next/navigation"
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   Settings,
   User,
@@ -11,10 +11,8 @@ import {
   HelpCircle,
   Mail,
   LayoutTemplate,
-  Command,
-  Sparkles,
-} from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+} from "lucide-react";
+import { motion } from "motion/react";
 
 import {
   CommandDialog,
@@ -24,30 +22,66 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@/components/ui/command"
-import { Button } from "@/components/ui/button"
-import { COMPONENTS } from "@/data/components"
+} from "@/components/ui/command";
+import { Button } from "@/components/ui/button";
+import { COMPONENTS } from "@/data/components";
+import { IconCircle } from "@tabler/icons-react";
 
 export function GlobalSearch() {
-  const [open, setOpen] = React.useState(false)
-  const router = useRouter()
+  const [open, setOpen] = React.useState(false);
+  const router = useRouter();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey) || e.key === "Escape") {
-        e.preventDefault()
-        setOpen((prev) => !prev)
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setOpen((open) => !open);
       }
-    }
-
-    document.addEventListener("keydown", down)
-    return () => document.removeEventListener("keydown", down)
-  }, [])
-
+    };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
   const runCommand = React.useCallback((command: () => void) => {
-    setOpen(false)
-    command()
-  }, [])
+    setOpen(false);
+    command();
+  }, []);
+
+  const NavItems = {
+    navigation: [
+      {
+        label: "Templates",
+        href: "/templates",
+      },
+      {
+        label: "Blog",
+        href: "/blog",
+      },
+      {
+        label: "Cart",
+        href: "/cart",
+      },
+    ],
+    support: [
+      {
+        label: "FAQ",
+        href: "/faq",
+      },
+      {
+        label: "Contact",
+        href: "/contact",
+      },
+    ],
+    account: [
+      {
+        label: "Profile",
+        href: "/profile",
+      },
+      {
+        label: "Settings",
+        href: "/settings",
+      },
+    ],
+  };
 
   return (
     <>
@@ -59,40 +93,34 @@ export function GlobalSearch() {
         <Button
           variant="outline"
           onClick={() => setOpen(true)}
-          className="relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-4 xl:py-2 bg-white/50 dark:bg-black/50 backdrop-blur-sm border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all duration-200"
+          className="relative p-0 xl:justify-start xl:px-4 xl:py-2 bg-white/50 dark:bg-black/50 backdrop-blur-sm border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all duration-200"
         >
           <Search className="h-4 w-4 xl:mr-2 text-neutral-500 dark:text-neutral-400" />
-          <span className="hidden xl:inline-flex text-neutral-500 dark:text-neutral-400">Search components...</span>
-          <span className="sr-only">Search components...</span>
-          <kbd className="pointer-events-none absolute right-2 top-1.5 hidden h-6 select-none items-center gap-1 rounded border bg-neutral-100 dark:bg-neutral-800 px-1.5 font-mono text-[10px] font-medium text-neutral-500 dark:text-neutral-400 xl:flex">
+          <span className="hidden md:inline-flex text-sm text-neutral-500 dark:text-neutral-400">
+            Search
+          </span>
+          <kbd className="bg-muted text-muted-foreground pointer-events-none inline-flex h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none">
             <span className="text-xs">⌘</span>K
           </kbd>
         </Button>
       </motion.div>
-      <CommandDialog 
-        open={open} 
-        onOpenChange={setOpen}
-      >
-        <div className="flex items-center border-b border-neutral-200 dark:border-neutral-800 px-3">
-          <Search className="h-4 w-4 text-neutral-500 dark:text-neutral-400 mr-2" />
-          <CommandInput 
-            placeholder="Type a command or search..." 
-            className="flex-1 bg-transparent border-none focus:ring-0 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500 dark:placeholder:text-neutral-400"
-          />
-        </div>
+
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <CommandInput placeholder="Type a command or search..." />
         <CommandList className="max-h-[500px] overflow-y-auto">
-          <CommandEmpty className="py-6 text-center text-sm text-neutral-500 dark:text-neutral-400">
-            <Sparkles className="h-6 w-6 mx-auto mb-2 text-neutral-400 dark:text-neutral-600" />
+          <CommandEmpty className="py-6 text-center text-sm text-muted-foreground">
             No results found.
           </CommandEmpty>
           <CommandGroup heading="Components" className="p-2">
             {COMPONENTS.map((component, idx) => (
               <CommandItem
                 key={idx}
-                onSelect={() => runCommand(() => router.push(`/components/${component.id}`))}
-                className="flex items-center gap-2 px-2 py-1.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-colors"
+                onSelect={() =>
+                  runCommand(() => router.push(`/components/${component.id}`))
+                }
+                className="command-item"
               >
-                <LayoutTemplate className="h-4 w-4 text-neutral-500 dark:text-neutral-400" />
+                <IconCircle className="icon" />
                 <span>{component.title}</span>
               </CommandItem>
             ))}
@@ -101,23 +129,23 @@ export function GlobalSearch() {
           <CommandGroup heading="Navigation" className="p-2">
             <CommandItem
               onSelect={() => runCommand(() => router.push("/templates"))}
-              className="flex items-center gap-2 px-2 py-1.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-colors"
+              className="command-item"
             >
-              <LayoutTemplate className="h-4 w-4 text-neutral-500 dark:text-neutral-400" />
+              <LayoutTemplate className="icon" />
               <span>Templates</span>
             </CommandItem>
             <CommandItem
               onSelect={() => runCommand(() => router.push("/blog"))}
-              className="flex items-center gap-2 px-2 py-1.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-colors"
+              className="command-item"
             >
-              <FileText className="h-4 w-4 text-neutral-500 dark:text-neutral-400" />
+              <FileText className="icon" />
               <span>Blog</span>
             </CommandItem>
             <CommandItem
               onSelect={() => runCommand(() => router.push("/cart"))}
-              className="flex items-center gap-2 px-2 py-1.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-colors"
+              className="command-item"
             >
-              <ShoppingCart className="h-4 w-4 text-neutral-500 dark:text-neutral-400" />
+              <ShoppingCart className="icon" />
               <span>Cart</span>
             </CommandItem>
           </CommandGroup>
@@ -125,16 +153,16 @@ export function GlobalSearch() {
           <CommandGroup heading="Support" className="p-2">
             <CommandItem
               onSelect={() => runCommand(() => router.push("/faq"))}
-              className="flex items-center gap-2 px-2 py-1.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-colors"
+              className="command-item"
             >
-              <HelpCircle className="h-4 w-4 text-neutral-500 dark:text-neutral-400" />
+              <HelpCircle className="icon" />
               <span>FAQ</span>
             </CommandItem>
             <CommandItem
               onSelect={() => runCommand(() => router.push("/contact"))}
-              className="flex items-center gap-2 px-2 py-1.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-colors"
+              className="command-item"
             >
-              <Mail className="h-4 w-4 text-neutral-500 dark:text-neutral-400" />
+              <Mail className="icon" />
               <span>Contact</span>
             </CommandItem>
           </CommandGroup>
@@ -142,21 +170,21 @@ export function GlobalSearch() {
           <CommandGroup heading="Account" className="p-2">
             <CommandItem
               onSelect={() => runCommand(() => router.push("/profile"))}
-              className="flex items-center gap-2 px-2 py-1.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-colors"
+              className="command-item"
             >
-              <User className="h-4 w-4 text-neutral-500 dark:text-neutral-400" />
+              <User className="icon" />
               <span>Profile</span>
             </CommandItem>
             <CommandItem
               onSelect={() => runCommand(() => router.push("/settings"))}
-              className="flex items-center gap-2 px-2 py-1.5 rounded-md text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer transition-colors"
+              className="command-item"
             >
-              <Settings className="h-4 w-4 text-neutral-500 dark:text-neutral-400" />
+              <Settings className="icon" />
               <span>Settings</span>
             </CommandItem>
           </CommandGroup>
         </CommandList>
       </CommandDialog>
     </>
-  )
-} 
+  );
+}

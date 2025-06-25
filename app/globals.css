@@ -122,3 +122,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+/* icons */
+.icon {
+  @apply w-6 h-6 backdrop-blur-md rounded-md p-1 border bg-primary/5 text-muted-foreground;
+}
+
+.command-item {
+  @apply flex items-center gap-2 px-2 py-1.5 font-semibold text-xs md:text-sm;
+}

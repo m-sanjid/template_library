@@ -16,7 +16,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   // Use useRef to avoid unnecessary re-renders while maintaining cart state
   const cartRef = useRef<CartItem[]>([]);
-  
+
   // Initialize from localStorage on first mount only
   useEffect(() => {
     try {
@@ -26,7 +26,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         // Ensure all items have quantity of 1
         const normalizedCart = parsedCart.map((item: CartItem) => ({
           ...item,
-          quantity: 1
+          quantity: 1,
         }));
         cartRef.current = normalizedCart;
         // Force a re-render to ensure initial state is correct
@@ -44,8 +44,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   // Memoized cart operations to prevent unnecessary re-renders
   const addToCart = useCallback((item: CartItem) => {
     // Check if the item is already in the cart
-    const existingItem = cartRef.current.find(i => i.name === item.name);
-    
+    const existingItem = cartRef.current.find((i) => i.name === item.name);
+
     // If item doesn't exist, add it with quantity 1
     if (!existingItem) {
       cartRef.current = [...cartRef.current, { ...item, quantity: 1 }];
@@ -57,7 +57,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const removeFromCart = useCallback((name: string) => {
-    cartRef.current = cartRef.current.filter(item => item.name !== name);
+    cartRef.current = cartRef.current.filter((item) => item.name !== name);
     persistCart();
     forceUpdate();
   }, []);
@@ -82,14 +82,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     cart: cartRef.current,
     addToCart,
     removeFromCart,
-    clearCart
+    clearCart,
   };
 
-  return (
-    <CartContext.Provider value={value}>
-      {children}
-    </CartContext.Provider>
-  );
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
 export const useCart = (): CartContextType => {

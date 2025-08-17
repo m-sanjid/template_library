@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen relative max-w-6xl mx-auto overflow-hidden">
+      <div className="relative mx-auto min-h-screen max-w-6xl overflow-hidden">
         <HeroSection session={session} />
         <StatsSection />
         <Features />

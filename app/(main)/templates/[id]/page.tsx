@@ -68,7 +68,7 @@ const template = {
 
 export default function TemplateDetailPage() {
   const [activeView, setActiveView] = useState<"desktop" | "tablet" | "mobile">(
-    "desktop"
+    "desktop",
   );
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const { addToCart } = useCart();
@@ -84,73 +84,73 @@ export default function TemplateDetailPage() {
 
   return (
     <div className="min-h-screen py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8">
+        <div className="mb-8 flex flex-col justify-between gap-8 lg:flex-row">
           <div>
             <Link href="/templates">
               <Button variant="ghost" className="mb-4 gap-2">
-                <ArrowLeft className="w-4 h-4" />
+                <ArrowLeft className="h-4 w-4" />
                 Back to Templates
               </Button>
             </Link>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="mb-2 flex items-center gap-2">
               <Badge variant="secondary">{template.category}</Badge>
               <Badge variant="outline">{template.subcategory}</Badge>
             </div>
-            <h1 className="text-3xl font-bold mb-2">{template.name}</h1>
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <h1 className="mb-2 text-3xl font-bold">{template.name}</h1>
+            <div className="text-muted-foreground flex items-center gap-4 text-sm">
               <div className="flex items-center">
-                <Star className="w-4 h-4 mr-1 text-yellow-400" />
+                <Star className="mr-1 h-4 w-4 text-yellow-400" />
                 {template.rating} ({template.downloads} downloads)
               </div>
               <div className="flex items-center">
-                <Clock className="w-4 h-4 mr-1" />
+                <Clock className="mr-1 h-4 w-4" />
                 Updated {template.lastUpdated}
               </div>
             </div>
           </div>
           <div className="flex items-center gap-4">
             <Button variant="outline" size="icon" className="h-10 w-10">
-              <Heart className="w-4 h-4" />
+              <Heart className="h-4 w-4" />
             </Button>
             <Button variant="outline" size="icon" className="h-10 w-10">
-              <Share2 className="w-4 h-4" />
+              <Share2 className="h-4 w-4" />
             </Button>
             <Button variant="outline" size="icon" className="h-10 w-10">
-              <Bookmark className="w-4 h-4" />
+              <Bookmark className="h-4 w-4" />
             </Button>
             <Button variant="outline" onClick={() => setIsPreviewOpen(true)}>
-              <Eye className="w-4 h-4 mr-2" />
+              <Eye className="mr-2 h-4 w-4" />
               Live Preview
             </Button>
             <Button onClick={handleAddToCart}>
-              <ShoppingCart className="w-4 h-4 mr-2" />
+              <ShoppingCart className="mr-2 h-4 w-4" />
               Add to Cart - ${template.price}
             </Button>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Preview Section */}
           <div className="lg:col-span-2">
             <Card className="overflow-hidden">
               <div className="relative aspect-video">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10" />
+                <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent to-black/60" />
                 <div className="absolute inset-0 grid grid-cols-3 gap-1 p-1">
-                  <div className="bg-gray-200 dark:bg-gray-800 rounded-lg" />
-                  <div className="bg-gray-300 dark:bg-gray-700 rounded-lg" />
-                  <div className="bg-gray-400 dark:bg-gray-600 rounded-lg" />
+                  <div className="rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+                  <div className="rounded-lg bg-neutral-300 dark:bg-neutral-700" />
+                  <div className="rounded-lg bg-neutral-400 dark:bg-neutral-600" />
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
-                  <div className="flex items-center gap-2 mb-2">
+                <div className="absolute right-0 bottom-0 left-0 z-20 p-4">
+                  <div className="mb-2 flex items-center gap-2">
                     <Button
                       variant={activeView === "desktop" ? "default" : "ghost"}
                       size="sm"
                       onClick={() => setActiveView("desktop")}
                     >
-                      <Monitor className="w-4 h-4 mr-2" />
+                      <Monitor className="mr-2 h-4 w-4" />
                       Desktop
                     </Button>
                     <Button
@@ -158,7 +158,7 @@ export default function TemplateDetailPage() {
                       size="sm"
                       onClick={() => setActiveView("tablet")}
                     >
-                      <Tablet className="w-4 h-4 mr-2" />
+                      <Tablet className="mr-2 h-4 w-4" />
                       Tablet
                     </Button>
                     <Button
@@ -166,7 +166,7 @@ export default function TemplateDetailPage() {
                       size="sm"
                       onClick={() => setActiveView("mobile")}
                     >
-                      <Smartphone className="w-4 h-4 mr-2" />
+                      <Smartphone className="mr-2 h-4 w-4" />
                       Mobile
                     </Button>
                   </div>
@@ -178,26 +178,26 @@ export default function TemplateDetailPage() {
               <Tabs defaultValue="features">
                 <TabsList className="w-full">
                   <TabsTrigger value="features" className="gap-2">
-                    <Layout className="w-4 h-4" />
+                    <Layout className="h-4 w-4" />
                     Features
                   </TabsTrigger>
                   <TabsTrigger value="specifications" className="gap-2">
-                    <FileText className="w-4 h-4" />
+                    <FileText className="h-4 w-4" />
                     Specifications
                   </TabsTrigger>
                   <TabsTrigger value="compatibility" className="gap-2">
-                    <Code className="w-4 h-4" />
+                    <Code className="h-4 w-4" />
                     Compatibility
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent
                   value="features"
-                  className="rounded-lg shadow-sm p-6"
+                  className="rounded-lg p-6 shadow-sm"
                 >
                   <ul className="grid grid-cols-2 gap-4">
                     {template.features.map((feature) => (
                       <li key={feature} className="flex items-center">
-                        <Check className="w-4 h-4 mr-2 text-green-500" />
+                        <Check className="mr-2 h-4 w-4 text-green-500" />
                         {feature}
                       </li>
                     ))}
@@ -205,11 +205,11 @@ export default function TemplateDetailPage() {
                 </TabsContent>
                 <TabsContent
                   value="specifications"
-                  className="rounded-lg shadow-sm p-6"
+                  className="rounded-lg p-6 shadow-sm"
                 >
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-semibold mb-2">File Formats</h3>
+                      <h3 className="mb-2 font-semibold">File Formats</h3>
                       <div className="flex flex-wrap gap-2">
                         {template.specifications.formats.map((format) => (
                           <Badge key={format} variant="secondary">
@@ -219,7 +219,7 @@ export default function TemplateDetailPage() {
                       </div>
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-2">Dimensions</h3>
+                      <h3 className="mb-2 font-semibold">Dimensions</h3>
                       <div className="flex flex-wrap gap-2">
                         {template.specifications.dimensions.map((dim) => (
                           <Badge key={dim} variant="secondary">
@@ -229,7 +229,7 @@ export default function TemplateDetailPage() {
                       </div>
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-2">Required Software</h3>
+                      <h3 className="mb-2 font-semibold">Required Software</h3>
                       <div className="flex flex-wrap gap-2">
                         {template.specifications.software.map((software) => (
                           <Badge key={software} variant="secondary">
@@ -242,11 +242,11 @@ export default function TemplateDetailPage() {
                 </TabsContent>
                 <TabsContent
                   value="compatibility"
-                  className="rounded-lg shadow-sm p-6"
+                  className="rounded-lg p-6 shadow-sm"
                 >
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-semibold mb-2">Supported Browsers</h3>
+                      <h3 className="mb-2 font-semibold">Supported Browsers</h3>
                       <div className="flex flex-wrap gap-2">
                         {template.compatibility.browsers.map((browser) => (
                           <Badge key={browser} variant="secondary">
@@ -256,7 +256,7 @@ export default function TemplateDetailPage() {
                       </div>
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-2">Device Support</h3>
+                      <h3 className="mb-2 font-semibold">Device Support</h3>
                       <div className="flex flex-wrap gap-2">
                         {template.compatibility.devices.map((device) => (
                           <Badge key={device} variant="secondary">
@@ -274,7 +274,7 @@ export default function TemplateDetailPage() {
           {/* Sidebar */}
           <div className="space-y-6">
             <Card className="p-6">
-              <h3 className="font-semibold mb-4">Template Tags</h3>
+              <h3 className="mb-4 font-semibold">Template Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {template.tags.map((tag) => (
                   <Badge key={tag} variant="outline">
@@ -285,39 +285,39 @@ export default function TemplateDetailPage() {
             </Card>
 
             <Card className="p-6">
-              <h3 className="font-semibold mb-4">Quick Actions</h3>
+              <h3 className="mb-4 font-semibold">Quick Actions</h3>
               <div className="space-y-2">
                 <Button
                   variant="outline"
                   className="w-full justify-start gap-2"
                 >
-                  <Eye className="w-4 h-4" />
+                  <Eye className="h-4 w-4" />
                   Preview Template
                 </Button>
                 <Button
                   variant="outline"
                   className="w-full justify-start gap-2"
                 >
-                  <Palette className="w-4 h-4" />
+                  <Palette className="h-4 w-4" />
                   Customize Design
                 </Button>
                 <Button
                   variant="outline"
                   className="w-full justify-start gap-2"
                 >
-                  <ExternalLink className="w-4 h-4" />
+                  <ExternalLink className="h-4 w-4" />
                   View Demo
                 </Button>
                 <Button className="w-full gap-2">
-                  <Download className="w-4 h-4" />
+                  <Download className="h-4 w-4" />
                   Download Template
                 </Button>
               </div>
             </Card>
 
             <Card className="p-6">
-              <h3 className="font-semibold mb-4">Need Help?</h3>
-              <p className="text-sm text-muted-foreground mb-4">
+              <h3 className="mb-4 font-semibold">Need Help?</h3>
+              <p className="text-muted-foreground mb-4 text-sm">
                 Our support team is here to help you with any questions about
                 this template.
               </p>
@@ -331,9 +331,9 @@ export default function TemplateDetailPage() {
 
       {/* Live Preview Modal */}
       {isPreviewOpen && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-          <div className="rounded-lg w-full max-w-6xl mx-4">
-            <div className="flex justify-between items-center p-4 border-b">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="mx-4 w-full max-w-6xl rounded-lg">
+            <div className="flex items-center justify-between border-b p-4">
               <h2 className="text-lg font-semibold">Live Preview</h2>
               <Button
                 variant="ghost"
@@ -346,7 +346,7 @@ export default function TemplateDetailPage() {
             <div className="p-4">
               <iframe
                 src={template.demoUrl}
-                className="w-full h-[80vh] rounded-lg border"
+                className="h-[80vh] w-full rounded-lg border"
               />
             </div>
           </div>

@@ -13,13 +13,18 @@ import Navbar3 from "./components/navbar/Navbar3";
 import AuthPage1 from "./components/auth/AuthPage1";
 import FAQ3 from "./components/faq/FAQ3";
 import FAQ4 from "./components/faq/FAQ4";
+import AnimatedCard from "./components/cards/AnimatedCard";
+import AnimatedSpinner from "./components/loading/AnimatedSpinner";
+import AnimatedProgressBar from "./components/progress/AnimatedProgressBar";
+import FloatingActionButton from "./components/buttons/FloatingActionButton";
+import AnimatedNotification from "./components/notifications/AnimatedNotification";
 
 type ComponentType = {
   title: string;
   description: string;
   component: React.ComponentType<any>;
   code: string;
-}
+};
 
 export type COMPONENT_TYPE = {
   id: string;
@@ -28,7 +33,7 @@ export type COMPONENT_TYPE = {
   component?: React.ComponentType<any>;
   code?: string;
   type?: Record<string, ComponentType>;
-}
+};
 
 export const COMPONENTS: COMPONENT_TYPE[] = [
   {
@@ -47,110 +52,116 @@ export const COMPONENTS: COMPONENT_TYPE[] = [
   {
     id: "pricing",
     title: "Pricing",
-    description: "A custom pricing component with variants and states",   
+    description: "A custom pricing component with variants and states",
     type: {
-      "pricing1": {
+      pricing1: {
         title: "Pricing 1",
         description: "A custom pricing component with variants and states",
         component: Pricing,
-        code: `<Pricing />`
+        code: `<Pricing />`,
       },
-      "pricing2": {
+      pricing2: {
         title: "Pricing 2",
         description: "A custom pricing component with variants and states",
         component: Pricing2,
-        code: `<Pricing2 />`
+        code: `<Pricing2 />`,
       },
-      "pricing3": {
+      pricing3: {
         title: "Pricing 3",
         description: "A custom pricing component with variants and states",
         component: Pricing3,
-        code: `<Pricing3 />`
+        code: `<Pricing3 />`,
       },
-      "pricing4": {
+      pricing4: {
         title: "Pricing 4",
         description: "A custom pricing component with variants and states",
         component: Pricing4,
-        code: `<Pricing4 />`
-      }
-    }
-  },{
-    id:"faq",
+        code: `<Pricing4 />`,
+      },
+    },
+  },
+  {
+    id: "faq",
     title: "FAQ",
     description: "A custom FAQ component with variants and states",
     type: {
-      "faq1": {
+      faq1: {
         title: "FAQ 1",
         description: "A custom FAQ component with variants and states",
         component: FAQ1,
-        code: `<FAQ1 />`
+        code: `<FAQ1 />`,
       },
-      "faq2": {
+      faq2: {
         title: "FAQ 2",
         description: "A custom FAQ component with variants and states",
         component: FAQ2,
-        code: `<FAQ2 />`
-      },"faq3": {
+        code: `<FAQ2 />`,
+      },
+      faq3: {
         title: "FAQ 3",
         description: "A custom FAQ component with variants and states",
         component: FAQ3,
-        code: `<FAQ2 />`
-      },"faq4": {
+        code: `<FAQ2 />`,
+      },
+      faq4: {
         title: "FAQ 4",
         description: "A custom FAQ component with variants and states",
         component: FAQ4,
-        code: `<FAQ4 />`
-      }
-    }
-  },{
-    id:"navbar",
+        code: `<FAQ4 />`,
+      },
+    },
+  },
+  {
+    id: "navbar",
     title: "Navbar",
     description: "A custom navbar component with variants and states",
     type: {
-      "navbar1": {
+      navbar1: {
         title: "Navbar 1",
         description: "A custom navbar component with variants and states",
         component: Navbar1,
-        code: `<Navbar1 />`
+        code: `<Navbar1 />`,
       },
-      "navbar2": {
+      navbar2: {
         title: "Navbar 2",
         description: "A custom navbar component with variants and states",
         component: Navbar2,
-        code: `<Navbar2 />`
+        code: `<Navbar2 />`,
       },
-      "navbar3": {
+      navbar3: {
         title: "Navbar 3",
-        description:"",
-        component:Navbar3,
-        code:`<NAVBAR/>`
-      }  
-    }
-  },{
-    id:"authpage",
-    title:"Auth Page",
-    description:"Authpage component",
+        description: "",
+        component: Navbar3,
+        code: `<NAVBAR/>`,
+      },
+    },
+  },
+  {
+    id: "authpage",
+    title: "Auth Page",
+    description: "Authpage component",
     type: {
-      "auth1": {
+      auth1: {
         title: "AuthPage",
         description: "A custom Auth component with variants and states",
         component: AuthPage1,
-        code: `<Navbar1 />`
-      },},
+        code: `<Navbar1 />`,
+      },
+    },
   },
   {
     id: "navbar",
     title: "Navbar 5",
     description: "A custom navbar component with variants and states",
     component: Navbar,
-    code: `<Navbar />`
+    code: `<Navbar />`,
   },
   {
     id: "navbar2",
     title: "Navbar 2",
     description: "A custom navbar component with variants and states",
     component: Navbar2,
-    code: `<Navbar2 />`
+    code: `<Navbar2 />`,
   },
   {
     id: "navbar3",
@@ -158,18 +169,55 @@ export const COMPONENTS: COMPONENT_TYPE[] = [
     description: "A custom navbar component with variants and states",
     code: `<Navbar3 />`,
     type: {
-      "default": {
+      default: {
         title: "Navbar",
         description: "First navbar variant",
         component: Navbar,
-        code: `<Navbar />`
+        code: `<Navbar />`,
       },
-      "preview": {
+      preview: {
         title: "Navbar Preview",
         description: "Navbar preview with multiple states",
         component: NavbarPreview,
-        code: `<NavbarPreview />`
-      }
-    }
+        code: `<NavbarPreview />`,
+      },
+    },
+  },
+  {
+    id: "animated-components",
+    title: "Animated Components",
+    description: "A collection of animated components using Framer Motion",
+    type: {
+      "animated-card": {
+        title: "Animated Card",
+        description: "A card component with hover and tap animations",
+        component: AnimatedCard,
+        code: `<AnimatedCard title="Card Title" description="Card description" />`,
+      },
+      "animated-spinner": {
+        title: "Animated Spinner",
+        description: "A loading spinner with multiple animations",
+        component: AnimatedSpinner,
+        code: `<AnimatedSpinner size={40} color="#3B82F6" />`,
+      },
+      "animated-progress": {
+        title: "Animated Progress Bar",
+        description: "A progress bar with smooth animations",
+        component: AnimatedProgressBar,
+        code: `<AnimatedProgressBar progress={75} />`,
+      },
+      "floating-button": {
+        title: "Floating Action Button",
+        description: "A floating button with spring animations",
+        component: FloatingActionButton,
+        code: `<FloatingActionButton icon={<PlusIcon />} />`,
+      },
+      "animated-notification": {
+        title: "Animated Notification",
+        description: "A notification component with slide and fade animations",
+        component: AnimatedNotification,
+        code: `<AnimatedNotification message="Hello World!" type="success" isVisible={true} onClose={() => {}} />`,
+      },
+    },
   },
 ];

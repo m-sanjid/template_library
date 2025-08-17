@@ -107,7 +107,10 @@ export function useSettings() {
     }
   };
 
-  const updatePassword = async (currentPassword: string, newPassword: string) => {
+  const updatePassword = async (
+    currentPassword: string,
+    newPassword: string,
+  ) => {
     try {
       setIsLoading(true);
       setError(null);
@@ -173,4 +176,4 @@ export function useSettings() {
     updatePassword,
     deleteAccount,
   };
-} 
+}

@@ -68,7 +68,7 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <SectionHeader
           label="Blog"
@@ -81,43 +81,43 @@ export default function BlogPage() {
         {/* Featured Posts */}
         {featuredPosts.length > 0 && (
           <div className="my-20">
-            <h2 className="text-2xl font-bold mb-6">Featured Posts</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <h2 className="mb-6 text-2xl font-bold">Featured Posts</h2>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {featuredPosts.map((post) => (
                 <motion.div
                   key={post.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="group relative rounded-lg shadow-sm overflow-hidden bg-card border border-border"
+                  className="group bg-card border-border relative overflow-hidden rounded-lg border shadow-sm"
                 >
                   <Link href={`/blog/${post.slug}`}>
-                    <div className="aspect-video relative">
+                    <div className="relative aspect-video">
                       <Image
                         src={post.thumbnail}
                         alt={post.title}
                         width={576}
                         height={324}
-                        className="w-full h-full object-cover"
+                        className="h-full w-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <ArrowRight className="w-6 h-6 text-white" />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
+                        <ArrowRight className="h-6 w-6 text-white" />
                       </div>
                     </div>
                     <div className="p-6">
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                        <span className=" bg-muted px-2 py-1 rounded">
+                      <div className="text-muted-foreground mb-3 flex items-center gap-4 text-sm">
+                        <span className="bg-muted rounded px-2 py-1">
                           {post.category}
                         </span>
                         <div className="flex items-center">
-                          <Calendar className="w-4 h-4 mr-1" />
+                          <Calendar className="mr-1 h-4 w-4" />
                           {post.date}
                         </div>
                         <div className="flex items-center">
-                          <User className="w-4 h-4 mr-1" />
+                          <User className="mr-1 h-4 w-4" />
                           {post.author}
                         </div>
                       </div>
-                      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                      <h3 className="group-hover:text-primary mb-2 text-xl font-semibold transition-colors">
                         {post.title}
                       </h3>
                       <p className="text-muted-foreground">{post.excerpt}</p>
@@ -130,10 +130,10 @@ export default function BlogPage() {
         )}
 
         {/* Search and Filters */}
-        <div className="space-y-6 mb-12">
+        <div className="mb-12 space-y-6">
           {/* Search */}
-          <div className="relative max-w-xl mx-auto">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+          <div className="relative mx-auto max-w-xl">
+            <Search className="text-muted-foreground absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform" />
             <Input
               ref={searchInputRef}
               placeholder="Search blog posts... (Press '/' to focus)"
@@ -164,42 +164,42 @@ export default function BlogPage() {
         </div>
 
         {/* Blog Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {filteredPosts.map((post) => (
             <motion.div
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="group bg-card rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+              className="group bg-card overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-md"
             >
               <Link href={`/blog/${post.slug}`}>
-                <div className="aspect-video relative">
+                <div className="relative aspect-video">
                   <Image
                     src={post.thumbnail}
                     alt={post.title}
                     width={576}
                     height={324}
-                    className="w-full h-full object-cover"
+                    className="h-full w-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <ArrowRight className="w-6 h-6 text-white" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
+                    <ArrowRight className="h-6 w-6 text-white" />
                   </div>
                 </div>
                 <div className="p-4">
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                    <span className="bg-muted px-2 py-1 rounded">
+                  <div className="text-muted-foreground mb-3 flex items-center gap-4 text-sm">
+                    <span className="bg-muted rounded px-2 py-1">
                       {post.category}
                     </span>
                     <span>{post.readTime}</span>
                   </div>
-                  <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="group-hover:text-primary mb-2 text-lg font-semibold transition-colors">
                     {post.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm mb-4">
+                  <p className="text-muted-foreground mb-4 text-sm">
                     {post.excerpt}
                   </p>
-                  <div className="flex items-center text-sm text-muted-foreground">
-                    <User className="w-4 h-4 mr-1" />
+                  <div className="text-muted-foreground flex items-center text-sm">
+                    <User className="mr-1 h-4 w-4" />
                     {post.author}
                   </div>
                 </div>
@@ -210,11 +210,11 @@ export default function BlogPage() {
 
         {/* Empty State */}
         {filteredPosts.length === 0 && (
-          <div className="text-center py-12">
-            <div className="w-16 h-16 mx-auto mb-4 text-muted-foreground">
-              <Search className="w-full h-full" />
+          <div className="py-12 text-center">
+            <div className="text-muted-foreground mx-auto mb-4 h-16 w-16">
+              <Search className="h-full w-full" />
             </div>
-            <h3 className="text-lg font-semibold mb-2">No blog posts found</h3>
+            <h3 className="mb-2 text-lg font-semibold">No blog posts found</h3>
             <p className="text-muted-foreground mb-4">
               Try adjusting your search or category filters.
             </p>

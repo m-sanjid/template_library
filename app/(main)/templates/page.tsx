@@ -133,20 +133,21 @@ export default function TemplatesPage() {
   };
 
   return (
-    <div className="min-h-screen py-8 bg-gradient-to-b from-background to-background/80">
-      <div className="container max-w-7xl mx-auto px-4 py-20">
+    <div className="from-background to-background/80 min-h-screen bg-gradient-to-b py-8">
+      <div className="container mx-auto max-w-7xl px-4 py-20">
         <SectionHeader
           label="Templates Library"
           title="Premium UI Templates"
           description="Discover our collection of pre-built templates, crafted with attention to detail and ready for your next project."
           gradientText="Templates"
-          textHeight={60}
-          mdTextHeight={240}
+          textHeight={120}
+          mdTextHeight={120}
+          lgTextHeight={140}
         />
 
         {/* View mode toggle with animation */}
         <motion.div
-          className="flex gap-4 my-8 ml-4"
+          className="my-8 ml-4 flex gap-4"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -156,11 +157,11 @@ export default function TemplatesPage() {
             onClick={() => setViewMode("grid")}
             className="relative overflow-hidden"
           >
-            <Grid className="w-4 h-4 mr-2" />
+            <Grid className="mr-2 h-4 w-4" />
             Grid
             {viewMode === "grid" && (
               <motion.div
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                className="bg-primary absolute right-0 bottom-0 left-0 h-0.5"
                 layoutId="viewModeIndicator"
               />
             )}
@@ -171,11 +172,11 @@ export default function TemplatesPage() {
             onClick={() => setViewMode("list")}
             className="relative overflow-hidden"
           >
-            <List className="w-4 h-4 mr-2" />
+            <List className="mr-2 h-4 w-4" />
             List
             {viewMode === "list" && (
               <motion.div
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                className="bg-primary absolute right-0 bottom-0 left-0 h-0.5"
                 layoutId="viewModeIndicator"
               />
             )}
@@ -184,17 +185,17 @@ export default function TemplatesPage() {
 
         {/* Enhanced Filters */}
         <motion.div
-          className="rounded-xl shadow-md p-6 mb-8 bg-card/90 backdrop-blur-sm border border-border/30"
+          className="bg-card/90 border-border/30 mb-8 rounded-xl border p-6 shadow-md backdrop-blur-sm"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
             <div className="relative">
               <Search
-                className={`absolute left-3 top-1/2 transform -translate-y-1/2 ${
+                className={`absolute top-1/2 left-3 -translate-y-1/2 transform ${
                   isSearchFocused ? "text-primary" : "text-muted-foreground"
-                } w-4 h-4 transition-colors`}
+                } h-4 w-4 transition-colors`}
               />
               <Input
                 ref={searchInputRef}
@@ -204,14 +205,14 @@ export default function TemplatesPage() {
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setIsSearchFocused(false)}
                 className={`pl-10 transition-all duration-300 ${
-                  isSearchFocused ? "ring-2 ring-primary/20 border-primary" : ""
+                  isSearchFocused ? "ring-primary/20 border-primary ring-2" : ""
                 }`}
               />
               {searchQuery && (
                 <motion.button
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 transform transition-colors"
                   onClick={() => setSearchQuery("")}
                 >
                   <span className="sr-only">Clear search</span>
@@ -237,7 +238,7 @@ export default function TemplatesPage() {
               value={selectedCategory}
               onValueChange={setSelectedCategory}
             >
-              <SelectTrigger className="transition-all hover:border-primary/50">
+              <SelectTrigger className="hover:border-primary/50 transition-all">
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
@@ -251,25 +252,25 @@ export default function TemplatesPage() {
             </Select>
 
             <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="transition-all hover:border-primary/50">
+              <SelectTrigger className="hover:border-primary/50 transition-all">
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="popular">
                   <div className="flex items-center">
-                    <Download className="w-4 h-4 mr-2 text-muted-foreground" />
+                    <Download className="text-muted-foreground mr-2 h-4 w-4" />
                     Most Popular
                   </div>
                 </SelectItem>
                 <SelectItem value="rating">
                   <div className="flex items-center">
-                    <Star className="w-4 h-4 mr-2 text-muted-foreground" />
+                    <Star className="text-muted-foreground mr-2 h-4 w-4" />
                     Highest Rated
                   </div>
                 </SelectItem>
                 <SelectItem value="recent">
                   <div className="flex items-center">
-                    <Clock className="w-4 h-4 mr-2 text-muted-foreground" />
+                    <Clock className="text-muted-foreground mr-2 h-4 w-4" />
                     Recently Updated
                   </div>
                 </SelectItem>
@@ -278,9 +279,9 @@ export default function TemplatesPage() {
 
             <Button
               variant="outline"
-              className="w-full group transition-all hover:bg-primary/5"
+              className="group hover:bg-primary/5 w-full transition-all"
             >
-              <Filter className="w-4 h-4 mr-2 group-hover:text-primary transition-colors" />
+              <Filter className="group-hover:text-primary mr-2 h-4 w-4 transition-colors" />
               More Filters
             </Button>
           </div>
@@ -290,19 +291,19 @@ export default function TemplatesPage() {
             selectedCategory !== "all" ||
             sortBy !== "popular") && (
             <motion.div
-              className="flex flex-wrap gap-2 mt-4"
+              className="mt-4 flex flex-wrap gap-2"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
             >
               {searchQuery && (
                 <Badge
                   variant="outline"
-                  className="flex items-center gap-1 bg-background/80"
+                  className="bg-background/80 flex items-center gap-1"
                 >
                   <span>Search: {searchQuery}</span>
                   <button
                     onClick={() => setSearchQuery("")}
-                    className="ml-1 hover:text-destructive"
+                    className="hover:text-destructive ml-1"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -325,12 +326,12 @@ export default function TemplatesPage() {
               {selectedCategory !== "all" && (
                 <Badge
                   variant="outline"
-                  className="flex items-center gap-1 bg-background/80"
+                  className="bg-background/80 flex items-center gap-1"
                 >
                   <span>Category: {selectedCategory}</span>
                   <button
                     onClick={() => setSelectedCategory("all")}
-                    className="ml-1 hover:text-destructive"
+                    className="hover:text-destructive ml-1"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -353,7 +354,7 @@ export default function TemplatesPage() {
               {sortBy !== "popular" && (
                 <Badge
                   variant="outline"
-                  className="flex items-center gap-1 bg-background/80"
+                  className="bg-background/80 flex items-center gap-1"
                 >
                   <span>
                     Sort:{" "}
@@ -361,7 +362,7 @@ export default function TemplatesPage() {
                   </span>
                   <button
                     onClick={() => setSortBy("popular")}
-                    className="ml-1 hover:text-destructive"
+                    className="hover:text-destructive ml-1"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -404,14 +405,14 @@ export default function TemplatesPage() {
 
         {/* Results summary */}
         <motion.div
-          className="flex justify-between items-center mb-6 px-2"
+          className="mb-6 flex items-center justify-between px-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Showing{" "}
-            <span className="font-medium text-foreground">
+            <span className="text-foreground font-medium">
               {sortedTemplates.length}
             </span>{" "}
             templates
@@ -424,14 +425,14 @@ export default function TemplatesPage() {
                   variant="outline"
                   className="bg-primary/5 hover:bg-primary/10 cursor-help transition-colors"
                 >
-                  <Eye className="w-3 h-3 mr-1" />
+                  <Eye className="mr-1 h-3 w-3" />
                   Quick tips
                 </Badge>
               </TooltipTrigger>
               <TooltipContent className="max-w-xs">
                 <p>
                   Press{" "}
-                  <kbd className="px-2 py-1 bg-muted rounded text-xs">/</kbd> to
+                  <kbd className="bg-muted rounded px-2 py-1 text-xs">/</kbd> to
                   quickly search templates
                 </p>
               </TooltipContent>
@@ -448,7 +449,7 @@ export default function TemplatesPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mb-4" />
+              <div className="border-primary/30 border-t-primary mb-4 h-16 w-16 animate-spin rounded-full border-4" />
               <p className="text-muted-foreground">Loading templates...</p>
             </motion.div>
           )}
@@ -462,7 +463,7 @@ export default function TemplatesPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
             >
               {sortedTemplates.map((template, idx) => (
                 <motion.div
@@ -470,47 +471,47 @@ export default function TemplatesPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.05 }}
-                  className={`group rounded-xl shadow-sm overflow-hidden transition-all duration-300 ${
+                  className={`group overflow-hidden rounded-xl shadow-sm transition-all duration-300 ${
                     hoveredTemplate === template.id
-                      ? "shadow-lg ring-1 ring-primary/20 scale-[1.02]"
-                      : "hover:shadow-md hover:translate-y-[-2px]"
-                  } bg-card border border-border/50`}
+                      ? "ring-primary/20 scale-[1.02] shadow-lg ring-1"
+                      : "hover:translate-y-[-2px] hover:shadow-md"
+                  } bg-card border-border/50 border`}
                   onMouseEnter={() => setHoveredTemplate(template.id)}
                   onMouseLeave={() => setHoveredTemplate(null)}
                 >
                   <Link href={`/templates/${template.id}`} className="block">
-                    <div className="aspect-video relative overflow-hidden">
+                    <div className="relative aspect-video overflow-hidden">
                       <Image
                         src={template.thumbnail ?? ""}
                         alt={template.name}
                         width={576}
                         height={324}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100">
                         <motion.div
                           initial={{ y: 20, opacity: 0 }}
                           whileHover={{ y: 0, opacity: 1 }}
-                          className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full text-white text-sm flex items-center"
+                          className="absolute bottom-4 left-4 flex items-center rounded-full bg-black/70 px-3 py-1.5 text-sm text-white backdrop-blur-sm"
                         >
-                          <ExternalLink className="w-4 h-4 mr-2" />
+                          <ExternalLink className="mr-2 h-4 w-4" />
                           View details
                         </motion.div>
                       </div>
 
                       {/* Category badge */}
-                      <Badge className="absolute top-3 left-3 bg-black/50 backdrop-blur-sm text-white border-none">
+                      <Badge className="absolute top-3 left-3 border-none bg-black/50 text-white backdrop-blur-sm">
                         {template.category}
                       </Badge>
                     </div>
                   </Link>
                   <div className="p-5">
                     <Link href={`/templates/${template.id}`}>
-                      <h3 className="font-semibold text-lg mb-1 hover:text-primary transition-colors">
+                      <h3 className="hover:text-primary mb-1 text-lg font-semibold transition-colors">
                         {template.name}
                       </h3>
                     </Link>
-                    <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                    <p className="text-muted-foreground mb-4 line-clamp-2 text-sm">
                       {template.description}
                     </p>
                     <div className="flex items-center justify-between">
@@ -523,8 +524,8 @@ export default function TemplatesPage() {
                             onClick={() => handleDownload(template)}
                             className="group relative overflow-hidden"
                           >
-                            <span className="flex items-center relative">
-                              <Download className="w-4 h-4 mr-2" />
+                            <span className="relative flex items-center">
+                              <Download className="mr-2 h-4 w-4" />
                               Download
                             </span>
                           </Button>
@@ -554,11 +555,11 @@ export default function TemplatesPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.05 }}
-                  className={`rounded-xl shadow-sm p-5 transition-all duration-300 ${
+                  className={`rounded-xl p-5 shadow-sm transition-all duration-300 ${
                     hoveredTemplate === template.id
-                      ? "shadow-lg ring-1 ring-primary/20 bg-card/95"
-                      : "hover:shadow-md hover:bg-card/95"
-                  } bg-card/80 border border-border/50`}
+                      ? "ring-primary/20 bg-card/95 shadow-lg ring-1"
+                      : "hover:bg-card/95 hover:shadow-md"
+                  } bg-card/80 border-border/50 border`}
                   onMouseEnter={() => setHoveredTemplate(template.id)}
                   onMouseLeave={() => setHoveredTemplate(null)}
                 >
@@ -567,7 +568,7 @@ export default function TemplatesPage() {
                       <div className="flex-1">
                         <div className="flex justify-between">
                           <Link href={`/templates/${template.id}`}>
-                            <h3 className="font-semibold text-lg mb-1 hover:text-primary transition-colors">
+                            <h3 className="hover:text-primary mb-1 text-lg font-semibold transition-colors">
                               {template.name}
                             </h3>
                           </Link>
@@ -579,56 +580,56 @@ export default function TemplatesPage() {
                       <div className="grid grid-cols-3 gap-4">
                         <Link
                           href={`/templates/${template.id}`}
-                          className="w-48 h-32 bg-muted rounded-lg overflow-hidden relative group-hover:shadow-md transition-all"
+                          className="bg-muted relative h-32 w-48 overflow-hidden rounded-lg transition-all group-hover:shadow-md"
                         >
                           <Image
                             src={template.thumbnail ?? ""}
                             alt={template.name}
                             width={192}
                             height={144}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                           />
                           {/* Category overlay */}
-                          <Badge className="absolute bottom-2 left-2 bg-black/50 backdrop-blur-sm text-white border-none">
+                          <Badge className="absolute bottom-2 left-2 border-none bg-black/50 text-white backdrop-blur-sm">
                             {template.category}
                           </Badge>
                         </Link>
                         <Link
                           href={`/templates/${template.id}`}
-                          className="w-48 h-32 bg-muted rounded-lg overflow-hidden relative group-hover:shadow-md transition-all"
+                          className="bg-muted relative h-32 w-48 overflow-hidden rounded-lg transition-all group-hover:shadow-md"
                         >
                           <Image
                             src={template.thumbnail ?? ""}
                             alt={template.name}
                             width={192}
                             height={144}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                           />
                         </Link>
                         <Link
                           href={`/templates/${template.id}`}
-                          className="w-48 h-32 bg-muted rounded-lg overflow-hidden relative group-hover:shadow-md transition-all"
+                          className="bg-muted relative h-32 w-48 overflow-hidden rounded-lg transition-all group-hover:shadow-md"
                         >
                           <Image
                             src={template.thumbnail ?? ""}
                             alt={template.name}
                             width={192}
                             height={144}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                           />
                         </Link>
                       </div>
                     </div>
 
-                    <div className="flex justify-between mt-8">
+                    <div className="mt-8 flex justify-between">
                       <Link href={`/templates/${template.id}`}>
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="text-xs w-full"
+                          className="w-full text-xs"
                         >
                           View details
-                          <ExternalLink className="w-3 h-3 ml-2" />
+                          <ExternalLink className="ml-2 h-3 w-3" />
                         </Button>
                       </Link>
                       <div>
@@ -636,10 +637,10 @@ export default function TemplatesPage() {
                           <Button
                             variant="outline"
                             onClick={() => handleDownload(template)}
-                            className="group relative overflow-hidden w-full"
+                            className="group relative w-full overflow-hidden"
                           >
                             <span className="flex items-center">
-                              <Download className="w-4 h-4 mr-2" />
+                              <Download className="mr-2 h-4 w-4" />
                               Download
                             </span>
                           </Button>
@@ -661,13 +662,13 @@ export default function TemplatesPage() {
         {/* Empty State with animation */}
         {!isLoading && sortedTemplates.length === 0 && (
           <motion.div
-            className="text-center py-16 rounded-xl bg-card/80 border border-border/50 shadow-sm"
+            className="bg-card/80 border-border/50 rounded-xl border py-16 text-center shadow-sm"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ type: "spring", damping: 15 }}
           >
             <motion.div
-              className="w-16 h-16 mx-auto mb-4 text-muted-foreground"
+              className="text-muted-foreground mx-auto mb-4 h-16 w-16"
               initial={{ rotate: -10 }}
               animate={{ rotate: 10 }}
               transition={{
@@ -677,12 +678,12 @@ export default function TemplatesPage() {
                 ease: "easeInOut",
               }}
             >
-              <Search className="w-full h-full" />
+              <Search className="h-full w-full" />
             </motion.div>
-            <h3 className="text-lg font-semibold text-primary mb-2">
+            <h3 className="text-primary mb-2 text-lg font-semibold">
               No templates found
             </h3>
-            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+            <p className="text-muted-foreground mx-auto mb-6 max-w-md">
               Try adjusting your search or filters to find what you&apos;re
               looking for.
             </p>
@@ -703,7 +704,7 @@ export default function TemplatesPage() {
         {/* Results pagination */}
         {!isLoading && sortedTemplates.length > 0 && (
           <motion.div
-            className="flex justify-center mt-12"
+            className="mt-12 flex justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
@@ -715,14 +716,14 @@ export default function TemplatesPage() {
               <Button
                 variant="outline"
                 size="sm"
-                className="w-9 h-9 p-0 bg-primary text-primary-foreground"
+                className="bg-primary text-primary-foreground h-9 w-9 p-0"
               >
                 1
               </Button>
-              <Button variant="outline" size="sm" className="w-9 h-9 p-0">
+              <Button variant="outline" size="sm" className="h-9 w-9 p-0">
                 2
               </Button>
-              <Button variant="outline" size="sm" className="w-9 h-9 p-0">
+              <Button variant="outline" size="sm" className="h-9 w-9 p-0">
                 3
               </Button>
               <Button variant="outline" size="sm">

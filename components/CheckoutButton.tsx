@@ -20,7 +20,7 @@ interface CheckoutButtonProps {
 }
 
 const CheckoutButton = ({ items, className }: CheckoutButtonProps) => {
-  const {data:session} = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
 
   const handleCheckout = async () => {
@@ -59,10 +59,7 @@ const CheckoutButton = ({ items, className }: CheckoutButtonProps) => {
   }, []);
 
   return (
-    <Button 
-      onClick={handleCheckout} 
-      className={cn("w-full", className)}
-    >
+    <Button onClick={handleCheckout} className={cn("w-full", className)}>
       Proceed to Checkout
     </Button>
   );

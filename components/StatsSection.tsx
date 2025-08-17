@@ -6,7 +6,7 @@ import SectionHeader from "./SectionHeader";
 
 const StatsSection = () => {
   return (
-    <div className="relative max-w-5xl mx-auto my-20">
+    <div className="relative mx-auto my-20 max-w-5xl">
       <SectionHeader
         label="Benifits"
         title="Everything You Need to Create Amazing Templates"
@@ -19,7 +19,7 @@ const StatsSection = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 my-6"
+        className="my-6 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3"
       >
         <StatsCard
           title="Wide Range of Templates"
@@ -48,13 +48,13 @@ const StatsCard = ({
   description: string;
 }) => {
   return (
-    <div className="bg-gradient-to-b from-white/5 via-black/5 to-white/5 backdrop-blur-sm border rounded-lg p-4 flex flex-col justify-between">
-      <div className="p-3 bg-white/10 w-fit rounded-md">
+    <div className="flex flex-col justify-between rounded-lg border bg-gradient-to-b from-white/5 via-black/5 to-white/5 p-4 backdrop-blur-sm">
+      <div className="w-fit rounded-md bg-white/10 p-3">
         <BanIcon />
       </div>
-      <div className="px-2 mt-10">
-        <div className="font-semibold text-sm">{title}</div>
-        <div className="text-sm text-muted-foreground">{description}</div>
+      <div className="mt-10 px-2">
+        <div className="text-sm font-semibold">{title}</div>
+        <div className="text-muted-foreground text-sm">{description}</div>
       </div>
     </div>
   );

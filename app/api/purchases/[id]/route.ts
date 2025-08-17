@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
     if (!purchaseId) {
       return NextResponse.json(
         { error: "Missing purchase ID" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
     if (!purchase) {
       return NextResponse.json(
         { error: "Purchase not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -53,7 +53,7 @@ export async function GET(req: NextRequest) {
     }
     return NextResponse.json(
       { error: "An unknown error occurred" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

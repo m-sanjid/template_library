@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import CardBadge from './CardBadge';
+import React from "react";
+import { motion } from "motion/react";
+import CardBadge from "./CardBadge";
 
 interface SectionHeaderProps {
   label: string;
@@ -21,7 +21,7 @@ const SectionHeader = ({
   textHeight = 80,
   smTextHeight = 100,
   mdTextHeight = 140,
-  lgTextHeight = 200
+  lgTextHeight = 200,
 }: SectionHeaderProps) => {
   return (
     <div className="relative">
@@ -35,17 +35,29 @@ const SectionHeader = ({
         <div className="text-2xl font-bold">{title}</div>
         <div className="text-muted-foreground">{description}</div>
       </motion.div>
-      <div className="absolute -top-4 flex justify-center items-center -z-10 opacity-50 overflow-hidden bg-clip-text text-transparent bg-gradient-to-b from-neutral-400 via-neutral-200 to-neutral-100 dark:from-neutral-700 dark:via-neutral-800 dark:to-black tracking-tight">
-        <span className="uppercase font-extrabold block sm:hidden" style={{ fontSize: `${textHeight}px` }}>
+      <div className="absolute -top-4 -z-10 flex items-center justify-center overflow-hidden bg-gradient-to-b from-neutral-400 via-neutral-200 to-neutral-100 bg-clip-text tracking-tight text-transparent opacity-50 dark:from-neutral-700 dark:via-neutral-800 dark:to-black">
+        <span
+          className="block font-extrabold uppercase sm:hidden"
+          style={{ fontSize: `${textHeight}px` }}
+        >
           {gradientText}
         </span>
-        <span className="uppercase font-extrabold hidden sm:block md:hidden" style={{ fontSize: `${smTextHeight}px` }}>
-          {gradientText} 
-        </span>
-        <span className="uppercase font-black text-8xl hidden md:block lg:hidden" style={{ fontSize: `${mdTextHeight}px` }}>
+        <span
+          className="hidden font-extrabold uppercase sm:block md:hidden"
+          style={{ fontSize: `${smTextHeight}px` }}
+        >
           {gradientText}
         </span>
-        <span className="uppercase font-black text-8xl hidden lg:block" style={{ fontSize: `${lgTextHeight}px` }}>
+        <span
+          className="hidden text-8xl font-black uppercase md:block lg:hidden"
+          style={{ fontSize: `${mdTextHeight}px` }}
+        >
+          {gradientText}
+        </span>
+        <span
+          className="hidden text-8xl font-black uppercase lg:block"
+          style={{ fontSize: `${lgTextHeight}px` }}
+        >
           {gradientText}
         </span>
       </div>

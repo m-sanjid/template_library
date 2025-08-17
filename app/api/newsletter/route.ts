@@ -5,8 +5,7 @@ export async function POST(req: NextRequest) {
   const email = body?.email;
 
   const listId = Number(process.env.BREVO_LIST_ID);
-  console.log(listId,"listId");
-
+  console.log(listId, "listId");
 
   if (!email) {
     return NextResponse.json({ error: "Email is required" }, { status: 400 });
@@ -18,7 +17,7 @@ export async function POST(req: NextRequest) {
       headers: {
         "api-key": process.env.BREVO_API_KEY!,
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         email,
@@ -32,7 +31,7 @@ export async function POST(req: NextRequest) {
       console.log(error);
       return NextResponse.json({ error }, { status: res.status });
     }
-    console.log("success",email);
+    console.log("success", email);
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error(err);

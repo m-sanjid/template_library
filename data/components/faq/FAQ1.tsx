@@ -6,24 +6,29 @@ import { ChevronDownIcon } from "lucide-react";
 const faqs = [
   {
     question: "How does the AI email template generator work?",
-    answer: "Our AI analyzes your requirements and generates professional email templates using advanced machine learning algorithms. Simply input your needs, and the AI will create a customized template that you can further refine."
+    answer:
+      "Our AI analyzes your requirements and generates professional email templates using advanced machine learning algorithms. Simply input your needs, and the AI will create a customized template that you can further refine.",
   },
   {
     question: "Can I customize the generated templates?",
-    answer: "Yes, absolutely! All templates are fully customizable. You can modify colors, fonts, layouts, and content to match your brand identity and specific needs."
+    answer:
+      "Yes, absolutely! All templates are fully customizable. You can modify colors, fonts, layouts, and content to match your brand identity and specific needs.",
   },
   {
     question: "Are the templates mobile-responsive?",
-    answer: "Yes, all our templates are fully responsive and tested across various email clients and devices to ensure they look great everywhere."
+    answer:
+      "Yes, all our templates are fully responsive and tested across various email clients and devices to ensure they look great everywhere.",
   },
   {
     question: "Do you offer a free trial?",
-    answer: "Yes, we offer a free plan that lets you generate up to 5 templates per month. This allows you to try our platform and see the value before committing to a paid plan."
+    answer:
+      "Yes, we offer a free plan that lets you generate up to 5 templates per month. This allows you to try our platform and see the value before committing to a paid plan.",
   },
   {
     question: "What kind of support do you offer?",
-    answer: "We offer email support for all users and priority support for Pro and Enterprise plans. Enterprise customers also get a dedicated account manager."
-  }
+    answer:
+      "We offer email support for all users and priority support for Pro and Enterprise plans. Enterprise customers also get a dedicated account manager.",
+  },
 ];
 
 function FAQ1() {
@@ -31,15 +36,23 @@ function FAQ1() {
 
   return (
     <section className="py-24">
-      <div className="max-w-3xl mx-auto px-6 lg:px-8">
-        <motion.div 
+      <div className="mx-auto max-w-3xl px-6 lg:px-8">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: "easeInOut" }}
           className="text-center"
         >
-          <h2 className="text-4xl font-bold tracking-tight">Frequently Asked Questions</h2>
-          <p className="mt-4 text-lg text-muted-foreground">Can't find what you're looking for? <a href="#" className="text-blue-500 hover:underline">Contact our support team</a>.</p>
+          <h2 className="text-4xl font-bold tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground mt-4 text-lg">
+            Can't find what you're looking for?{" "}
+            <a href="#" className="text-blue-500 hover:underline">
+              Contact our support team
+            </a>
+            .
+          </p>
         </motion.div>
 
         <div className="mt-16 space-y-4">
@@ -51,15 +64,15 @@ function FAQ1() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
               layoutId={`faq-${index}`}
-              className="overflow-hidden rounded-xl shadow-md bg-white dark:bg-zinc-900"
+              className="overflow-hidden rounded-xl bg-white shadow-md dark:bg-zinc-900"
             >
               <button
-                className="w-full px-6 py-5 flex items-center justify-between text-left text-lg font-medium"
+                className="flex w-full items-center justify-between px-6 py-5 text-left text-lg font-medium"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
                 {faq.question}
                 <ChevronDownIcon
-                  className={`w-6 h-6 transition-transform ${openIndex === index ? "rotate-180" : ""}`}
+                  className={`h-6 w-6 transition-transform ${openIndex === index ? "rotate-180" : ""}`}
                 />
               </button>
               <AnimatePresence>

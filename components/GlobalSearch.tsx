@@ -93,10 +93,10 @@ export function GlobalSearch() {
         <Button
           variant="outline"
           onClick={() => setOpen(true)}
-          className="relative p-0 xl:justify-start xl:px-4 xl:py-2 bg-white/50 dark:bg-black/50 backdrop-blur-sm border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all duration-200"
+          className="relative border-neutral-200 bg-white/50 p-0 backdrop-blur-sm transition-all duration-200 hover:bg-neutral-100 xl:justify-start xl:px-4 xl:py-2 dark:border-neutral-800 dark:bg-black/50 dark:hover:bg-neutral-900"
         >
-          <Search className="h-4 w-4 xl:mr-2 text-neutral-500 dark:text-neutral-400" />
-          <span className="hidden md:inline-flex text-sm text-neutral-500 dark:text-neutral-400">
+          <Search className="h-4 w-4 text-neutral-500 xl:mr-2 dark:text-neutral-400" />
+          <span className="hidden text-sm text-neutral-500 md:inline-flex dark:text-neutral-400">
             Search
           </span>
           <kbd className="bg-muted text-muted-foreground pointer-events-none inline-flex h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none">
@@ -108,7 +108,7 @@ export function GlobalSearch() {
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Type a command or search..." />
         <CommandList className="max-h-[500px] overflow-y-auto">
-          <CommandEmpty className="py-6 text-center text-sm text-muted-foreground">
+          <CommandEmpty className="text-muted-foreground py-6 text-center text-sm">
             No results found.
           </CommandEmpty>
           <CommandGroup heading="Components" className="p-2">

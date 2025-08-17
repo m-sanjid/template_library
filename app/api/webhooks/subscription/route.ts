@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET
+      process.env.STRIPE_WEBHOOK_SECRET,
     );
   } catch (error) {
     console.error("Webhook signature verification failed:", error);
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
             stripeSubscriptionId: session.subscription as string,
             currentPeriodStart: new Date(session.created * 1000),
             currentPeriodEnd: new Date(
-              (session.created + 30 * 24 * 60 * 60) * 1000
+              (session.created + 30 * 24 * 60 * 60) * 1000,
             ), // 30 days from now
           },
         });
@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
 
       case "customer.subscription.updated": {
         const subscription = event.data.object;
-        
+
         // Find subscription by stripeSubscriptionId
         const existingSubscription = await prisma.subscription.findFirst({
           where: { stripeSubscriptionId: subscription.id },
@@ -72,7 +72,9 @@ export async function POST(req: NextRequest) {
           where: { id: existingSubscription.id },
           data: {
             status: subscription.status,
-            currentPeriodStart: new Date(subscription.current_period_start * 1000),
+            currentPeriodStart: new Date(
+              subscription.current_period_start * 1000,
+            ),
             currentPeriodEnd: new Date(subscription.current_period_end * 1000),
           },
         });
@@ -83,7 +85,7 @@ export async function POST(req: NextRequest) {
 
       case "customer.subscription.deleted": {
         const subscription = event.data.object;
-        
+
         // Find subscription by stripeSubscriptionId
         const existingSubscription = await prisma.subscription.findFirst({
           where: { stripeSubscriptionId: subscription.id },
@@ -162,5 +164,5 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-  return new Response('Webhook endpoint is working', { status: 200 });
-} 
+  return new Response("Webhook endpoint is working", { status: 200 });
+}

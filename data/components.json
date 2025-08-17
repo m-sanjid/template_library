@@ -4,20 +4,13 @@
     "name": "Button",
     "description": "A customizable button component.",
     "codeUrl": "https://github.com/username/repo/components/Button/Button.tsx",
-    "tags": [
-      "UI",
-      "Form",
-      "Button"
-    ]
+    "tags": ["UI", "Form", "Button"]
   },
   {
     "id": "pricing",
     "name": "Pricing",
     "description": "A pricing table component.",
     "codeUrl": "https://raw.githubusercontent.com/m-sanjid/dev_stats/main/components/Pricing.tsx",
-    "tags": [
-      "E-commerce",
-      "Pricing"
-    ]
+    "tags": ["E-commerce", "Pricing"]
   }
 ]

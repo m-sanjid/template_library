@@ -41,8 +41,14 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --shadow-derek: shadow-[0px_0px_0px_2px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)];
-  --shadow-aesthetic: shadow-[0_3px_10px_rgb(0,0,0,0.2)];
+  --shadow-derek:
+    shadow-[0px_0px_0px_2px_rgba(0, 0, 0, 0.06),
+    0px_1px_1px_-0.5px_rgba (0, 0, 0, 0.06),
+    0px_3px_3px_-1.5px_rgba (0, 0, 0, 0.06),
+    _0px_6px_6px_-3px_rgba(0, 0, 0, 0.06),
+    0px_12px_12px_-6px_rgba (0, 0, 0, 0.06),
+    0px_24px_24px_-12px_rgba (0, 0, 0, 0.06)];
+  --shadow-aesthetic: shadow-[0_3px_10px_rgb(0, 0, 0, 0.2)];
 }
 
 :root {
@@ -123,12 +129,11 @@
   }
 }
 
-
 /* icons */
 .icon {
-  @apply w-6 h-6 backdrop-blur-md rounded-md p-1 border bg-primary/5 text-muted-foreground;
+  @apply bg-primary/5 text-muted-foreground h-6 w-6 rounded-md border p-1 backdrop-blur-md;
 }
 
 .command-item {
-  @apply flex items-center gap-2 px-2 py-1.5 font-semibold text-xs md:text-sm;
+  @apply flex items-center gap-2 px-2 py-1.5 text-xs font-semibold md:text-sm;
 }

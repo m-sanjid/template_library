@@ -14,17 +14,19 @@ import SectionHeader from "@/components/SectionHeader";
 const ComponentsPage = () => {
   return (
     <div className="min-h-screen">
-      <div className="container max-w-7xl mx-auto px-4 py-20">
+      <div className="container mx-auto max-w-7xl px-4 py-20">
         <SectionHeader
           label="Components Library"
           title="Premium UI Components"
           description="Discover our collection of pre-built components, crafted with attention to detail and ready for your next project."
           gradientText="Components"
-          textHeight={40}
+          textHeight={100}
+          mdTextHeight={105}
+          lgTextHeight={120}
         />
 
         <Tabs defaultValue="all" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-8 bg-white/5 backdrop-blur-sm border-white/10">
+          <TabsList className="mb-8 grid w-full grid-cols-4 border-white/10 bg-white/5 backdrop-blur-sm">
             <TabsTrigger
               value="all"
               className="data-[state=active]:bg-white/10"
@@ -52,7 +54,7 @@ const ComponentsPage = () => {
           </TabsList>
 
           <TabsContent value="all" className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {COMPONENTS.map((item, index) => (
                 <motion.div
                   key={index}
@@ -61,15 +63,15 @@ const ComponentsPage = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <Card className="group overflow-hidden border-2 border-white/10 bg-black/5 backdrop-blur-sm hover:border-primary/50 transition-all duration-300">
+                  <Card className="group hover:border-primary/50 overflow-hidden border-2 border-white/10 bg-black/5 backdrop-blur-sm transition-all duration-300">
                     <div className="p-6">
-                      <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-2xl font-semibold group-hover:text-primary transition-colors">
+                      <div className="mb-4 flex items-center justify-between">
+                        <h2 className="group-hover:text-primary text-2xl font-semibold transition-colors">
                           {item.title}
                         </h2>
                         <Badge
                           variant="secondary"
-                          className="bg-white/10 backdrop-blur-sm group-hover:bg-primary/10"
+                          className="group-hover:bg-primary/10 bg-white/10 backdrop-blur-sm"
                         >
                           {item.type ? "Multiple Variants" : "Single"}
                         </Badge>
@@ -79,7 +81,7 @@ const ComponentsPage = () => {
                       </p>
 
                       <div className="space-y-4">
-                        <div className="relative h-48 bg-black/20 rounded-lg overflow-hidden">
+                        <div className="relative h-48 overflow-hidden rounded-lg bg-black/20">
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                           <div className="absolute inset-0 flex items-center justify-center">
                             <Preview
@@ -94,9 +96,9 @@ const ComponentsPage = () => {
 
                         <div className="flex items-center justify-between">
                           <Link href={`/components/${item.id}`}>
-                            <Button className="w-full group" variant="outline">
+                            <Button className="group w-full" variant="outline">
                               View Details
-                              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                             </Button>
                           </Link>
                         </div>
@@ -109,13 +111,13 @@ const ComponentsPage = () => {
           </TabsContent>
         </Tabs>
 
-        <div className="flex justify-center mt-12">
+        <div className="mt-12 flex justify-center">
           <Button
             size="lg"
             className="group bg-white text-black hover:bg-white/90"
           >
             Show More Components
-            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>
       </div>

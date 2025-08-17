@@ -22,14 +22,14 @@ export default function FAQ2() {
       callback: () => {
         searchInputRef.current?.focus();
       },
-    },  
+    },
   ]);
 
   const toggleQuestion = (questionId: string) => {
     setExpandedQuestions((prev) =>
       prev.includes(questionId)
         ? prev.filter((id) => id !== questionId)
-        : [...prev, questionId]
+        : [...prev, questionId],
     );
   };
 
@@ -38,7 +38,7 @@ export default function FAQ2() {
     questions: category.questions.filter(
       (q) =>
         q.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        q.answer.toLowerCase().includes(searchQuery.toLowerCase())
+        q.answer.toLowerCase().includes(searchQuery.toLowerCase()),
     ),
   }));
 
@@ -49,22 +49,21 @@ export default function FAQ2() {
 
   return (
     <div className="min-h-scree py-8">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bol mb-4">
-            Frequently Asked Questions
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Find answers to common questions about our template library and services
+        <div className="mb-12 text-center">
+          <h1 className="font-bol mb-4 text-4xl">Frequently Asked Questions</h1>
+          <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
+            Find answers to common questions about our template library and
+            services
           </p>
         </div>
 
         {/* Search and Categories */}
-        <div className="space-y-6 mb-12">
+        <div className="mb-12 space-y-6">
           {/* Search */}
-          <div className="relative max-w-xl mx-auto">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+          <div className="relative mx-auto max-w-xl">
+            <Search className="text-muted-foreground absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform" />
             <Input
               ref={searchInputRef}
               placeholder="Search questions... (Press '/' to focus)"
@@ -85,7 +84,9 @@ export default function FAQ2() {
             {faq.categories.map((category) => (
               <Button
                 key={category.name}
-                variant={activeCategory === category.name ? "default" : "outline"}
+                variant={
+                  activeCategory === category.name ? "default" : "outline"
+                }
                 onClick={() => setActiveCategory(category.name)}
               >
                 {category.name}
@@ -101,12 +102,10 @@ export default function FAQ2() {
               key={category.name}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="rounded-lg shadow-sm overflow-hidden"
+              className="overflow-hidden rounded-lg shadow-sm"
             >
               <div className="border-b p-6">
-                <h2 className="text-2xl font-semibold">
-                  {category.name}
-                </h2>
+                <h2 className="text-2xl font-semibold">{category.name}</h2>
               </div>
 
               {/* Questions */}
@@ -118,16 +117,16 @@ export default function FAQ2() {
                   return (
                     <div key={questionId} className="border-t">
                       <button
-                        className="w-full text-left px-6 py-4 focus:outline-none"
+                        className="w-full px-6 py-4 text-left focus:outline-none"
                         onClick={() => toggleQuestion(questionId)}
                       >
                         <div className="flex items-center justify-between">
-                          <h3 className="text-lg font-medium ">
+                          <h3 className="text-lg font-medium">
                             {item.question}
                           </h3>
                           <ChevronDown
-                            className={`w-5 h-5 text-muted-foreground transition-transform ${
-                              isExpanded ? "transform rotate-180" : ""
+                            className={`text-muted-foreground h-5 w-5 transition-transform ${
+                              isExpanded ? "rotate-180 transform" : ""
                             }`}
                           />
                         </div>
@@ -140,7 +139,9 @@ export default function FAQ2() {
                               transition={{ duration: 0.2 }}
                               className="mt-2"
                             >
-                              <p className="text-muted-foreground">{item.answer}</p>
+                              <p className="text-muted-foreground">
+                                {item.answer}
+                              </p>
                             </motion.div>
                           )}
                         </AnimatePresence>
@@ -167,14 +168,12 @@ export default function FAQ2() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center py-12"
+            className="py-12 text-center"
           >
-            <div className="w-16 h-16 mx-auto mb-4 text-muted-foreground">
-              <Search className="w-full h-full" />
+            <div className="text-muted-foreground mx-auto mb-4 h-16 w-16">
+              <Search className="h-full w-full" />
             </div>
-            <h3 className="text-lg font-semibold mb-2">
-              No questions found
-            </h3>
+            <h3 className="mb-2 text-lg font-semibold">No questions found</h3>
             <p className="text-muted-foreground mb-4">
               Try adjusting your search query or category filter.
             </p>
@@ -194,14 +193,12 @@ export default function FAQ2() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-12 text-center rounded-lg shadow-sm p-8"
+          className="mt-12 rounded-lg p-8 text-center shadow-sm"
         >
-          <h2 className="text-2xl font-semibold mb-4">
-            Still have questions?
-          </h2>
+          <h2 className="mb-4 text-2xl font-semibold">Still have questions?</h2>
           <p className="text-muted-foreground mb-6">
-            Can't find the answer you're looking for? Please chat with our friendly
-            team.
+            Can't find the answer you're looking for? Please chat with our
+            friendly team.
           </p>
           <Button asChild>
             <a href="/contact">Contact Support</a>
@@ -210,4 +207,4 @@ export default function FAQ2() {
       </div>
     </div>
   );
-} 
+}

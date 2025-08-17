@@ -18,15 +18,15 @@ const CartPage = () => {
 
   if (!cart || cart.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] p-8">
-        <ShoppingCart className="w-16 h-16 text-muted-foreground mb-4" />
-        <h2 className="text-2xl font-semibold mb-2">Your cart is empty</h2>
+      <div className="flex min-h-[60vh] flex-col items-center justify-center p-8">
+        <ShoppingCart className="text-muted-foreground mb-4 h-16 w-16" />
+        <h2 className="mb-2 text-2xl font-semibold">Your cart is empty</h2>
         <p className="text-muted-foreground mb-4">
           Looks like you haven&apos;t added any templates yet.
         </p>
         <AnimatedButton
           label="Browse Templates"
-          className="border rounded-full bg-primary text-secondary"
+          className="bg-primary text-secondary rounded-full border"
           to="/templates"
         />
       </div>
@@ -35,11 +35,11 @@ const CartPage = () => {
 
   const totalPrice = cart.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
-    0
+    0,
   );
 
   return (
-    <div className="max-w-4xl mx-auto p-8 mt-20">
+    <div className="mx-auto mt-20 max-w-4xl p-8">
       <SectionHeader
         label="Shopping Cart"
         title="Shopping Cart"
@@ -47,16 +47,16 @@ const CartPage = () => {
         gradientText="CART"
         textHeight={160}
       />
-      <div className="flex justify-between items-center mb-8">
+      <div className="mb-8 flex items-center justify-between">
         <AnimatedButton
           label="Clear Cart"
-          className="text-red-500 hover:text-red-600 hover:bg-red-50 border-red-500 border rounded-full"
+          className="rounded-full border border-red-500 text-red-500 hover:bg-red-50 hover:text-red-600"
           onClick={() => clearCart()}
-          logo={<Trash2 className="w-4 h-4 mr-2" />}
+          logo={<Trash2 className="mr-2 h-4 w-4" />}
         />
       </div>
 
-      <div className="border rounded-lg shadow-sm">
+      <div className="rounded-lg border shadow-sm">
         <AnimatePresence>
           {cart.map((item, index) => (
             <motion.div
@@ -69,11 +69,11 @@ const CartPage = () => {
               }`}
             >
               <div className="flex-1">
-                <h2 className="text-lg font-semibold mb-1">{item.name}</h2>
-                <p className="text-muted-foreground text-sm mb-2">
+                <h2 className="mb-1 text-lg font-semibold">{item.name}</h2>
+                <p className="text-muted-foreground mb-2 text-sm">
                   {item.description}
                 </p>
-                <div className="flex items-center text-sm text-muted-foreground">
+                <div className="text-muted-foreground flex items-center text-sm">
                   <span>Quantity: {item.quantity || 1}</span>
                   <span className="mx-2">•</span>
                   <span>${item.price}</span>
@@ -86,10 +86,10 @@ const CartPage = () => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                  className="text-red-500 hover:bg-red-50 hover:text-red-600"
                   onClick={() => removeFromCart(item.name)}
                 >
-                  <Trash2 className="w-4 h-4" />
+                  <Trash2 className="h-4 w-4" />
                 </Button>
               </div>
             </motion.div>
@@ -97,14 +97,14 @@ const CartPage = () => {
         </AnimatePresence>
       </div>
 
-      <div className="mt-8 bg-muted rounded-lg p-6">
-        <div className="flex justify-between items-center mb-6">
+      <div className="bg-muted mt-8 rounded-lg p-6">
+        <div className="mb-6 flex items-center justify-between">
           <span className="text-lg font-semibold">Total</span>
           <span className="text-2xl font-bold">${totalPrice.toFixed(2)}</span>
         </div>
         <div className="flex flex-col gap-4">
-          <div className="flex items-start gap-2 text-sm text-muted-foreground">
-            <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+          <div className="text-muted-foreground flex items-start gap-2 text-sm">
+            <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0" />
             <p>
               By proceeding to checkout, you agree to our terms of service and
               acknowledge that all purchases are final.

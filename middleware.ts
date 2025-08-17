@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
           headers: {
             cookie: request.headers.get("cookie") || "",
           },
-        }
+        },
       );
 
       const { subscription } = await response.json();
@@ -37,7 +37,7 @@ export async function middleware(request: NextRequest) {
 
       // Check if the subscription plan has access to the requested feature
       const plan = Object.entries(PRICING).find(
-        ([_, p]) => p.name === subscription.plan
+        ([_, p]) => p.name === subscription.plan,
       )?.[1];
 
       if (!plan?.features.includes("Pro Features")) {
@@ -53,9 +53,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/pro/:path*",
-    "/settings/:path*",
-    "/api/pro/:path*",
-  ],
-}; 
+  matcher: ["/pro/:path*", "/settings/:path*", "/api/pro/:path*"],
+};

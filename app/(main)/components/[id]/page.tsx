@@ -18,7 +18,7 @@ import {
 import { Link } from "next-view-transitions";
 import PricingPage from "@/app/(out)/pricing/page";
 import { useCart } from "@/context/CartContext";
-import { toast } from 'sonner'
+import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { AnimatedButton } from "@/components/AnimatedButton";
@@ -66,8 +66,8 @@ const ComponentDetailPage = (): JSX.Element => {
 
   if (!component) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <h1 className="text-2xl font-bold mb-4">Component not found</h1>
+      <div className="flex min-h-screen flex-col items-center justify-center">
+        <h1 className="mb-4 text-2xl font-bold">Component not found</h1>
         <Link href="/components">
           <Button variant="outline">
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -83,7 +83,7 @@ const ComponentDetailPage = (): JSX.Element => {
       {/* Header Section */}
       <Link
         href="/components"
-        className="fixed top-20 bg-accent rounded-full p-2"
+        className="bg-accent fixed top-20 rounded-full p-2"
       >
         <Button variant="ghost">
           <ArrowLeft className="mr-2 h-4 w-4" />
@@ -93,30 +93,30 @@ const ComponentDetailPage = (): JSX.Element => {
       <div className="mt-24 mb-8">
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-3xl font-bold mb-2">{component?.title}</h1>
+            <h1 className="mb-2 text-3xl font-bold">{component?.title}</h1>
             <p className="text-muted-foreground mb-4">
               {component?.description}
             </p>
             <div className="flex items-center gap-4">
               <Badge variant="secondary" className="flex items-center gap-1">
-                <Star className="w-3 h-3" />
+                <Star className="h-3 w-3" />
                 4.8
               </Badge>
               <Badge variant="outline" className="flex items-center gap-1">
-                <Download className="w-3 h-3" />
+                <Download className="h-3 w-3" />
                 1.2k
               </Badge>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <Button variant="outline" size="icon" className="h-10 w-10">
-              <Heart className="w-4 h-4" />
+              <Heart className="h-4 w-4" />
             </Button>
             <Button variant="outline" size="icon" className="h-10 w-10">
-              <Share2 className="w-4 h-4" />
+              <Share2 className="h-4 w-4" />
             </Button>
             <Button onClick={handleAddToCart} className="gap-2">
-              <ShoppingCart className="w-4 h-4" />
+              <ShoppingCart className="h-4 w-4" />
               Add to Cart - $29
             </Button>
           </div>
@@ -129,8 +129,8 @@ const ComponentDetailPage = (): JSX.Element => {
           // Handling components with multiple types
           Object.entries(component.type).map(([key, value]) => (
             <div key={key} className="mb-12">
-              <div className="w-full p-6 bg-card rounded-lg border shadow-sm">
-                <div className="flex items-center justify-between mb-4">
+              <div className="bg-card w-full rounded-lg border p-6 shadow-sm">
+                <div className="mb-4 flex items-center justify-between">
                   <div>
                     <div className="text-xl font-semibold">{value.title}</div>
                     <div className="text-muted-foreground">
@@ -154,7 +154,7 @@ const ComponentDetailPage = (): JSX.Element => {
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent value="preview" className="mt-0">
-                    <div className="rounded-lg border bg-card p-6 overflow-hidden">
+                    <div className="bg-card overflow-hidden rounded-lg border p-6">
                       {value.component ? (
                         React.createElement(value.component)
                       ) : (
@@ -163,7 +163,7 @@ const ComponentDetailPage = (): JSX.Element => {
                     </div>
                   </TabsContent>
                   <TabsContent value="code" className="mt-0">
-                    <div className="w-full p-4 bg-muted rounded-lg overflow-x-auto">
+                    <div className="bg-muted w-full overflow-x-auto rounded-lg p-4">
                       <PricingPage />
                     </div>
                   </TabsContent>
@@ -174,8 +174,8 @@ const ComponentDetailPage = (): JSX.Element => {
         ) : (
           // Handling simple components
           <div className="w-full">
-            <div className="w-full p-6 bg-card rounded-lg border shadow-sm">
-              <div className="flex items-center justify-between mb-4">
+            <div className="bg-card w-full rounded-lg border p-6 shadow-sm">
+              <div className="mb-4 flex items-center justify-between">
                 <div>
                   <div className="text-xl font-semibold">{component.title}</div>
                   <div className="text-muted-foreground">
@@ -201,7 +201,7 @@ const ComponentDetailPage = (): JSX.Element => {
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="preview" className="mt-0">
-                  <div className="rounded-lg border bg-card p-6 overflow-hidden">
+                  <div className="bg-card overflow-hidden rounded-lg border p-6">
                     {component.component ? (
                       React.createElement(component.component)
                     ) : (
@@ -210,7 +210,7 @@ const ComponentDetailPage = (): JSX.Element => {
                   </div>
                 </TabsContent>
                 <TabsContent value="code" className="mt-0">
-                  <div className="w-full p-4 bg-muted rounded-lg overflow-x-auto">
+                  <div className="bg-muted w-full overflow-x-auto rounded-lg p-4">
                     <PricingPage />
                   </div>
                 </TabsContent>
@@ -223,7 +223,7 @@ const ComponentDetailPage = (): JSX.Element => {
       {/* Sidebar */}
       <div className="space-y-6">
         <Card className="p-6">
-          <h3 className="font-semibold mb-4">Component Tags</h3>
+          <h3 className="mb-4 font-semibold">Component Tags</h3>
           <div className="flex flex-wrap gap-2">
             {component?.tags?.map((tag) => (
               <Badge key={tag} variant="outline">
@@ -238,18 +238,18 @@ const ComponentDetailPage = (): JSX.Element => {
         </Card>
 
         <Card className="p-6">
-          <h3 className="font-semibold mb-4">Quick Actions</h3>
+          <h3 className="mb-4 font-semibold">Quick Actions</h3>
           <div className="space-y-2">
             <Button variant="outline" className="w-full justify-start gap-2">
-              <Eye className="w-4 h-4" />
+              <Eye className="h-4 w-4" />
               Preview Component
             </Button>
             <Button variant="outline" className="w-full justify-start gap-2">
-              <Code className="w-4 h-4" />
+              <Code className="h-4 w-4" />
               View Code
             </Button>
             <Button variant="outline" className="w-full justify-start gap-2">
-              <Download className="w-4 h-4" />
+              <Download className="h-4 w-4" />
               Download
             </Button>
           </div>

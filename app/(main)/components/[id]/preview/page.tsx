@@ -14,8 +14,8 @@ const ComponentPreviewPage = () => {
 
   if (!component) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <h1 className="text-2xl font-bold mb-4">Component not found</h1>
+      <div className="flex min-h-screen flex-col items-center justify-center">
+        <h1 className="mb-4 text-2xl font-bold">Component not found</h1>
         <Link href="/components">
           <Button variant="outline">
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -42,7 +42,7 @@ const ComponentPreviewPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Back Button */}
       <div className="fixed top-24 left-4 z-50">
         <Link href={`/components/${id}`}>
@@ -54,7 +54,7 @@ const ComponentPreviewPage = () => {
       </div>
 
       {/* Component Preview */}
-      <div className="pt-16 w-full min-h-screen">{renderComponent()}</div>
+      <div className="min-h-screen w-full pt-16">{renderComponent()}</div>
     </div>
   );
 };

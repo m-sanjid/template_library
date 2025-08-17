@@ -31,11 +31,11 @@ export function useToast(): ToastContextValue {
 // Toast component
 export function Toast({ title, description }: Toast) {
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      <div className="bg-white rounded-lg shadow-lg p-4 max-w-sm">
+    <div className="fixed right-4 bottom-4 z-50">
+      <div className="max-w-sm rounded-lg bg-white p-4 shadow-lg">
         <h3 className="font-semibold text-neutral-900">{title}</h3>
-        {description && <p className="text-neutral-600 mt-1">{description}</p>}
+        {description && <p className="mt-1 text-neutral-600">{description}</p>}
       </div>
     </div>
   );
-} 
+}

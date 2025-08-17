@@ -1,5 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Check } from "lucide-react";
 
 const tiers = [
@@ -59,12 +66,15 @@ export default function Pricing2() {
     <div className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          <h1 className="text-base font-semibold leading-7 text-primary">Pricing</h1>
+          <h1 className="text-primary text-base leading-7 font-semibold">
+            Pricing
+          </h1>
           <p className="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">
             Choose the right plan for you
           </p>
-          <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            We offer flexible pricing plans to help you find your dream job. All plans include a 14-day free trial.
+          <p className="text-muted-foreground mt-6 text-lg leading-8">
+            We offer flexible pricing plans to help you find your dream job. All
+            plans include a 14-day free trial.
           </p>
         </div>
         <div className="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 xl:gap-x-12">
@@ -72,23 +82,25 @@ export default function Pricing2() {
             <Card
               key={tier.id}
               className={`relative flex flex-col justify-between ${
-                tier.mostPopular ? "ring-2 ring-primary" : ""
+                tier.mostPopular ? "ring-primary ring-2" : ""
               }`}
             >
               <CardHeader>
-                <CardTitle className="text-2xl font-bold">{tier.name}</CardTitle>
+                <CardTitle className="text-2xl font-bold">
+                  {tier.name}
+                </CardTitle>
                 <CardDescription>{tier.description}</CardDescription>
                 <div className="mt-4 flex items-baseline">
                   <span className="text-4xl font-bold tracking-tight">
                     {tier.price.monthly}
                   </span>
-                  <span className="ml-1 text-sm font-semibold leading-6 text-muted-foreground">
+                  <span className="text-muted-foreground ml-1 text-sm leading-6 font-semibold">
                     /month
                   </span>
                 </div>
                 {tier.mostPopular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <span className="inline-flex items-center rounded-full bg-primary px-4 py-1 text-xs font-semibold text-primary-foreground">
+                    <span className="bg-primary text-primary-foreground inline-flex items-center rounded-full px-4 py-1 text-xs font-semibold">
                       Most popular
                     </span>
                   </div>
@@ -98,7 +110,10 @@ export default function Pricing2() {
                 <ul role="list" className="mt-8 space-y-3 text-sm leading-6">
                   {tier.features.map((feature) => (
                     <li key={feature} className="flex gap-x-3">
-                      <Check className="h-6 w-5 flex-none text-primary" aria-hidden="true" />
+                      <Check
+                        className="text-primary h-6 w-5 flex-none"
+                        aria-hidden="true"
+                      />
                       {feature}
                     </li>
                   ))}
@@ -108,10 +123,16 @@ export default function Pricing2() {
                 <Button
                   asChild
                   className={`w-full ${
-                    tier.mostPopular ? "bg-primary text-primary-foreground hover:bg-primary/90" : ""
+                    tier.mostPopular
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : ""
                   }`}
                 >
-                  <a href={tier.id === "enterprise" ? "/contact" : "/auth/register"}>
+                  <a
+                    href={
+                      tier.id === "enterprise" ? "/contact" : "/auth/register"
+                    }
+                  >
                     {tier.cta}
                   </a>
                 </Button>
@@ -122,4 +143,4 @@ export default function Pricing2() {
       </div>
     </div>
   );
-} 
+}

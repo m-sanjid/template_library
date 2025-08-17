@@ -81,7 +81,7 @@ export default function SettingsPage() {
   };
 
   const handlePreferencesSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
+    e: React.FormEvent<HTMLFormElement>,
   ) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -124,7 +124,7 @@ export default function SettingsPage() {
   const handleDeleteAccount = async () => {
     if (
       !confirm(
-        "Are you sure you want to delete your account? This action cannot be undone."
+        "Are you sure you want to delete your account? This action cannot be undone.",
       )
     ) {
       return;
@@ -147,7 +147,7 @@ export default function SettingsPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen max-w-7xl mx-auto px-4 py-20">
+      <div className="mx-auto min-h-screen max-w-7xl px-4 py-20">
         <SectionHeader
           label="Settings"
           title="Settings"
@@ -155,12 +155,12 @@ export default function SettingsPage() {
           gradientText="Settings"
           textHeight={160}
         />
-        <div className="flex flex-col gap-4 mt-20 min-h-screen">
-          <div className="w-full h-[5rem] bg-card rounded-lg p-4">
-            <Skeleton className="w-full h-full" />
+        <div className="mt-20 flex min-h-screen flex-col gap-4">
+          <div className="bg-card h-[5rem] w-full rounded-lg p-4">
+            <Skeleton className="h-full w-full" />
           </div>
-          <div className="w-full h-[20rem] bg-card rounded-lg p-4">
-            <Skeleton className="w-full h-full" />
+          <div className="bg-card h-[20rem] w-full rounded-lg p-4">
+            <Skeleton className="h-full w-full" />
           </div>
         </div>
       </div>
@@ -168,7 +168,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto py-10 px-4">
+    <div className="mx-auto max-w-7xl px-4 py-10">
       <SectionHeader
         label="Settings"
         title="Settings"
@@ -178,7 +178,7 @@ export default function SettingsPage() {
       />
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-4 mb-20">
+        <TabsList className="mb-20 grid w-full grid-cols-4">
           <TabsTrigger value="profile">Profile</TabsTrigger>
           <TabsTrigger value="preferences">Preferences</TabsTrigger>
           <TabsTrigger value="security">Security</TabsTrigger>
@@ -315,7 +315,7 @@ export default function SettingsPage() {
               <div className="space-y-4">
                 <div>
                   <h3 className="text-lg font-medium">Delete Account</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     Permanently delete your account and all associated data
                   </p>
                 </div>
@@ -355,7 +355,7 @@ export default function SettingsPage() {
                       <h3 className="font-semibold">
                         {subscription.plan} Plan
                       </h3>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-muted-foreground text-sm">
                         {subscription.status === "active" ? (
                           <Badge variant="secondary">Active</Badge>
                         ) : (
@@ -378,7 +378,7 @@ export default function SettingsPage() {
                       </span>
                       <span>
                         {new Date(
-                          subscription.currentPeriodEnd
+                          subscription.currentPeriodEnd,
                         ).toLocaleDateString()}
                       </span>
                     </div>
@@ -387,7 +387,7 @@ export default function SettingsPage() {
                         Payment method
                       </span>
                       <div className="flex items-center">
-                        <CreditCard className="w-4 h-4 mr-2" />
+                        <CreditCard className="mr-2 h-4 w-4" />
                         <span>•••• 4242</span>
                       </div>
                     </div>
@@ -399,7 +399,7 @@ export default function SettingsPage() {
                       onClick={() => {
                         if (
                           confirm(
-                            "Are you sure you want to cancel your subscription?"
+                            "Are you sure you want to cancel your subscription?",
                           )
                         ) {
                           window.location.href = "/pricing";
@@ -413,10 +413,10 @@ export default function SettingsPage() {
               ) : (
                 <div className="space-y-6">
                   <div className="text-center">
-                    <h3 className="font-semibold mb-2">
+                    <h3 className="mb-2 font-semibold">
                       No Active Subscription
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-4">
+                    <p className="text-muted-foreground mb-4 text-sm">
                       Upgrade to access premium features and templates
                     </p>
                     <Button onClick={() => (window.location.href = "/pricing")}>

@@ -44,7 +44,13 @@ const outNavItems = [
   { title: "About Us", href: "/about" },
 ];
 
-export default function Navbar2({isAuthenticated=false, scrolled=false}: {isAuthenticated?: boolean, scrolled?: boolean}) {
+export default function Navbar2({
+  isAuthenticated = false,
+  scrolled = false,
+}: {
+  isAuthenticated?: boolean;
+  scrolled?: boolean;
+}) {
   const { cart } = useCart();
   const pathname = usePathname();
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -75,7 +81,7 @@ export default function Navbar2({isAuthenticated=false, scrolled=false}: {isAuth
 
   if (!mounted) {
     return (
-      <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur" />
+      <nav className="bg-background/95 sticky top-0 z-50 w-full border-b backdrop-blur" />
     );
   }
 
@@ -105,13 +111,14 @@ export default function Navbar2({isAuthenticated=false, scrolled=false}: {isAuth
 
   return (
     <nav
-    className={`sticky z-50 w-full transition-all duration-300 ${scrolled || isScrolled
-      ? "top-4 mx-auto max-w-5xl border rounded-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-      : "top-0 bg-background/95 backdrop-blur"
+      className={`sticky z-50 w-full transition-all duration-300 ${
+        scrolled || isScrolled
+          ? "bg-background/95 supports-[backdrop-filter]:bg-background/60 top-4 mx-auto max-w-5xl rounded-full border backdrop-blur"
+          : "bg-background/95 top-0 backdrop-blur"
       }`}
-    onMouseLeave={handleMouseLeave}
+      onMouseLeave={handleMouseLeave}
     >
-      <div className="max-w-7xl mx-auto flex h-14 items-center px-4 md:px-8 justify-between">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:px-8">
         {/* Logo */}
         <Logo />
 
@@ -121,7 +128,7 @@ export default function Navbar2({isAuthenticated=false, scrolled=false}: {isAuth
             {/* Hover Effect */}
             {isHovered && (
               <motion.div
-                className="absolute top-0 bottom-0 z-0 bg-black/10 dark:bg-white/10 rounded-lg"
+                className="absolute top-0 bottom-0 z-0 rounded-lg bg-black/10 dark:bg-white/10"
                 initial={false}
                 animate={{
                   left: hoverPosition.left,
@@ -135,40 +142,40 @@ export default function Navbar2({isAuthenticated=false, scrolled=false}: {isAuth
             {/* Navigation Items */}
             {isAuthenticated
               ? navItems.map(({ title, href }) => (
-                <Link href={"#"} key={href} passHref>
-                  <Button
-                    size="sm"
-                    className={`gap-2 relative bg-transparent border-none shadow-none hover:bg-transparent z-10 ${
-                      pathname === href
-                        ? "text-muted-foreground"
-                        : "text-primary"
-                    }`}
-                    onMouseEnter={handleHover}
-                  >
-                    {title}
-                  </Button>
-                </Link>
-              ))
+                  <Link href={"#"} key={href} passHref>
+                    <Button
+                      size="sm"
+                      className={`relative z-10 gap-2 border-none bg-transparent shadow-none hover:bg-transparent ${
+                        pathname === href
+                          ? "text-muted-foreground"
+                          : "text-primary"
+                      }`}
+                      onMouseEnter={handleHover}
+                    >
+                      {title}
+                    </Button>
+                  </Link>
+                ))
               : outNavItems.map(({ title, href }) => (
-                <Link href={"#"} key={href} passHref>
-                  <Button
-                    size="sm"
-                    onMouseEnter={handleHover}
-                    className={`gap-2 relative bg-transparent border-none shadow-none hover:bg-transparent z-10 ${
-                      pathname === href
-                        ? "text-muted-foreground"
-                        : "text-primary"
-                    }`}
-                  >
-                    {title}
-                  </Button>
-                </Link>
-              ))}
+                  <Link href={"#"} key={href} passHref>
+                    <Button
+                      size="sm"
+                      onMouseEnter={handleHover}
+                      className={`relative z-10 gap-2 border-none bg-transparent shadow-none hover:bg-transparent ${
+                        pathname === href
+                          ? "text-muted-foreground"
+                          : "text-primary"
+                      }`}
+                    >
+                      {title}
+                    </Button>
+                  </Link>
+                ))}
           </nav>
         </div>
 
         {/* Global Search */}
-        <div className="flex-1 max-w-sm mx-4">
+        <div className="mx-4 max-w-sm flex-1">
           <GlobalSearch />
         </div>
 
@@ -183,22 +190,22 @@ export default function Navbar2({isAuthenticated=false, scrolled=false}: {isAuth
             <DropdownMenuContent align="end" className="w-48">
               {isAuthenticated
                 ? navItems.map(({ title, href }) => (
-                  <DropdownMenuItem key={href} asChild>
-                    <Link
-                      href={"#"}
-                      className="flex items-center gap-2 w-full"
-                    >
-                      {title}
-                    </Link>
-                  </DropdownMenuItem>
-                ))
+                    <DropdownMenuItem key={href} asChild>
+                      <Link
+                        href={"#"}
+                        className="flex w-full items-center gap-2"
+                      >
+                        {title}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))
                 : outNavItems.map(({ title, href }) => (
-                  <DropdownMenuItem key={href} asChild>
-                    <Link href={"#"} className="w-full">
-                      {title}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
+                    <DropdownMenuItem key={href} asChild>
+                      <Link href={"#"} className="w-full">
+                        {title}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -210,7 +217,7 @@ export default function Navbar2({isAuthenticated=false, scrolled=false}: {isAuth
             <Button variant="ghost" size="sm" className="relative">
               <ShoppingCart className="h-5 w-5" />
               {cart && cart.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
                   {cart[0].quantity}
                 </span>
               )}
@@ -222,12 +229,10 @@ export default function Navbar2({isAuthenticated=false, scrolled=false}: {isAuth
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-2">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src={''} />
-                    <AvatarFallback>{'U'}</AvatarFallback>
+                    <AvatarImage src={""} />
+                    <AvatarFallback>{"U"}</AvatarFallback>
                   </Avatar>
-                  <span className="hidden md:inline-block">
-                    {'Username'}
-                  </span>
+                  <span className="hidden md:inline-block">{"Username"}</span>
                   <ChevronDown className="h-4 w-4 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
@@ -235,7 +240,7 @@ export default function Navbar2({isAuthenticated=false, scrolled=false}: {isAuth
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link href="#" className="flex items-center w-full">
+                  <Link href="#" className="flex w-full items-center">
                     <User className="mr-2 h-4 w-4" /> Profile
                   </Link>
                 </DropdownMenuItem>

@@ -13,30 +13,30 @@ const ProPage = () => {
 
   if (isLoading) {
     return (
-      <div className="container max-w-4xl mx-auto px-4 py-16">
-        <div className="flex items-center justify-center h-64">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+      <div className="container mx-auto max-w-4xl px-4 py-16">
+        <div className="flex h-64 items-center justify-center">
+          <div className="border-primary h-8 w-8 animate-spin rounded-full border-4 border-t-transparent" />
         </div>
       </div>
     );
   }
 
   if (!hasRequiredSubscription) {
-    return null; 
+    return null;
   }
 
   return (
-    <div className="container max-w-4xl mx-auto px-4 py-16">
+    <div className="container mx-auto max-w-4xl px-4 py-16">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <h1 className="text-4xl font-bold mb-8">Pro Features</h1>
+        <h1 className="mb-8 text-4xl font-bold">Pro Features</h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <Card className="p-6">
-            <h2 className="text-2xl font-semibold mb-4">Advanced Analytics</h2>
+            <h2 className="mb-4 text-2xl font-semibold">Advanced Analytics</h2>
             <p className="text-muted-foreground mb-6">
               Get detailed insights into your template usage and performance
               metrics.
@@ -45,7 +45,7 @@ const ProPage = () => {
           </Card>
 
           <Card className="p-6">
-            <h2 className="text-2xl font-semibold mb-4">Custom Templates</h2>
+            <h2 className="mb-4 text-2xl font-semibold">Custom Templates</h2>
             <p className="text-muted-foreground mb-6">
               Create and save your own custom templates for future use.
             </p>
@@ -53,7 +53,7 @@ const ProPage = () => {
           </Card>
 
           <Card className="p-6">
-            <h2 className="text-2xl font-semibold mb-4">Priority Support</h2>
+            <h2 className="mb-4 text-2xl font-semibold">Priority Support</h2>
             <p className="text-muted-foreground mb-6">
               Get priority access to our support team and faster response times.
             </p>
@@ -61,7 +61,7 @@ const ProPage = () => {
           </Card>
 
           <Card className="p-6">
-            <h2 className="text-2xl font-semibold mb-4">API Access</h2>
+            <h2 className="mb-4 text-2xl font-semibold">API Access</h2>
             <p className="text-muted-foreground mb-6">
               Access our API to integrate templates into your own applications.
             </p>

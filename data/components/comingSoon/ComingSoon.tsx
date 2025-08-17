@@ -1,15 +1,15 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React from "react";
+import { motion } from "motion/react";
 
 const ComingSoon = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black to-neutral-900 text-white flex flex-col items-center justify-center relative overflow-hidden">
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-black to-neutral-900 text-white">
       {/* Stars Background Effect */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="pointer-events-none absolute inset-0">
         {[...Array(100)].map((_, i) => (
           <motion.div
             key={i}
-            className="w-[2px] h-[2px] bg-white opacity-50 rounded-full absolute"
+            className="absolute h-[2px] w-[2px] rounded-full bg-white opacity-50"
             animate={{
               y: [0, 20, -20, 0],
             }}
@@ -27,7 +27,7 @@ const ComingSoon = () => {
 
       {/* Header */}
       <motion.h1
-        className="text-5xl font-bold mb-4"
+        className="mb-4 text-5xl font-bold"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -35,22 +35,31 @@ const ComingSoon = () => {
         Arriving Shortly!
       </motion.h1>
 
-      <p className="text-neutral-400 mb-8">Get our latest updates and news by joining our newsletter.</p>
+      <p className="mb-8 text-neutral-400">
+        Get our latest updates and news by joining our newsletter.
+      </p>
 
       {/* Subscribe Section */}
       <div className="flex items-center space-x-2">
         <input
           type="email"
           placeholder="pixkit@framer.com"
-          className="px-4 py-2 rounded-lg bg-neutral-800 text-white border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-600"
+          className="rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-2 text-white focus:ring-2 focus:ring-neutral-600 focus:outline-none"
         />
-        <button className="bg-white text-black px-4 py-2 rounded-lg font-medium">Subscribe</button>
+        <button className="rounded-lg bg-white px-4 py-2 font-medium text-black">
+          Subscribe
+        </button>
       </div>
 
-      <p className="text-neutral-500 text-sm mt-4">By signing up you agree to our <span className="underline cursor-pointer">privacy policy</span>.</p>
+      <p className="mt-4 text-sm text-neutral-500">
+        By signing up you agree to our{" "}
+        <span className="cursor-pointer underline">privacy policy</span>.
+      </p>
 
       {/* Navigation Link */}
-      <a href="#" className="mt-6 text-neutral-400 hover:text-white">Back to homepage →</a>
+      <a href="#" className="mt-6 text-neutral-400 hover:text-white">
+        Back to homepage →
+      </a>
 
       {/* Footer Section */}
       <div className="mt-16 flex space-x-8">

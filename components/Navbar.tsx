@@ -21,13 +21,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import Logo from "./Logo";
 import SigninButton from "./SigninButton";
 import { useCart } from "@/context/CartContext";
 import { GlobalSearch } from "./GlobalSearch";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { useTheme } from "next-themes";
 
 const navItems = [
   { title: "Templates", href: "/templates" },
@@ -50,101 +51,87 @@ export default function Navbar() {
   const { cart } = useCart();
   const pathname = usePathname();
   const isAuthenticated = !!session;
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isHovered, setIsHovered] = useState<number|null>(null);
+  const [isHovered, setIsHovered] = useState<number | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setMounted(true);
-    const root = document.documentElement;
-    const currentTheme =
-      localStorage.getItem("theme") ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light");
-
-    const isDark = currentTheme === "dark";
-    setIsDarkMode(isDark);
-    root.classList.toggle("dark", isDark);
-  }, []);
+  const { theme, setTheme } = useTheme();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 0);
   });
 
-  if (!mounted) {
-    return (
-      <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur" />
-    );
-  }
-
   const toggleTheme = () => {
-    const newTheme = isDarkMode ? "light" : "dark";
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle("dark", !isDarkMode);
-    localStorage.setItem("theme", newTheme);
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
   };
-
 
   return (
     <nav
-      className={`sticky z-50 w-full transition-all duration-300 ${isScrolled
-        ? "top-4 mx-auto max-w-5xl border rounded-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-        : "top-0 bg-background/95 backdrop-blur"
-        }`}
+      className={`sticky z-50 w-full transition-all duration-700 ease-in-out ${
+        isScrolled
+          ? "bg-background/95 supports-[backdrop-filter]:bg-background/60 top-0 mx-auto max-w-5xl border backdrop-blur md:top-4 md:rounded-full"
+          : "bg-background/95 top-0 backdrop-blur"
+      }`}
     >
-      <div className="max-w-7xl mx-auto flex h-14 items-center px-4 md:px-8 justify-between">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:px-8">
         {/* Logo */}
         <Logo />
 
         {/* Desktop Navigation */}
         <div className="hidden md:block">
-          <nav className="relative flex space-x-2" ref={navRef} onMouseLeave={() => setIsHovered(null)}>
-
+          <nav
+            className="relative flex space-x-2"
+            ref={navRef}
+            onMouseLeave={() => setIsHovered(null)}
+          >
             {/* Navigation Items */}
             {isAuthenticated
-              ? navItems.map((item,idx) => (
-                <Link href={item.href} key={item.href}
+              ? navItems.map((item, idx) => (
+                  <Link
+                    href={item.href}
+                    key={item.href}
                     onMouseEnter={() => setIsHovered(idx)}
-                    className={`gap-2 relative p-2 flex items-center z-10 ${pathname === item.href
-                      ? "text-muted-foreground"
-                      : "text-primary"
-                      }`}
-                      >
+                    className={`relative z-10 flex items-center gap-2 p-2 ${
+                      pathname === item.href
+                        ? "text-muted-foreground"
+                        : "text-primary"
+                    }`}
+                  >
                     <span className="text-sm">{item.title}</span>
                     {isHovered === idx && (
                       <motion.div
                         layoutId="hover"
-                        className="absolute inset-0 z-20 bg-black/10 dark:bg-white/10 h-full w-full rounded-lg"
+                        className="absolute inset-0 z-20 h-full w-full rounded-lg bg-black/10 dark:bg-white/10"
                       />
                     )}
-                </Link>
-              ))
-              : outNavItems.map((item,idx) => (
-                <Link href={item.href} key={item.href}
+                  </Link>
+                ))
+              : outNavItems.map((item, idx) => (
+                  <Link
+                    href={item.href}
+                    key={item.href}
                     onMouseEnter={() => setIsHovered(idx)}
-                    className={`gap-8 p-2 relative z-10 flex items-center ${pathname === item.href
-                      ? "text-muted-foreground"
-                      : "text-primary"
-                      }`}
+                    className={`relative z-10 flex items-center gap-8 p-2 ${
+                      pathname === item.href
+                        ? "text-muted-foreground"
+                        : "text-primary"
+                    }`}
                   >
                     <span className="text-sm">{item.title}</span>
-                  {isHovered === idx && (
+                    {isHovered === idx && (
                       <motion.div
                         layoutId="hover"
-                        className="absolute inset-0 z-20 bg-black/10 dark:bg-white/10 h-full w-full rounded-lg"
+                        className="absolute inset-0 z-20 h-full w-full rounded-lg bg-black/10 dark:bg-white/10"
                       />
                     )}
-                </Link>
-              ))}
+                  </Link>
+                ))}
           </nav>
         </div>
 
         {/* Global Search */}
-        <div className="flex-1 max-w-sm mx-4">
+        <div className="mx-4 max-w-sm flex-1">
           <GlobalSearch />
         </div>
 
@@ -159,22 +146,22 @@ export default function Navbar() {
             <DropdownMenuContent align="end" className="w-48 px-2 py-4">
               {isAuthenticated
                 ? navItems.map(({ title, href }) => (
-                  <DropdownMenuItem key={href} asChild>
-                    <Link
-                      href={href}
-                      className="flex items-center gap-2 w-full"
-                    >
-                      {title}
-                    </Link>
-                  </DropdownMenuItem>
-                ))
+                    <DropdownMenuItem key={href} asChild>
+                      <Link
+                        href={href}
+                        className="flex w-full items-center gap-2"
+                      >
+                        {title}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))
                 : outNavItems.map(({ title, href }) => (
-                  <DropdownMenuItem key={href} asChild>
-                    <Link href={href} className="w-full">
-                      {title}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
+                    <DropdownMenuItem key={href} asChild>
+                      <Link href={href} className="w-full">
+                        {title}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
               <DropdownMenuItem asChild>
                 <SigninButton />
               </DropdownMenuItem>
@@ -189,7 +176,7 @@ export default function Navbar() {
             <Button variant="ghost" size="sm" className="relative">
               <ShoppingCart className="h-5 w-5" />
               {cart && cart.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
                   {cart.reduce((acc, item) => acc + item.quantity, 0)}
                 </span>
               )}
@@ -197,12 +184,17 @@ export default function Navbar() {
           </Link>
 
           {isAuthenticated ? (
-            <DropdownMenu>  
+            <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-2">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src={session.user?.image || undefined} alt={session.user?.name || ''} />
-                    <AvatarFallback>{session.user?.name?.[0] || 'U'}</AvatarFallback>
+                    <AvatarImage
+                      src={session.user?.image || undefined}
+                      alt={session.user?.name || ""}
+                    />
+                    <AvatarFallback>
+                      {session.user?.name?.[0] || "U"}
+                    </AvatarFallback>
                   </Avatar>
                   <span className="hidden md:inline-block">
                     {session.user?.name}
@@ -214,7 +206,7 @@ export default function Navbar() {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link href="/profile" className="flex items-center w-full">
+                  <Link href="/profile" className="flex w-full items-center">
                     <User className="mr-2 h-4 w-4" /> Profile
                   </Link>
                 </DropdownMenuItem>
@@ -231,7 +223,7 @@ export default function Navbar() {
 
           {/* Theme Toggle */}
           <Button variant="ghost" size="sm" onClick={toggleTheme}>
-            {isDarkMode ? (
+            {theme === "dark" ? (
               <Sun className="h-4 w-4" />
             ) : (
               <Moon className="h-4 w-4" />

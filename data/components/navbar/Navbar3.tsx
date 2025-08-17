@@ -43,13 +43,13 @@ function Navbar3() {
 
   return (
     <nav
-      className={`sticky ${isScrolled ? "top-3 border rounded-lg max-w-6xl mx-auto" : "top-0"} px-10 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 duration-300 easeInOut`}
+      className={`sticky ${isScrolled ? "top-3 mx-auto max-w-6xl rounded-lg border" : "top-0"} bg-background/95 supports-[backdrop-filter]:bg-background/60 easeInOut z-50 w-full px-10 backdrop-blur duration-300`}
     >
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
         <div className="flex items-center gap-4">
           <Logo />
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden items-center gap-1 md:flex">
             <Link href="/home">
               <Button variant="ghost" size="sm">
                 Home
@@ -163,7 +163,7 @@ function Navbar3() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden pb-4 px-4 border-t">
+        <div className="border-t px-4 pb-4 md:hidden">
           <div className="flex flex-col space-y-3 pt-3">
             <Link href="/features" onClick={() => setMobileMenuOpen(false)}>
               <Button variant="ghost" className="w-full justify-start">
@@ -191,7 +191,7 @@ function Navbar3() {
                 <Link href="/logout" onClick={() => setMobileMenuOpen(false)}>
                   <Button
                     variant="ghost"
-                    className="w-full justify-start text-destructive"
+                    className="text-destructive w-full justify-start"
                   >
                     Logout
                   </Button>

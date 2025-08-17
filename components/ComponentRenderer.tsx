@@ -2,37 +2,37 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 interface DynamicComponentLoaderProps {
-	codeUrl?: string | null;
+  codeUrl?: string | null;
 }
 
 const DynamicComponentLoader: React.FC<DynamicComponentLoaderProps> = ({
-	codeUrl,
+  codeUrl,
 }) => {
-	const [iframeSrc, setIframeSrc] = useState<string>("");
-	const [error, setError] = useState<string | null>(null);
+  const [iframeSrc, setIframeSrc] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
-	useEffect(() => {
-		const fetchComponent = async () => {
-			if (!codeUrl) {
-				setError("No code URL provided");
-				return;
-			}
+  useEffect(() => {
+    const fetchComponent = async () => {
+      if (!codeUrl) {
+        setError("No code URL provided");
+        return;
+      }
 
-			try {
-				const normalizedUrl = codeUrl
-					.replace("https://github.com", "https://raw.githubusercontent.com")
-					.replace("/blob/", "/");
-				const proxyUrl = `/api/github-proxy?url=${encodeURIComponent(normalizedUrl)}`;
+      try {
+        const normalizedUrl = codeUrl
+          .replace("https://github.com", "https://raw.githubusercontent.com")
+          .replace("/blob/", "/");
+        const proxyUrl = `/api/github-proxy?url=${encodeURIComponent(normalizedUrl)}`;
 
-				const response = await axios.get(proxyUrl);
-				const code = response.data;
+        const response = await axios.get(proxyUrl);
+        const code = response.data;
 
-				// Create Blob URL for code
-				const blob = new Blob([code], { type: "application/javascript" });
-				const blobUrl = URL.createObjectURL(blob);
+        // Create Blob URL for code
+        const blob = new Blob([code], { type: "application/javascript" });
+        const blobUrl = URL.createObjectURL(blob);
 
-				// Generate HTML for iframe with Blob URL
-				const previewHtml = `
+        // Generate HTML for iframe with Blob URL
+        const previewHtml = `
           <!DOCTYPE html>
           <html lang='en'>
           <head>
@@ -59,42 +59,42 @@ const DynamicComponentLoader: React.FC<DynamicComponentLoaderProps> = ({
           </html>
         `;
 
-				// Convert HTML to Blob URL
-				const htmlBlob = new Blob([previewHtml], { type: "text/html" });
-				const htmlBlobUrl = URL.createObjectURL(htmlBlob);
+        // Convert HTML to Blob URL
+        const htmlBlob = new Blob([previewHtml], { type: "text/html" });
+        const htmlBlobUrl = URL.createObjectURL(htmlBlob);
 
-				setIframeSrc(htmlBlobUrl);
-			} catch (err) {
-				console.error("Failed to load component:", err);
-				setError(
-					"Error loading the component. Please check the console for details.",
-				);
-			}
-		};
+        setIframeSrc(htmlBlobUrl);
+      } catch (err) {
+        console.error("Failed to load component:", err);
+        setError(
+          "Error loading the component. Please check the console for details.",
+        );
+      }
+    };
 
-		fetchComponent();
-	}, [codeUrl]);
+    fetchComponent();
+  }, [codeUrl]);
 
-	if (error) {
-		return <div className="text-red-500">{error}</div>;
-	}
+  if (error) {
+    return <div className="text-red-500">{error}</div>;
+  }
 
-	return (
-		<>
-			{iframeSrc ? (
-				<iframe
-					title="Component Preview"
-					src={iframeSrc}
-					sandbox="allow-same-origin allow-scripts"
-					width="100%"
-					height="600px"
-					frameBorder="0"
-				/>
-			) : (
-				<div>Loading component...</div>
-			)}
-		</>
-	);
+  return (
+    <>
+      {iframeSrc ? (
+        <iframe
+          title="Component Preview"
+          src={iframeSrc}
+          sandbox="allow-same-origin allow-scripts"
+          width="100%"
+          height="600px"
+          frameBorder="0"
+        />
+      ) : (
+        <div>Loading component...</div>
+      )}
+    </>
+  );
 };
 
 export default DynamicComponentLoader;

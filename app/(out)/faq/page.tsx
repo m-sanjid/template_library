@@ -31,7 +31,7 @@ export default function FAQPage() {
     setExpandedQuestions((prev) =>
       prev.includes(questionId)
         ? prev.filter((id) => id !== questionId)
-        : [...prev, questionId]
+        : [...prev, questionId],
     );
   };
 
@@ -40,7 +40,7 @@ export default function FAQPage() {
     questions: category.questions.filter(
       (q) =>
         q.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        q.answer.toLowerCase().includes(searchQuery.toLowerCase())
+        q.answer.toLowerCase().includes(searchQuery.toLowerCase()),
     ),
   }));
 
@@ -51,7 +51,7 @@ export default function FAQPage() {
 
   return (
     <div className="min-h-screen py-8">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <SectionHeader
           label="FAQ"
@@ -62,10 +62,10 @@ export default function FAQPage() {
         />
 
         {/* Search and Categories */}
-        <div className="space-y-6 mb-12">
+        <div className="mb-12 space-y-6">
           {/* Search */}
-          <div className="relative max-w-xl mx-auto">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+          <div className="relative mx-auto max-w-xl">
+            <Search className="text-muted-foreground absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform" />
             <Input
               ref={searchInputRef}
               placeholder="Search questions... (Press '/' to focus)"
@@ -104,33 +104,33 @@ export default function FAQPage() {
               key={category.name}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-card  rounded-lg shadow-sm overflow-hidden"
+              className="bg-card overflow-hidden rounded-lg shadow-sm"
             >
-              <div className="border-b border-border p-6">
-                <h2 className="text-2xl font-semibold text-foreground">
+              <div className="border-border border-b p-6">
+                <h2 className="text-foreground text-2xl font-semibold">
                   {category.name}
                 </h2>
               </div>
 
               {/* Questions */}
-              <div className="divide-y divide-border">
+              <div className="divide-border divide-y">
                 {category.questions.map((item) => {
                   const questionId = `${category.name}-${item.question}`;
                   const isExpanded = expandedQuestions.includes(questionId);
 
                   return (
-                    <div key={questionId} className="border-t border-border">
+                    <div key={questionId} className="border-border border-t">
                       <button
-                        className="w-full text-left px-6 py-4 focus:outline-none"
+                        className="w-full px-6 py-4 text-left focus:outline-none"
                         onClick={() => toggleQuestion(questionId)}
                       >
                         <div className="flex items-center justify-between">
-                          <h3 className="text-lg font-medium text-foreground">
+                          <h3 className="text-foreground text-lg font-medium">
                             {item.question}
                           </h3>
                           <ChevronDown
-                            className={`w-5 h-5 text-muted-foreground transition-transform ${
-                              isExpanded ? "transform rotate-180" : ""
+                            className={`text-muted-foreground h-5 w-5 transition-transform ${
+                              isExpanded ? "rotate-180 transform" : ""
                             }`}
                           />
                         </div>
@@ -172,12 +172,12 @@ export default function FAQPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center py-12"
+            className="py-12 text-center"
           >
-            <div className="w-16 h-16 mx-auto mb-4 text-muted-foreground">
-              <Search className="w-full h-full" />
+            <div className="text-muted-foreground mx-auto mb-4 h-16 w-16">
+              <Search className="h-full w-full" />
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">
+            <h3 className="text-foreground mb-2 text-lg font-semibold">
               No questions found
             </h3>
             <p className="text-muted-foreground mb-4">
@@ -199,9 +199,9 @@ export default function FAQPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-12 text-center bg-card rounded-lg shadow-sm p-8"
+          className="bg-card mt-12 rounded-lg p-8 text-center shadow-sm"
         >
-          <h2 className="text-2xl font-semibold text-foreground mb-4">
+          <h2 className="text-foreground mb-4 text-2xl font-semibold">
             Still have questions?
           </h2>
           <p className="text-muted-foreground mb-6">
@@ -210,7 +210,7 @@ export default function FAQPage() {
           </p>
           <AnimatedButton
             label="Contact Support"
-            className="border rounded-full bg-primary text-secondary"
+            className="bg-primary text-secondary rounded-full border"
             to="/contact"
           />
         </motion.div>

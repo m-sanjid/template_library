@@ -1,12 +1,19 @@
-"use client"
+"use client";
 
-import { Check} from "lucide-react"
-import { useState } from "react"
+import { Check } from "lucide-react";
+import { useState } from "react";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
 
 const pricingPlan = [
   {
@@ -14,7 +21,7 @@ const pricingPlan = [
     name: "Basic",
     price: 19,
     description: "For individual developers",
-    features: ["Single template download", "6 months support", "Free updates"]
+    features: ["Single template download", "6 months support", "Free updates"],
   },
   {
     id: 2,
@@ -27,8 +34,8 @@ const pricingPlan = [
       "Priority support",
       "Early access to new templates",
       "Free updates",
-      "Team collaboration"
-    ]
+      "Team collaboration",
+    ],
   },
   {
     id: 3,
@@ -41,10 +48,10 @@ const pricingPlan = [
       "Free updates",
       "API access",
       "Dedicated account manager",
-      "Team collaboration"
-    ]
-  }
-]
+      "Team collaboration",
+    ],
+  },
+];
 
 export default function Pricing3() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -59,24 +66,45 @@ export default function Pricing3() {
     <div className="flex min-h-screen flex-col">
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6 mx-auto text-center space-y-4">
-            <h1 className="text-4xl font-bold sm:text-5xl lg:text-6xl">Simple, Transparent Pricing</h1>
-            <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-              Choose the plan that works best for you and your team. All plans include a 14-day free trial.
+          <div className="container mx-auto space-y-4 px-4 text-center md:px-6">
+            <h1 className="text-4xl font-bold sm:text-5xl lg:text-6xl">
+              Simple, Transparent Pricing
+            </h1>
+            <p className="text-muted-foreground mx-auto max-w-[700px] md:text-xl">
+              Choose the plan that works best for you and your team. All plans
+              include a 14-day free trial.
             </p>
 
-            <Tabs defaultValue="monthly" className="w-full max-w-5xl mx-auto">
+            <Tabs defaultValue="monthly" className="mx-auto w-full max-w-5xl">
               <TabsList className="grid grid-cols-2">
-                <TabsTrigger value="monthly" onClick={() => setIsAnnual(false)}>Monthly</TabsTrigger>
+                <TabsTrigger value="monthly" onClick={() => setIsAnnual(false)}>
+                  Monthly
+                </TabsTrigger>
                 <TabsTrigger value="yearly" onClick={() => setIsAnnual(true)}>
-                  Yearly <Badge variant="outline" className="ml-2 bg-primary/20 text-primary">Save 20%</Badge>
+                  Yearly{" "}
+                  <Badge
+                    variant="outline"
+                    className="bg-primary/20 text-primary ml-2"
+                  >
+                    Save 20%
+                  </Badge>
                 </TabsTrigger>
               </TabsList>
-              <TabsContent value={isAnnual ? "yearly" : "monthly"} className="mt-6">
+              <TabsContent
+                value={isAnnual ? "yearly" : "monthly"}
+                className="mt-6"
+              >
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-12">
                   {pricingPlan.map((plan) => (
-                    <Card className={`flex relative flex-col ${plan.isPro ? "bg-primary/10 border-primary border-2 scale-110" : ""}`} key={plan.id}>
-                        {plan.isPro && <Badge className="absolute -top-4 left-1/2 -translate-x-1/2">Popular</Badge>}
+                    <Card
+                      className={`relative flex flex-col ${plan.isPro ? "bg-primary/10 border-primary scale-110 border-2" : ""}`}
+                      key={plan.id}
+                    >
+                      {plan.isPro && (
+                        <Badge className="absolute -top-4 left-1/2 -translate-x-1/2">
+                          Popular
+                        </Badge>
+                      )}
                       <CardHeader>
                         <CardTitle>{plan.name}</CardTitle>
                         <CardDescription>{plan.description}</CardDescription>
@@ -87,7 +115,8 @@ export default function Pricing3() {
                         <ul className="mt-4 space-y-2 text-left">
                           {plan.features.map((feature, index) => (
                             <li className="flex items-center" key={index}>
-                              <Check className="mr-2 h-4 w-4 text-primary" />{feature}
+                              <Check className="text-primary mr-2 h-4 w-4" />
+                              {feature}
                             </li>
                           ))}
                         </ul>

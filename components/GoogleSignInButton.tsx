@@ -2,13 +2,13 @@ import { signIn } from "next-auth/react";
 import { GoogleIcon } from "./Icon";
 
 export default function GoogleSignInButton() {
-	return (
-		<button
-			onClick={() => signIn("google")}
-			className="w-full bg-black dark:bg-white text-secondary font-medium flex justify-center items-center gap-2 p-2 border rounded-full"
-		>
-			<GoogleIcon />
-			<span>Google</span>
-		</button>
-	);
+  return (
+    <button
+      onClick={() => signIn("google")}
+      className="text-secondary flex w-full items-center justify-center gap-2 rounded-full border bg-black p-2 font-medium dark:bg-white"
+    >
+      <GoogleIcon />
+      <span>Google</span>
+    </button>
+  );
 }

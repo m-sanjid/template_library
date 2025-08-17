@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   try {
     const { id } = params;
@@ -31,7 +31,7 @@ export async function GET(
           message: `Component with ID ${id} not found`,
           availableIds: allComponents.map((c) => c.id),
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -40,7 +40,7 @@ export async function GET(
     console.error("Error fetching component:", error);
     return NextResponse.json(
       { error: true, message: "Failed to fetch component" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

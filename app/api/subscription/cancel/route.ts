@@ -37,4 +37,4 @@ export async function POST() {
     console.error("Error canceling subscription:", error);
     return new NextResponse("Internal error", { status: 500 });
   }
-} 
+}

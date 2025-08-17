@@ -29,11 +29,11 @@ const DashboardPage = () => {
 
   return (
     <div className="min-h-screen py-8">
-      <div className="container max-w-7xl mx-auto px-4">
+      <div className="container mx-auto max-w-7xl px-4">
         {/* Welcome Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+        <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
           <div>
-            <h1 className="text-3xl font-bold mb-2">
+            <h1 className="mb-2 text-3xl font-bold">
               Welcome back,{" "}
               <span className="text-primary">{session?.user?.name}</span>
             </h1>
@@ -43,46 +43,46 @@ const DashboardPage = () => {
           </div>
           <div className="flex gap-4">
             <Button variant="outline">
-              <Bell className="w-4 h-4 mr-2" />
+              <Bell className="mr-2 h-4 w-4" />
               Notifications
             </Button>
             <Button>
-              <Settings className="w-4 h-4 mr-2" />
+              <Settings className="mr-2 h-4 w-4" />
               Settings
             </Button>
           </div>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {[
             {
               title: "Total Downloads",
               value: "1,234",
               change: "+12.5%",
               trend: "up",
-              icon: <Download className="w-6 h-6" />,
+              icon: <Download className="h-6 w-6" />,
             },
             {
               title: "Active Templates",
               value: "45",
               change: "+5.2%",
               trend: "up",
-              icon: <Upload className="w-6 h-6" />,
+              icon: <Upload className="h-6 w-6" />,
             },
             {
               title: "Total Views",
               value: "8,567",
               change: "-2.1%",
               trend: "down",
-              icon: <Eye className="w-6 h-6" />,
+              icon: <Eye className="h-6 w-6" />,
             },
             {
               title: "Average Rating",
               value: "4.8",
               change: "+0.3",
               trend: "up",
-              icon: <Star className="w-6 h-6" />,
+              icon: <Star className="h-6 w-6" />,
             },
           ].map((stat, index) => (
             <motion.div
@@ -90,9 +90,9 @@ const DashboardPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-card rounded-lg p-6 shadow-sm transition-shadow hover:shadow-md"
             >
-              <div className="flex items-center justify-between mb-4">
+              <div className="mb-4 flex items-center justify-between">
                 <div className="text-muted-foreground">{stat.title}</div>
                 <div className="text-primary">{stat.icon}</div>
               </div>
@@ -104,9 +104,9 @@ const DashboardPage = () => {
                   }`}
                 >
                   {stat.trend === "up" ? (
-                    <ArrowUpRight className="w-4 h-4 mr-1" />
+                    <ArrowUpRight className="mr-1 h-4 w-4" />
                   ) : (
-                    <ArrowDownRight className="w-4 h-4 mr-1" />
+                    <ArrowDownRight className="mr-1 h-4 w-4" />
                   )}
                   {stat.change}
                 </div>
@@ -116,12 +116,12 @@ const DashboardPage = () => {
         </div>
 
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Charts Section */}
           <div className="lg:col-span-2">
             <Card className="p-6">
               <Tabs defaultValue="weekly">
-                <div className="flex items-center justify-between mb-6">
+                <div className="mb-6 flex items-center justify-between">
                   <h2 className="text-xl font-semibold">Analytics</h2>
                   <TabsList>
                     <TabsTrigger value="weekly">Weekly</TabsTrigger>
@@ -130,15 +130,15 @@ const DashboardPage = () => {
                   </TabsList>
                 </div>
                 <TabsContent value="weekly" className="space-y-6">
-                  <div className="h-[300px] bg-muted rounded-lg flex items-center justify-center">
-                    <LineChart className="w-8 h-8 text-muted-foreground" />
+                  <div className="bg-muted flex h-[300px] items-center justify-center rounded-lg">
+                    <LineChart className="text-muted-foreground h-8 w-8" />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="h-[200px] bg-muted rounded-lg flex items-center justify-center">
-                      <BarChart className="w-8 h-8 text-muted-foreground" />
+                    <div className="bg-muted flex h-[200px] items-center justify-center rounded-lg">
+                      <BarChart className="text-muted-foreground h-8 w-8" />
                     </div>
-                    <div className="h-[200px] bg-muted rounded-lg flex items-center justify-center">
-                      <PieChart className="w-8 h-8 text-muted-foreground" />
+                    <div className="bg-muted flex h-[200px] items-center justify-center rounded-lg">
+                      <PieChart className="text-muted-foreground h-8 w-8" />
                     </div>
                   </div>
                 </TabsContent>
@@ -156,7 +156,7 @@ const DashboardPage = () => {
           <div className="space-y-6">
             {/* Subscription Status */}
             <Card className="p-6">
-              <div className="flex items-center justify-between mb-4">
+              <div className="mb-4 flex items-center justify-between">
                 <h3 className="font-semibold">Subscription Status</h3>
                 <Badge variant="secondary">Pro Plan</Badge>
               </div>
@@ -170,7 +170,7 @@ const DashboardPage = () => {
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Payment method</span>
                   <div className="flex items-center">
-                    <CreditCard className="w-4 h-4 mr-2" />
+                    <CreditCard className="mr-2 h-4 w-4" />
                     <span>•••• 4242</span>
                   </div>
                 </div>
@@ -182,7 +182,7 @@ const DashboardPage = () => {
 
             {/* Recent Activity */}
             <Card className="p-6">
-              <h3 className="font-semibold mb-4">Recent Activity</h3>
+              <h3 className="mb-4 font-semibold">Recent Activity</h3>
               <div className="space-y-4">
                 {[
                   {
@@ -202,14 +202,14 @@ const DashboardPage = () => {
                   },
                 ].map((activity, index) => (
                   <div key={index} className="flex items-center gap-4">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Clock className="w-4 h-4 text-primary" />
+                    <div className="bg-primary/10 flex h-8 w-8 items-center justify-center rounded-full">
+                      <Clock className="text-primary h-4 w-4" />
                     </div>
                     <div className="flex-1">
                       <div className="text-sm font-medium">
                         {activity.action} {activity.template}
                       </div>
-                      <div className="text-xs text-muted-foreground">
+                      <div className="text-muted-foreground text-xs">
                         {activity.time}
                       </div>
                     </div>
@@ -220,10 +220,10 @@ const DashboardPage = () => {
 
             {/* Team Members */}
             <Card className="p-6">
-              <div className="flex items-center justify-between mb-4">
+              <div className="mb-4 flex items-center justify-between">
                 <h3 className="font-semibold">Team Members</h3>
                 <Button variant="ghost" size="sm">
-                  <Users className="w-4 h-4 mr-2" />
+                  <Users className="mr-2 h-4 w-4" />
                   Manage
                 </Button>
               </div>
@@ -234,14 +234,14 @@ const DashboardPage = () => {
                   { name: "Mike Johnson", role: "Viewer" },
                 ].map((member, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="text-sm font-medium text-primary">
+                    <div className="bg-primary/10 flex h-8 w-8 items-center justify-center rounded-full">
+                      <span className="text-primary text-sm font-medium">
                         {member.name.charAt(0)}
                       </span>
                     </div>
                     <div>
                       <div className="text-sm font-medium">{member.name}</div>
-                      <div className="text-xs text-muted-foreground">
+                      <div className="text-muted-foreground text-xs">
                         {member.role}
                       </div>
                     </div>

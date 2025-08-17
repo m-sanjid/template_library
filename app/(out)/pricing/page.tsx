@@ -51,7 +51,7 @@ const PricingPage = () => {
   };
 
   return (
-    <div className="container max-w-6xl mx-auto px-4 py-16">
+    <div className="container mx-auto max-w-6xl px-4 py-16">
       <SectionHeader
         label="Pricing"
         title="Simple, Transparent Pricing"
@@ -68,12 +68,12 @@ const PricingPage = () => {
 
       {/* FAQ Section */}
       <div className="mt-24">
-        <h2 className="text-3xl font-bold text-center mb-12">
+        <h2 className="mb-12 text-center text-3xl font-bold">
           Frequently Asked Questions
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
           <div>
-            <h3 className="text-xl font-semibold mb-2">
+            <h3 className="mb-2 text-xl font-semibold">
               Can I change plans later?
             </h3>
             <p className="text-muted-foreground">
@@ -82,7 +82,7 @@ const PricingPage = () => {
             </p>
           </div>
           <div>
-            <h3 className="text-xl font-semibold mb-2">
+            <h3 className="mb-2 text-xl font-semibold">
               What payment methods do you accept?
             </h3>
             <p className="text-muted-foreground">
@@ -91,7 +91,7 @@ const PricingPage = () => {
             </p>
           </div>
           <div>
-            <h3 className="text-xl font-semibold mb-2">
+            <h3 className="mb-2 text-xl font-semibold">
               Is there a free trial?
             </h3>
             <p className="text-muted-foreground">
@@ -100,7 +100,7 @@ const PricingPage = () => {
             </p>
           </div>
           <div>
-            <h3 className="text-xl font-semibold mb-2">
+            <h3 className="mb-2 text-xl font-semibold">
               What&apos;s your refund policy?
             </h3>
             <p className="text-muted-foreground">

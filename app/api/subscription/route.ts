@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     const { plan, isAnnual } = await req.json();
     // eslint-disable-next-line
     const pricingPlan = Object.entries(PRICING).find(
-      ([_, p]) => p.name === plan
+      ([_, p]) => p.name === plan,
     )?.[1];
 
     if (!pricingPlan) {
@@ -79,4 +79,4 @@ export async function POST(req: Request) {
     console.error("Subscription error:", error);
     return new NextResponse("Internal error", { status: 500 });
   }
-} 
+}

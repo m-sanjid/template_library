@@ -50,14 +50,14 @@ export default function SuccessPage() {
         `/api/invoice/${purchase.id}/download?download=true`,
         {
           responseType: "blob",
-        }
+        },
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
       link.setAttribute(
         "download",
-        `invoice-${purchase.id.substring(0, 8)}.pdf`
+        `invoice-${purchase.id.substring(0, 8)}.pdf`,
       );
       document.body.appendChild(link);
       link.click();
@@ -80,20 +80,20 @@ export default function SuccessPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">
+          <h2 className="mb-4 text-2xl font-bold text-red-600">
             Something went wrong
           </h2>
-          <p className="text-gray-600 mb-4">{error}</p>
+          <p className="mb-4 text-neutral-600">{error}</p>
           <Button onClick={() => window.location.reload()}>Try Again</Button>
         </div>
       </div>
@@ -102,20 +102,20 @@ export default function SuccessPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-neutral-900 dark:to-neutral-800">
-      <div className="max-w-4xl mx-auto px-4 py-16">
+      <div className="mx-auto max-w-4xl px-4 py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="mb-12 text-center"
         >
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 className="w-10 h-10 text-green-600" />
+          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
+            <CheckCircle2 className="h-10 w-10 text-green-600" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+          <h1 className="mb-4 text-3xl font-bold text-neutral-900 dark:text-white">
             Thank You for Your Purchase!
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
+          <p className="text-xl text-neutral-600 dark:text-neutral-300">
             Your order has been successfully processed.
           </p>
         </motion.div>
@@ -125,57 +125,57 @@ export default function SuccessPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white dark:bg-neutral-800 rounded-xl shadow-lg p-6 mb-8"
+            className="mb-8 rounded-xl bg-white p-6 shadow-lg dark:bg-neutral-800"
           >
-            <div className="flex items-center justify-between mb-6">
+            <div className="mb-6 flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h2 className="text-xl font-semibold text-neutral-900 dark:text-white">
                   Order #{purchase.id.substring(0, 8)}
                 </h2>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-neutral-600 dark:text-neutral-300">
                   {new Date(purchase.createdAt).toLocaleDateString()}
                 </p>
               </div>
               <div className="text-right">
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                <p className="text-2xl font-bold text-neutral-900 dark:text-white">
                   ${parseFloat(purchase.totalPrice).toFixed(2)}
                 </p>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
+                <p className="text-sm text-neutral-600 dark:text-neutral-300">
                   Total Amount
                 </p>
               </div>
             </div>
 
-            <div className="space-y-4 mb-6">
+            <div className="mb-6 space-y-4">
               {purchase.PurchaseItem.map(
                 (item: PurchaseItem, index: number) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between py-2 border-b last:border-0"
+                    className="flex items-center justify-between border-b py-2 last:border-0"
                   >
                     <div>
-                      <h3 className="font-medium text-gray-900 dark:text-white">
+                      <h3 className="font-medium text-neutral-900 dark:text-white">
                         {item.name}
                       </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                      <p className="text-sm text-neutral-600 dark:text-neutral-300">
                         Quantity: {item.quantity}
                       </p>
                     </div>
-                    <p className="font-medium text-gray-900 dark:text-white">
+                    <p className="font-medium text-neutral-900 dark:text-white">
                       ${parseFloat(item.price).toFixed(2)}
                     </p>
                   </div>
-                )
+                ),
               )}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <Button
                 onClick={handleDownloadInvoice}
                 className="flex-1"
                 variant="outline"
               >
-                <Download className="w-4 h-4 mr-2" />
+                <Download className="mr-2 h-4 w-4" />
                 Download Invoice
               </Button>
               <Button
@@ -183,7 +183,7 @@ export default function SuccessPage() {
                 className="flex-1"
                 variant="outline"
               >
-                <Mail className="w-4 h-4 mr-2" />
+                <Mail className="mr-2 h-4 w-4" />
                 Email Invoice
               </Button>
             </div>
@@ -196,23 +196,23 @@ export default function SuccessPage() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="text-center"
         >
-          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 mb-8">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+          <div className="mb-8 rounded-lg bg-blue-50 p-6 dark:bg-blue-900/20">
+            <h3 className="mb-2 text-lg font-semibold text-neutral-900 dark:text-white">
               What&apos;s Next?
             </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">
+            <p className="mb-4 text-neutral-600 dark:text-neutral-300">
               Your purchased items are now available in your account. You can
               access them at any time.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <AnimatedButton
                 label="View My Purchases"
-                className="border rounded-full bg-primary text-secondary"
+                className="bg-primary text-secondary rounded-full border"
                 to="/dashboard"
               />
               <AnimatedButton
                 label="Browse More Templates"
-                className="border rounded-full bg-primary text-secondary"
+                className="bg-primary text-secondary rounded-full border"
                 to="/templates"
               />
             </div>

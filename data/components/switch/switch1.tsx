@@ -74,7 +74,7 @@ const Toggle: React.FC<ToggleProps> = ({
         role="switch"
         aria-checked={isToggled}
         onClick={handleToggle}
-        className={`relative inline-flex flex-shrink-0 cursor-pointer border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${colorScheme.split("-")[0]}-500 ${variantStyles[variant]} ${sizeStyles[size].toggle} ${colorSchemes[colorScheme]}`}
+        className={`relative inline-flex flex-shrink-0 cursor-pointer border-2 border-transparent transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-offset-2 focus:outline-none focus:ring-${colorScheme.split("-")[0]}-500 ${variantStyles[variant]} ${sizeStyles[size].toggle} ${colorSchemes[colorScheme]}`}
       >
         <span className="sr-only">Toggle {label}</span>
         <span

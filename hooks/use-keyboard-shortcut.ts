@@ -29,4 +29,4 @@ export function useKeyboardShortcut(shortcuts: KeyboardShortcut[]) {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [shortcuts]);
-} 
+}

@@ -18,7 +18,7 @@ export default function MainLayout({
   return (
     <>
       {shouldShowNavbar && <Navbar />}
-      <div className="flex min-h-screen max-w-7xl mx-auto">
+      <div className="mx-auto flex min-h-screen max-w-7xl">
         {shouldShowSidebar && <Sidebar />}
         <main className={`${shouldShowSidebar ? "" : ""} p-4`}>
           <div

@@ -18,7 +18,7 @@ const emailTo = process.env.EMAIL_TO;
 
 if (!emailUser || !emailPass || !emailTo) {
   console.error(
-    "Missing required environment variables: EMAIL_USER, EMAIL_APP_PASSWORD, or EMAIL_TO."
+    "Missing required environment variables: EMAIL_USER, EMAIL_APP_PASSWORD, or EMAIL_TO.",
   );
 }
 
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
           message: "Validation failed",
           errors: result.error.flatten().fieldErrors,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
     console.log("EMAIL_USER:", emailUser);
@@ -98,7 +98,7 @@ export async function POST(request: Request) {
         message: "Failed to send email. Please try again later.",
         error: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -104,7 +104,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           label="Contact"
           title="Get in Touch"
@@ -113,9 +113,9 @@ export default function ContactPage() {
           textHeight={240}
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-20">
+        <div className="mt-20 grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Contact Information */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="space-y-6 lg:col-span-1">
             {/* Office Locations */}
             {contact.locations.map((location, index) => (
               <motion.div
@@ -123,12 +123,12 @@ export default function ContactPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="rounded-lg shadow-sm p-6 bg-card border border-border hover:border-primary/50 transition-colors"
+                className="bg-card border-border hover:border-primary/50 rounded-lg border p-6 shadow-sm transition-colors"
               >
-                <h3 className="text-lg font-semibold mb-4">{location.city}</h3>
+                <h3 className="mb-4 text-lg font-semibold">{location.city}</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-muted-foreground mt-1" />
+                    <MapPin className="text-muted-foreground mt-1 h-5 w-5" />
                     <div>
                       <p className="text-muted-foreground">
                         {location.address}
@@ -136,7 +136,7 @@ export default function ContactPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Phone className="w-5 h-5 text-muted-foreground" />
+                    <Phone className="text-muted-foreground h-5 w-5" />
                     <a
                       href={`tel:${location.phone}`}
                       className="text-primary hover:underline"
@@ -153,11 +153,11 @@ export default function ContactPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="rounded-lg shadow-sm p-6 bg-card border border-border hover:border-primary/50 transition-colors"
+              className="bg-card border-border hover:border-primary/50 rounded-lg border p-6 shadow-sm transition-colors"
             >
-              <h3 className="text-lg font-semibold mb-4">Support Hours</h3>
+              <h3 className="mb-4 text-lg font-semibold">Support Hours</h3>
               <div className="flex items-center gap-3">
-                <Clock className="w-5 h-5 text-muted-foreground" />
+                <Clock className="text-muted-foreground h-5 w-5" />
                 <p className="text-muted-foreground">{contact.supportHours}</p>
               </div>
             </motion.div>
@@ -167,12 +167,12 @@ export default function ContactPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="rounded-lg shadow-sm p-6 bg-card border border-border hover:border-primary/50 transition-colors"
+              className="bg-card border-border hover:border-primary/50 rounded-lg border p-6 shadow-sm transition-colors"
             >
-              <h3 className="text-lg font-semibold mb-4">Quick Contact</h3>
+              <h3 className="mb-4 text-lg font-semibold">Quick Contact</h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <Mail className="w-5 h-5 text-muted-foreground" />
+                  <Mail className="text-muted-foreground h-5 w-5" />
                   <a
                     href="mailto:support@templatelibrary.com"
                     className="text-primary hover:underline"
@@ -181,7 +181,7 @@ export default function ContactPage() {
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
-                  <MessageSquare className="w-5 h-5 text-muted-foreground" />
+                  <MessageSquare className="text-muted-foreground h-5 w-5" />
                   <a href="#" className="text-primary hover:underline">
                     Live Chat
                   </a>
@@ -196,14 +196,14 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             className="lg:col-span-2"
           >
-            <div className="rounded-lg shadow-sm p-6 bg-card border border-border">
-              <h2 className="text-2xl font-semibold mb-6">Send us a Message</h2>
+            <div className="bg-card border-border rounded-lg border p-6 shadow-sm">
+              <h2 className="mb-6 text-2xl font-semibold">Send us a Message</h2>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-sm font-medium text-muted-foreground mb-2"
+                      className="text-muted-foreground mb-2 block text-sm font-medium"
                     >
                       Name
                     </label>
@@ -213,7 +213,7 @@ export default function ContactPage() {
                       className={errors.name ? "border-red-500" : ""}
                     />
                     {errors.name && (
-                      <p className="text-red-500 text-sm mt-1">
+                      <p className="mt-1 text-sm text-red-500">
                         {errors.name.message}
                       </p>
                     )}
@@ -221,7 +221,7 @@ export default function ContactPage() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-muted-foreground mb-2"
+                      className="text-muted-foreground mb-2 block text-sm font-medium"
                     >
                       Email
                     </label>
@@ -232,7 +232,7 @@ export default function ContactPage() {
                       className={errors.email ? "border-red-500" : ""}
                     />
                     {errors.email && (
-                      <p className="text-red-500 text-sm mt-1">
+                      <p className="mt-1 text-sm text-red-500">
                         {errors.email.message}
                       </p>
                     )}
@@ -241,7 +241,7 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-sm font-medium text-muted-foreground mb-2"
+                    className="text-muted-foreground mb-2 block text-sm font-medium"
                   >
                     Subject
                   </label>
@@ -251,7 +251,7 @@ export default function ContactPage() {
                     className={errors.subject ? "border-red-500" : ""}
                   />
                   {errors.subject && (
-                    <p className="text-red-500 text-sm mt-1">
+                    <p className="mt-1 text-sm text-red-500">
                       {errors.subject.message}
                     </p>
                   )}
@@ -259,7 +259,7 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium text-muted-foreground mb-2"
+                    className="text-muted-foreground mb-2 block text-sm font-medium"
                   >
                     Message
                   </label>
@@ -270,7 +270,7 @@ export default function ContactPage() {
                     className={errors.message ? "border-red-500" : ""}
                   />
                   {errors.message && (
-                    <p className="text-red-500 text-sm mt-1">
+                    <p className="mt-1 text-sm text-red-500">
                       {errors.message.message}
                     </p>
                   )}
@@ -282,12 +282,12 @@ export default function ContactPage() {
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       Sending...
                     </>
                   ) : (
                     <>
-                      <Send className="w-4 h-4 mr-2" />
+                      <Send className="mr-2 h-4 w-4" />
                       Send Message
                     </>
                   )}

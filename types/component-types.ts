@@ -1,21 +1,21 @@
+import { ReactNode, ComponentType } from "react";
 
-import { ReactNode, ComponentType } from 'react';
-
-export type ComponentPreviewProps = 
-  | { 
-      isAnnual?: boolean; 
-      setIsAnnual?: (value: boolean) => void; 
-      isLoading?: string | null; 
+export type ComponentPreviewProps =
+  | {
+      isAnnual?: boolean;
+      setIsAnnual?: (value: boolean) => void;
+      isLoading?: string | null;
       handleSubscribe?: (plan: string) => void;
-    } 
-  | { 
-      isAuthenticated?: boolean; 
+    }
+  | {
+      isAuthenticated?: boolean;
       scrolled?: boolean;
-    } 
+    }
   | Record<string, any>;
 
-export type FlexibleComponent = ComponentType<ComponentPreviewProps> | 
-  ((props: ComponentPreviewProps) => ReactNode);
+export type FlexibleComponent =
+  | ComponentType<ComponentPreviewProps>
+  | ((props: ComponentPreviewProps) => ReactNode);
 
 export interface ComponentDefinition {
   id: string;
@@ -29,6 +29,6 @@ export interface ComponentDefinition {
       description?: string;
       component?: FlexibleComponent;
       code?: string;
-    }
+    };
   };
 }

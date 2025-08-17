@@ -9,32 +9,32 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Welcome Section */}
-      <section className="relative py-12 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-background" />
-        <div className="container max-w-7xl mx-auto px-4 relative">
+      <section className="relative overflow-hidden py-12">
+        <div className="from-primary/5 to-background absolute inset-0 bg-gradient-to-b" />
+        <div className="relative container mx-auto max-w-7xl px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row items-center justify-between gap-8"
+            className="flex flex-col items-center justify-between gap-8 md:flex-row"
           >
             <div>
-              <h1 className="text-4xl font-bold mb-4">
+              <h1 className="mb-4 text-4xl font-bold">
                 Welcome back, <span className="text-primary">User</span>
               </h1>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-muted-foreground text-xl">
                 Here&apos;s what&apos;s new in your template library
               </p>
             </div>
             <div className="flex gap-4">
               <AnimatedButton
                 label="Create Template"
-                className="border rounded-full bg-primary text-secondary"
+                className="bg-primary text-secondary rounded-full border"
                 to="/templates"
               />
               <AnimatedButton
                 label="Browse Templates"
-                className="border rounded-full bg-primary text-secondary"
+                className="bg-primary text-secondary rounded-full border"
                 to="/templates"
               />
             </div>
@@ -44,28 +44,28 @@ const Home = () => {
 
       {/* Quick Stats */}
       <section className="py-8">
-        <div className="container max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="container mx-auto max-w-7xl px-4">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
             {[
               {
                 label: "Saved Templates",
                 value: "12",
-                icon: <Bookmark className="w-6 h-6" />,
+                icon: <Bookmark className="h-6 w-6" />,
               },
               {
                 label: "Downloads",
                 value: "48",
-                icon: <Download className="w-6 h-6" />,
+                icon: <Download className="h-6 w-6" />,
               },
               {
                 label: "Recent Views",
                 value: "156",
-                icon: <Eye className="w-6 h-6" />,
+                icon: <Eye className="h-6 w-6" />,
               },
               {
                 label: "Favorites",
                 value: "8",
-                icon: <Star className="w-6 h-6" />,
+                icon: <Star className="h-6 w-6" />,
               },
             ].map((stat, index) => (
               <motion.div
@@ -73,9 +73,9 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
+                className="bg-card rounded-lg p-6 shadow-sm transition-shadow hover:shadow-md"
               >
-                <div className="flex items-center justify-between mb-4">
+                <div className="mb-4 flex items-center justify-between">
                   <div className="text-muted-foreground">{stat.label}</div>
                   <div className="text-primary">{stat.icon}</div>
                 </div>
@@ -88,13 +88,13 @@ const Home = () => {
 
       {/* Recent Activity & Quick Actions */}
       <section className="py-8">
-        <div className="container max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="container mx-auto max-w-7xl px-4">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             {/* Recent Activity */}
             <div className="lg:col-span-2">
-              <div className="flex items-center justify-between mb-6">
+              <div className="mb-6 flex items-center justify-between">
                 <h2 className="text-2xl font-bold">Recent Activity</h2>
-                <Button >View All</Button>
+                <Button>View All</Button>
               </div>
               <div className="space-y-4">
                 {[
@@ -124,27 +124,27 @@ const Home = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="flex items-center gap-4 p-4 bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                    className="bg-card flex items-center gap-4 rounded-lg p-4 shadow-sm transition-shadow hover:shadow-md"
                   >
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <div className="bg-primary/10 flex h-10 w-10 items-center justify-center rounded-full">
                       {activity.action === "Downloaded" && (
-                        <Download className="w-5 h-5 text-primary" />
+                        <Download className="text-primary h-5 w-5" />
                       )}
                       {activity.action === "Saved" && (
-                        <Bookmark className="w-5 h-5 text-primary" />
+                        <Bookmark className="text-primary h-5 w-5" />
                       )}
                       {activity.action === "Viewed" && (
-                        <Eye className="w-5 h-5 text-primary" />
+                        <Eye className="text-primary h-5 w-5" />
                       )}
                       {activity.action === "Created" && (
-                        <Plus className="w-5 h-5 text-primary" />
+                        <Plus className="text-primary h-5 w-5" />
                       )}
                     </div>
                     <div className="flex-1">
                       <div className="font-medium">
                         {activity.action} {activity.template}
                       </div>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-muted-foreground text-sm">
                         {activity.time}
                       </div>
                     </div>
@@ -155,24 +155,24 @@ const Home = () => {
 
             {/* Quick Actions */}
             <div>
-              <h2 className="text-2xl font-bold mb-6">Quick Actions</h2>
+              <h2 className="mb-6 text-2xl font-bold">Quick Actions</h2>
               <div className="space-y-4">
                 {[
                   {
                     label: "Create New Template",
-                    icon: <Plus className="w-5 h-5" />,
+                    icon: <Plus className="h-5 w-5" />,
                   },
                   {
                     label: "Browse Categories",
-                    icon: <Grid className="w-5 h-5" />,
+                    icon: <Grid className="h-5 w-5" />,
                   },
                   {
                     label: "View Favorites",
-                    icon: <Star className="w-5 h-5" />,
+                    icon: <Star className="h-5 w-5" />,
                   },
                   {
                     label: "Check Updates",
-                    icon: <Bell className="w-5 h-5" />,
+                    icon: <Bell className="h-5 w-5" />,
                   },
                 ].map((action, index) => (
                   <motion.div
@@ -180,10 +180,10 @@ const Home = () => {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="p-4 bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer group"
+                    className="bg-card group cursor-pointer rounded-lg p-4 shadow-sm transition-shadow hover:shadow-md"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="text-primary group-hover:scale-110 transition-transform">
+                      <div className="text-primary transition-transform group-hover:scale-110">
                         {action.icon}
                       </div>
                       <div className="font-medium">{action.label}</div>
@@ -194,7 +194,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section> 
+      </section>
     </div>
   );
 };

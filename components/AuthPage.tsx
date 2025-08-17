@@ -51,7 +51,7 @@ const AuthPage = ({ type }: { type: "login" | "signup" }) => {
     try {
       if (isLogin) {
         const result = await signIn("credentials", {
-          username:email,
+          username: email,
           password,
           redirect: false,
         });
@@ -81,14 +81,14 @@ const AuthPage = ({ type }: { type: "login" | "signup" }) => {
   const isLogin = type === "login";
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 h-screen max-w-7xl mx-auto">
+    <div className="mx-auto grid h-screen max-w-7xl grid-cols-1 md:grid-cols-2">
       {/* Left Panel */}
-      <div className="flex col-span-1 max-w-md mx-4 md:mx-auto justify-center items-center -mt-8">
+      <div className="col-span-1 mx-4 -mt-8 flex max-w-md items-center justify-center md:mx-auto">
         <div className="w-full max-w-md">
-          <div className="p-2 mr-4">
+          <div className="mr-4 p-2">
             <Logo />
           </div>
-          <h2 className="text-lg md:text-2xl leading-9 tracking-tight font-bold mt-2">
+          <h2 className="mt-2 text-lg leading-9 font-bold tracking-tight md:text-2xl">
             {isLogin ? "Sign in to your account" : "Create your account"}
           </h2>
 
@@ -103,7 +103,7 @@ const AuthPage = ({ type }: { type: "login" | "signup" }) => {
                     onChange={(e) => setName(e.target.value)}
                   />
                   {errors.name && (
-                    <p className="text-red-500 text-xs">{errors.name}</p>
+                    <p className="text-xs text-red-500">{errors.name}</p>
                   )}
                 </div>
               )}
@@ -116,7 +116,7 @@ const AuthPage = ({ type }: { type: "login" | "signup" }) => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-xs">{errors.email}</p>
+                  <p className="text-xs text-red-500">{errors.email}</p>
                 )}
               </div>
               <div className="space-y-2">
@@ -128,10 +128,14 @@ const AuthPage = ({ type }: { type: "login" | "signup" }) => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 {errors.password && (
-                  <p className="text-red-500 text-xs">{errors.password}</p>
+                  <p className="text-xs text-red-500">{errors.password}</p>
                 )}
               </div>
-              <Button type="submit" className="w-full rounded-full" disabled={isLoading}>
+              <Button
+                type="submit"
+                className="w-full rounded-full"
+                disabled={isLoading}
+              >
                 {isLoading
                   ? isLogin
                     ? "Signing In..."
@@ -141,7 +145,7 @@ const AuthPage = ({ type }: { type: "login" | "signup" }) => {
                     : "Sign Up"}
               </Button>
             </form>
-            <p className="text-center text-sm my-4">
+            <p className="my-4 text-center text-sm">
               {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
               <Link
                 href={isLogin ? "/signup" : "/login"}
@@ -156,14 +160,14 @@ const AuthPage = ({ type }: { type: "login" | "signup" }) => {
                 <span className="w-full border-t" />
               </div>
               <div className="relative flex justify-center text-xs">
-                <span className="bg-background px-2 text-muted-foreground">
+                <span className="bg-background text-muted-foreground px-2">
                   Or continue with
                 </span>
               </div>
             </div>
 
             <GoogleSignInButton />
-            <p className="text-xs text-center text-muted-foreground mt-4">
+            <p className="text-muted-foreground mt-4 text-center text-xs">
               By clicking on {isLogin ? "sign in" : "sign up"}, you agree to our{" "}
               <a href="#" className="underline">
                 Terms of Service
@@ -179,12 +183,12 @@ const AuthPage = ({ type }: { type: "login" | "signup" }) => {
       </div>
 
       {/* Right Panel */}
-      <div className="hidden md:flex w-[90%] md:w-full mx-auto bg-neutral-50 dark:bg-black justify-center items-center p-10">
-        <div className="text-center max-w-md">
-          <div className="flex justify-center mb-4">
+      <div className="mx-auto hidden w-[90%] items-center justify-center bg-neutral-50 p-10 md:flex md:w-full dark:bg-black">
+        <div className="max-w-md text-center">
+          <div className="mb-4 flex justify-center">
             <Logo />
           </div>
-          <h2 className="text-xl font-semibold mb-2">name</h2>
+          <h2 className="mb-2 text-xl font-semibold">name</h2>
           <p className="text-muted-foreground">description</p>
         </div>
       </div>

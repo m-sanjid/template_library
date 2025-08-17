@@ -3,5 +3,5 @@ export default function PreviewLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="min-h-screen bg-background relative">{children}</div>;
+  return <div className="bg-background relative min-h-screen">{children}</div>;
 }

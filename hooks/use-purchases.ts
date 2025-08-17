@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Purchase } from '@prisma/client';
-import { useSession } from 'next-auth/react';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Purchase } from "@prisma/client";
+import { useSession } from "next-auth/react";
 
 export function usePurchases() {
   const [purchases, setPurchases] = useState<Purchase[]>([]);
@@ -12,13 +12,13 @@ export function usePurchases() {
   useEffect(() => {
     const fetchPurchases = async () => {
       // Don't fetch if not authenticated
-      if (status === 'unauthenticated') {
+      if (status === "unauthenticated") {
         setIsLoading(false);
         return;
       }
 
       // Wait for session to be loaded
-      if (status === 'loading') {
+      if (status === "loading") {
         return;
       }
 
@@ -41,7 +41,7 @@ export function usePurchases() {
   }, [status]);
 
   const isPurchased = (templateId: string) => {
-    return purchases.some(purchase => purchase.id === templateId);
+    return purchases.some((purchase) => purchase.id === templateId);
   };
 
   return { purchases, isLoading, error, isPurchased };

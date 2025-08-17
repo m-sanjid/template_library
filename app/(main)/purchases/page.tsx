@@ -71,7 +71,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
 
   const handleGenerateInvoice = async (
     download: boolean = false,
-    email: boolean = false
+    email: boolean = false,
   ) => {
     try {
       if (email) {
@@ -87,7 +87,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
         {
           responseType: email ? "json" : "blob",
           validateStatus: (status) => status < 500,
-        }
+        },
       );
 
       // Check if the response is an error message
@@ -112,7 +112,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
         link.href = url;
         link.setAttribute(
           "download",
-          `invoice-${purchase.id.substring(0, 8)}.pdf`
+          `invoice-${purchase.id.substring(0, 8)}.pdf`,
         );
         document.body.appendChild(link);
         link.click();
@@ -129,7 +129,7 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
       console.error("Error handling invoice:", error);
       if (error instanceof Error) {
         toast.error(
-          error.message || "Failed to process invoice. Please try again."
+          error.message || "Failed to process invoice. Please try again.",
         );
       } else {
         toast.error("Failed to process invoice. Please try again.");
@@ -146,9 +146,9 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <Card className="hover:shadow-lg transition-shadow duration-200">
+      <Card className="transition-shadow duration-200 hover:shadow-lg">
         <CardHeader>
-          <div className="flex justify-between items-start">
+          <div className="flex items-start justify-between">
             <div>
               <CardTitle className="text-lg">
                 Order #{purchase.id.substring(0, 8)}
@@ -172,62 +172,64 @@ const PurchaseCard = ({ purchase }: { purchase: Purchase }) => {
             {purchase.PurchaseItem.map((item, index) => (
               <div
                 key={index}
-                className="flex justify-between items-center py-2 border-b last:border-0"
+                className="flex items-center justify-between border-b py-2 last:border-0"
               >
                 <div className="flex-1">
                   <h4 className="font-medium">{item.name}</h4>
-                  <p className="text-sm text-gray-500">{item.description}</p>
+                  <p className="text-sm text-neutral-500">{item.description}</p>
                 </div>
                 <div className="text-right">
                   <p className="font-medium">${formatPrice(item.price)}</p>
-                  <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
+                  <p className="text-sm text-neutral-500">
+                    Qty: {item.quantity}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
-          <div className="flex justify-between items-center w-full">
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <Clock className="w-4 h-4" />
+          <div className="flex w-full items-center justify-between">
+            <div className="flex items-center gap-2 text-sm text-neutral-500">
+              <Clock className="h-4 w-4" />
               <span>Processing time: 1-2 business days</span>
             </div>
             <div className="text-right">
-              <p className="text-sm text-gray-500">Total Amount</p>
+              <p className="text-sm text-neutral-500">Total Amount</p>
               <p className="text-xl font-bold">
                 ${formatPrice(purchase.totalPrice)}
               </p>
             </div>
           </div>
-          <div className="flex gap-2 w-full">
+          <div className="flex w-full gap-2">
             <Button
               variant="outline"
               size="sm"
-              className="flex-1 group"
+              className="group flex-1"
               onClick={() => handleGenerateInvoice(false)}
               disabled={isGeneratingInvoice || isSendingEmail}
             >
-              <FileText className="w-4 h-4 mr-2 group-hover:translate-x-2 duration-300 ease-in-out" />
+              <FileText className="mr-2 h-4 w-4 duration-300 ease-in-out group-hover:translate-x-2" />
               {isGeneratingInvoice ? "Generating..." : "View Invoice"}
             </Button>
             <Button
               variant="outline"
               size="sm"
-              className="flex-1 group"
+              className="group flex-1"
               onClick={() => handleGenerateInvoice(true)}
               disabled={isGeneratingInvoice || isSendingEmail}
             >
-              <Download className="w-4 h-4 mr-2 group-hover:translate-x-2 duration-300 ease-in-out" />
+              <Download className="mr-2 h-4 w-4 duration-300 ease-in-out group-hover:translate-x-2" />
               Download
             </Button>
             <Button
               variant="outline"
               size="sm"
-              className="flex-1 group"
+              className="group flex-1"
               onClick={() => handleGenerateInvoice(false, true)}
               disabled={isGeneratingInvoice || isSendingEmail}
             >
-              <Mail className="w-4 h-4 mr-2 group-hover:translate-x-2 duration-300 ease-in-out" />
+              <Mail className="mr-2 h-4 w-4 duration-300 ease-in-out group-hover:translate-x-2" />
               {isSendingEmail ? "Sending..." : "Email Invoice"}
             </Button>
           </div>
@@ -253,7 +255,7 @@ const LoadingSkeleton = () => (
           </div>
         </CardContent>
         <CardFooter>
-          <div className="flex gap-2 w-full">
+          <div className="flex w-full gap-2">
             <Skeleton className="h-8 flex-1" />
           </div>
         </CardFooter>
@@ -286,10 +288,10 @@ const PurchasesPage = () => {
 
   if (!session) {
     return (
-      <div className="container max-w-7xl mx-auto p-8">
-        <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
-          <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
-          <h2 className="text-xl font-semibold mb-2">
+      <div className="container mx-auto max-w-7xl p-8">
+        <div className="flex min-h-[400px] flex-col items-center justify-center text-center">
+          <AlertCircle className="mb-4 h-12 w-12 text-red-500" />
+          <h2 className="mb-2 text-xl font-semibold">
             Oops! You&apos;re not logged in
           </h2>
           <p className="text-muted-foreground mb-4">
@@ -303,7 +305,7 @@ const PurchasesPage = () => {
 
   if (isLoading) {
     return (
-      <div className="container max-w-7xl mx-auto p-8">
+      <div className="container mx-auto max-w-7xl p-8">
         <SectionHeader
           label="Purchase History"
           title="Your Purchase History"
@@ -319,13 +321,13 @@ const PurchasesPage = () => {
 
   if (error) {
     return (
-      <div className="container max-w-7xl mx-auto p-8">
-        <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
-          <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
-          <h2 className="text-xl font-semibold mb-2">
+      <div className="container mx-auto max-w-7xl p-8">
+        <div className="flex min-h-[400px] flex-col items-center justify-center text-center">
+          <AlertCircle className="mb-4 h-12 w-12 text-red-500" />
+          <h2 className="mb-2 text-xl font-semibold">
             Oops! Something went wrong
           </h2>
-          <p className="text-gray-500 mb-4">{error}</p>
+          <p className="mb-4 text-neutral-500">{error}</p>
           <Button onClick={() => window.location.reload()}>Try Again</Button>
         </div>
       </div>
@@ -334,11 +336,11 @@ const PurchasesPage = () => {
 
   if (purchases.length === 0) {
     return (
-      <div className="container max-w-7xl mx-auto p-8">
-        <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
-          <ShoppingBag className="w-16 h-16 text-gray-400 mb-4" />
-          <h2 className="text-2xl font-semibold mb-2">No purchases yet</h2>
-          <p className="text-gray-500 mb-4">
+      <div className="container mx-auto max-w-7xl p-8">
+        <div className="flex min-h-[400px] flex-col items-center justify-center text-center">
+          <ShoppingBag className="mb-4 h-16 w-16 text-neutral-400" />
+          <h2 className="mb-2 text-2xl font-semibold">No purchases yet</h2>
+          <p className="mb-4 text-neutral-500">
             Start shopping to see your purchase history here.
           </p>
           <Button asChild>
@@ -350,7 +352,7 @@ const PurchasesPage = () => {
   }
 
   return (
-    <div className="container max-w-7xl mx-auto p-8">
+    <div className="container mx-auto max-w-7xl p-8">
       <SectionHeader
         label="Purchase History"
         title="Your Purchase History"

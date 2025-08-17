@@ -11,7 +11,7 @@ export async function GET(
     console.log("Received request for component ID:", id);
 
     // Find the component in our static data
-    const component = COMPONENTS.find(c => c.id === id);
+    const component = COMPONENTS.find((c) => c.id === id);
 
     if (!component) {
       return NextResponse.json(
